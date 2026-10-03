@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>HeartCraft - Virtual Birthday Celebration</title>
+  <title>LuxeCraft - Cinematic Birthday Celebration Experience</title>
 
-  <!-- Premium Typography -->
+  <!-- Google Premium Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,600;0,800;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Core Libraries -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -16,14 +16,61 @@
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <style>
+    /* ========================================================
+       DYNAMIC LUXURY THEME VARIABLES
+    ======================================================== */
     :root {
-      --bg-dark: #0d0914;
-      --bg-radial: radial-gradient(circle at top, #23123d 0%, #0d0914 100%);
-      --accent-pink: #e8557a;
-      --accent-purple: #9b51e0;
-      --card-white: #ffffff;
-      --text-dark: #1f1b2e;
-      --text-muted: #8b8599;
+      --bg-gradient: radial-gradient(circle at 50% 10%, #1a162b 0%, #0a0812 100%);
+      --accent-gold: #e2b755;
+      --accent-gradient: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+      --primary-btn: linear-gradient(135deg, #d4af37 0%, #aa771c 100%);
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --glass-form: #ffffff;
+      --text-dark: #121018;
+      --text-glow: rgba(226, 183, 85, 0.3);
+      --card-export-bg: linear-gradient(145deg, #1b1625 0%, #110d18 100%);
+      --card-export-text: #ffffff;
+    }
+
+    /* THEME 1: ROYAL NOIR & GOLD */
+    body.theme-obsidian-gold {
+      --bg-gradient: radial-gradient(circle at top, #211c10 0%, #080705 100%);
+      --accent-gold: #dfb76c;
+      --primary-btn: linear-gradient(135deg, #e5b95f 0%, #9e7526 100%);
+      --card-border: rgba(223, 183, 108, 0.3);
+      --card-export-bg: linear-gradient(145deg, #1f1b13 0%, #0f0d09 100%);
+      --card-export-text: #f7edd7;
+    }
+
+    /* THEME 2: MIDNIGHT EMERALD */
+    body.theme-emerald {
+      --bg-gradient: radial-gradient(circle at top, #08211b 0%, #030d0a 100%);
+      --accent-gold: #2ecc71;
+      --primary-btn: linear-gradient(135deg, #00b894 0%, #006266 100%);
+      --card-border: rgba(46, 204, 113, 0.3);
+      --card-export-bg: linear-gradient(145deg, #0d2720 0%, #061310 100%);
+      --card-export-text: #e8f8f5;
+    }
+
+    /* THEME 3: ROSÉ CHAMPAGNE */
+    body.theme-rose {
+      --bg-gradient: radial-gradient(circle at top, #2d131f 0%, #10060b 100%);
+      --accent-gold: #ff76ac;
+      --primary-btn: linear-gradient(135deg, #e84393 0%, #a41c5c 100%);
+      --card-border: rgba(255, 118, 172, 0.3);
+      --card-export-bg: linear-gradient(145deg, #321925 0%, #150910 100%);
+      --card-export-text: #fce4ec;
+    }
+
+    /* THEME 4: CYBER ROYALE */
+    body.theme-cyber {
+      --bg-gradient: radial-gradient(circle at top, #140d33 0%, #04020c 100%);
+      --accent-gold: #00f2fe;
+      --primary-btn: linear-gradient(135deg, #4facfe 0%, #000851 100%);
+      --card-border: rgba(0, 242, 254, 0.35);
+      --card-export-bg: linear-gradient(145deg, #131432 0%, #070718 100%);
+      --card-export-text: #e0f7fa;
     }
 
     * {
@@ -35,106 +82,152 @@
     }
 
     body {
-      background: var(--bg-radial);
+      background: var(--bg-gradient);
       color: #fff;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 24px 16px 40px;
+      padding: 24px 16px 45px;
       overflow-x: hidden;
+      transition: background 0.4s ease;
+    }
+
+    /* Ambient Background Glow */
+    .ambient-glow {
+      position: fixed;
+      top: -120px;
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, var(--accent-gold) 0%, transparent 70%);
+      opacity: 0.12;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+      transition: background 0.4s;
     }
 
     .app-viewport {
       width: 100%;
-      max-width: 410px;
+      max-width: 420px;
       display: flex;
       flex-direction: column;
       align-items: center;
       position: relative;
+      z-index: 1;
     }
 
-    /* Top Navigation */
-    .top-nav-bar {
+    /* Top Control Bar */
+    .top-control-bar {
       width: 100%;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
+      justify-content: space-between;
+      margin-bottom: 20px;
     }
 
-    .back-btn-circle {
-      width: 40px;
-      height: 40px;
-      background: rgba(255, 255, 255, 0.95);
+    .icon-round-btn {
+      width: 42px;
+      height: 42px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      border: none;
+      color: #fff;
+      font-size: 16px;
       cursor: pointer;
-      color: #111;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.35);
-      font-size: 18px;
-      font-weight: 800;
-      transition: transform 0.15s ease;
+      transition: transform 0.15s, background 0.2s;
     }
+    .icon-round-btn:active { transform: scale(0.92); }
 
-    .back-btn-circle:active { transform: scale(0.92); }
-
-    /* Sticky Playful Badges */
-    .badge-stack {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 24px;
-    }
-
-    .badge-item {
+    .brand-title-chip {
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
       font-weight: 800;
-      font-size: 19px;
-      padding: 6px 18px;
-      border-radius: 12px;
-      border: 2.5px solid #111;
+      letter-spacing: 2px;
+      color: var(--accent-gold);
       text-transform: uppercase;
-      box-shadow: 0 4px 0 #111;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Theme Selector Bar */
+    .theme-selector-bar {
+      display: flex;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 6px 12px;
+      border-radius: 30px;
+      margin-bottom: 22px;
+    }
+
+    .theme-dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .theme-dot.active { border-color: #fff; transform: scale(1.15); }
+    .td-gold { background: linear-gradient(135deg, #f6d365, #fda085); }
+    .td-emerald { background: linear-gradient(135deg, #00b894, #00cec9); }
+    .td-rose { background: linear-gradient(135deg, #ff76ac, #e84393); }
+    .td-cyber { background: linear-gradient(135deg, #00f2fe, #4facfe); }
+
+    /* Luxury Header Badges */
+    .luxury-header-tag {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .luxury-subtitle {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .luxury-main-title {
+      font-family: 'Cinzel', serif;
+      font-size: 26px;
+      font-weight: 800;
+      background: linear-gradient(180deg, #ffffff 40%, rgba(255,255,255,0.7) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       letter-spacing: 0.5px;
     }
 
-    .b-yellow { background: #fbc531; color: #2f1703; transform: rotate(-3deg); z-index: 1; }
-    .b-coral { background: #eb4d4b; color: #fff; transform: rotate(2deg); margin-top: -6px; z-index: 2; }
-    .b-cyan { background: #48dbfb; color: #0c2461; transform: rotate(-2deg); margin-top: -6px; z-index: 3; }
-
-    /* Polished White Glassmorphic Card */
-    .glass-form-card {
-      background: var(--card-white);
-      border-radius: 30px;
+    /* Main White Luxe Form Card */
+    .lux-form-box {
+      background: var(--glass-form);
+      border-radius: 28px;
       padding: 28px 22px;
       width: 100%;
-      box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.5);
       color: var(--text-dark);
     }
 
-    .serif-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 22px;
+    .form-heading {
+      font-family: 'Cinzel', serif;
+      font-size: 19px;
       font-weight: 700;
-      color: #141416;
+      color: #121018;
       text-align: center;
     }
 
-    .muted-subtitle {
-      text-align: center;
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-top: 5px;
-      margin-bottom: 18px;
-    }
-
-    .input-field {
+    .text-input-field {
       width: 100%;
       height: 52px;
-      border: 1.5px solid #e3e5ec;
+      border: 1.5px solid #e1e3ea;
       border-radius: 16px;
       padding: 0 16px;
       font-size: 16px;
@@ -144,19 +237,18 @@
       margin-top: 10px;
       transition: border-color 0.2s;
     }
+    .text-input-field:focus { border-color: var(--accent-gold); }
 
-    .input-field:focus { border-color: var(--accent-pink); }
-
-    .date-grid {
+    .date-row-container {
       display: flex;
       gap: 12px;
       margin-top: 10px;
     }
 
-    .styled-select {
+    .select-dropdown {
       flex: 1;
       height: 52px;
-      border: 1.5px solid #e3e5ec;
+      border: 1.5px solid #e1e3ea;
       border-radius: 16px;
       padding: 0 14px;
       font-size: 15px;
@@ -165,157 +257,148 @@
       background: #fafbfc;
       outline: none;
       cursor: pointer;
-      appearance: none;
-      background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23666%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22M6%209l6%206%206-6%22%2F%3E%3C%2Fsvg%3E");
-      background-repeat: no-repeat;
-      background-position: right 14px center;
     }
 
-    /* Page 2 Customize Rows */
-    .row-item {
+    /* Primary CTA Buttons */
+    .lux-primary-btn {
+      margin-top: 18px;
+      width: 100%;
+      height: 54px;
+      background: var(--primary-btn);
+      border: none;
+      border-radius: 18px;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+      transition: transform 0.15s, opacity 0.2s;
+    }
+    .lux-primary-btn:active { transform: scale(0.98); }
+
+    /* Customization List Rows (Page 2) */
+    .option-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 14px 0;
       border-bottom: 1px solid #f1f2f6;
     }
-    .row-item:last-of-type { border-bottom: none; }
+    .option-row:last-of-type { border-bottom: none; }
 
-    .row-meta {
+    .option-meta {
       display: flex;
       align-items: center;
       gap: 12px;
       flex: 1;
     }
 
-    .row-name {
+    .option-label {
       font-weight: 700;
       font-size: 14px;
-      color: #4b233a;
-      min-width: 62px;
+      color: #2f253a;
+      min-width: 65px;
     }
 
-    .row-preview {
+    .option-detail {
       font-size: 13.5px;
       color: #7b7886;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: 155px;
+      max-width: 150px;
     }
 
-    .pill-btn {
-      background: #fdf0f4;
-      color: #cf4f79;
+    .pill-btn-small {
+      background: #f4f3f8;
+      color: #554a66;
       border: none;
       padding: 7px 15px;
       border-radius: 20px;
-      font-size: 12.5px;
+      font-size: 12px;
       font-weight: 700;
       cursor: pointer;
       transition: all 0.2s;
     }
-    .pill-btn:hover { background: #fce1ea; }
+    .pill-btn-small:hover { background: #e8e6f1; }
 
-    /* Switch Component */
-    .toggle-switch {
-      position: relative;
-      display: inline-block;
-      width: 44px;
-      height: 25px;
-    }
-    .toggle-switch input { opacity: 0; width: 0; height: 0; }
-    .toggle-slider {
-      position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
-      background-color: #e4e4e9; transition: .3s; border-radius: 34px;
-    }
-    .toggle-slider:before {
-      position: absolute; content: ""; height: 19px; width: 19px; left: 3px; bottom: 3px;
-      background-color: white; transition: .3s; border-radius: 50%;
-    }
-    input:checked + .toggle-slider { background-color: var(--accent-pink); }
-    input:checked + .toggle-slider:before { transform: translateX(19px); }
-
-    /* Callouts & Primary Button */
-    .amber-banner {
-      background: #fed361;
-      color: #3b2203;
+    /* Banner callout */
+    .banner-highlight {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      border: 1px dashed var(--card-border);
       border-radius: 18px;
-      padding: 13px 18px;
+      padding: 14px 18px;
       width: 100%;
-      margin-top: 15px;
+      margin-top: 16px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       font-size: 13.5px;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(254, 211, 97, 0.25);
-    }
-
-    .main-cta {
-      margin-top: 16px;
-      width: 100%;
-      height: 54px;
-      background: linear-gradient(90deg, #bb467a 0%, #e8557a 100%);
-      border: none;
-      border-radius: 20px;
+      font-weight: 600;
       color: #fff;
-      font-size: 17px;
-      font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 8px 22px rgba(232, 85, 122, 0.4);
-      transition: transform 0.15s, opacity 0.2s;
     }
-    .main-cta:active { transform: scale(0.98); }
 
     /* ========================================================
-       PAGE 3: THE INTERACTIVE REEL CELEBRATION ROOM
+       PAGE 3: INTERACTIVE REEL CELEBRATION STAGE
     ======================================================== */
-    .party-arena {
+    .celebration-stage {
       display: none;
       width: 100%;
       text-align: center;
-      animation: viewFadeIn 0.4s ease forwards;
+      animation: viewSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    @keyframes viewFadeIn {
-      from { opacity: 0; transform: translateY(12px); }
+    @keyframes viewSlideUp {
+      from { opacity: 0; transform: translateY(16px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .arena-badge {
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 1.5px;
-      color: #ff9ff3;
-      text-transform: uppercase;
-      margin-bottom: 6px;
+    /* Sound Track Player Bar */
+    .sound-player-bar {
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 30px;
+      padding: 8px 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: var(--accent-gold);
+      cursor: pointer;
     }
 
-    .arena-headline {
-      font-family: 'Playfair Display', serif;
-      font-size: 26px;
-      font-weight: 700;
-      color: #ffeaa7;
-      margin-bottom: 6px;
-    }
-
-    .arena-subhead {
-      font-size: 14px;
-      color: #dfe6e9;
-      margin-bottom: 24px;
-    }
-
-    /* Floating Balloons Grid */
-    .balloons-deck {
+    /* Countdown Display */
+    .countdown-timer-box {
       display: flex;
       justify-content: center;
-      gap: 16px;
-      margin: 30px 0 40px;
+      gap: 12px;
+      margin: 10px 0 24px;
+    }
+    .time-slot {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 8px 14px;
+      min-width: 60px;
+    }
+    .time-val { font-size: 18px; font-weight: 800; color: #fff; font-family: 'Cinzel', serif; }
+    .time-unit { font-size: 10px; color: #8f8a9e; text-transform: uppercase; letter-spacing: 1px; }
+
+    /* Interactive Balloons Deck */
+    .balloons-flex-deck {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin: 25px 0 35px;
     }
 
-    .interactive-balloon {
+    .balloon-unit {
       width: 66px;
       height: 84px;
       border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
@@ -325,411 +408,361 @@
       justify-content: center;
       font-size: 24px;
       user-select: none;
-      box-shadow: inset -6px -6px 12px rgba(0,0,0,0.25), 0 10px 20px rgba(0,0,0,0.3);
+      box-shadow: inset -6px -6px 12px rgba(0,0,0,0.3), 0 10px 22px rgba(0,0,0,0.4);
       position: relative;
-      animation: balloonWiggle 2.8s ease-in-out infinite alternate;
+      animation: balloonSway 3s ease-in-out infinite alternate;
       transition: transform 0.15s, opacity 0.3s;
     }
 
-    .balloon-string {
+    .b-string {
       position: absolute;
       bottom: -16px;
       left: 50%;
       transform: translateX(-50%);
       width: 1.5px;
       height: 18px;
-      background: rgba(255,255,255,0.4);
+      background: rgba(255, 255, 255, 0.4);
     }
 
-    .bal-1 { background: #ff7675; animation-delay: 0s; }
-    .bal-2 { background: #74b9ff; animation-delay: 0.4s; }
-    .bal-3 { background: #ffeaa7; animation-delay: 0.8s; }
-    .bal-4 { background: #a29bfe; animation-delay: 0.2s; }
+    .bu-1 { background: radial-gradient(circle at 30% 30%, #ff7675, #d63031); animation-delay: 0s; }
+    .bu-2 { background: radial-gradient(circle at 30% 30%, #74b9ff, #0984e3); animation-delay: 0.5s; }
+    .bu-3 { background: radial-gradient(circle at 30% 30%, #ffeaa7, #e17055); animation-delay: 0.2s; }
+    .bu-4 { background: radial-gradient(circle at 30% 30%, #a29bfe, #6c5ce7); animation-delay: 0.7s; }
 
-    @keyframes balloonWiggle {
-      0% { transform: translateY(0px) rotate(-4deg); }
-      100% { transform: translateY(-20px) rotate(4deg); }
+    @keyframes balloonSway {
+      0% { transform: translateY(0px) rotate(-3deg); }
+      100% { transform: translateY(-18px) rotate(4deg); }
     }
 
-    /* Interactive 3D Cake & Candle Stage */
-    .cake-spotlight {
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+    /* Cake Stage */
+    .cake-spotlight-chamber {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--card-border);
       border-radius: 28px;
-      padding: 32px 20px;
-      margin-bottom: 20px;
+      padding: 35px 20px;
+      margin-bottom: 22px;
     }
 
-    .cake-avatar {
-      font-size: 88px;
+    .cake-3d-model {
+      font-size: 90px;
       cursor: pointer;
       position: relative;
       display: inline-block;
-      user-select: none;
-      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: transform 0.2s;
     }
-    .cake-avatar:active { transform: scale(0.92); }
+    .cake-3d-model:active { transform: scale(0.94); }
 
-    .flame-element {
+    .flame-spark {
       position: absolute;
       top: -2px;
       left: 50%;
       transform: translateX(-50%);
       font-size: 28px;
-      animation: flameFlicker 0.6s infinite alternate ease-in-out;
+      animation: flameWaver 0.5s infinite alternate ease-in-out;
     }
 
-    @keyframes flameFlicker {
-      0% { opacity: 0.9; transform: translateX(-50%) scale(0.95); }
-      100% { opacity: 1; transform: translateX(-50%) scale(1.15); }
+    @keyframes flameWaver {
+      0% { opacity: 0.9; transform: translateX(-50%) scale(1); }
+      100% { opacity: 1; transform: translateX(-50%) scale(1.18); }
     }
 
-    /* Final Revealed Luxury Card (Canvas export ready) */
-    .export-card {
-      background: linear-gradient(135deg, #fff5f7 0%, #fedee7 50%, #fbd5e3 100%);
+    /* Final Luxury Card for Presentation & Export */
+    .luxe-export-card {
+      background: var(--card-export-bg);
+      border: 1px solid var(--card-border);
       border-radius: 28px;
-      padding: 30px 22px;
-      color: #381525;
+      padding: 32px 24px;
+      color: var(--card-export-text);
       text-align: center;
-      box-shadow: 0 16px 40px rgba(0,0,0,0.5);
-      margin-top: 15px;
-      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
       position: relative;
       overflow: hidden;
+      margin-bottom: 16px;
+      transition: transform 0.1s ease;
     }
 
-    .photo-frame-display {
+    .photo-display-circle {
       width: 110px;
       height: 110px;
       border-radius: 50%;
-      border: 4px solid #fff;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-      margin: 0 auto 12px;
+      border: 3px solid var(--accent-gold);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      margin: 0 auto 14px;
       overflow: hidden;
       display: none;
     }
 
-    .photo-frame-display img {
+    .photo-display-circle img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
-    .handwriting-note {
+    .cursive-letter-body {
       font-family: 'Dancing Script', cursive;
-      font-size: 21px;
+      font-size: 23px;
       line-height: 1.45;
-      color: #44172f;
-      margin: 14px 0 18px;
+      color: var(--card-export-text);
+      opacity: 0.92;
+      margin: 16px 0 20px;
       padding: 0 8px;
     }
 
-    .bond-chip {
-      background: rgba(255, 255, 255, 0.7);
-      border: 1px solid rgba(255, 107, 129, 0.3);
-      padding: 6px 16px;
+    .bond-pill-tag {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--card-border);
+      padding: 7px 18px;
       border-radius: 20px;
       font-size: 13px;
       font-weight: 700;
-      color: #9c2755;
+      color: var(--accent-gold);
       display: inline-block;
     }
 
-    /* Dual Action Buttons */
-    .action-row-btn {
+    /* Dual Action Download Buttons */
+    .action-button-grid {
       display: flex;
       gap: 10px;
-      margin-top: 12px;
       width: 100%;
+      margin-top: 10px;
     }
 
-    .tool-btn {
+    .btn-half {
       flex: 1;
       height: 48px;
       border: none;
       border-radius: 16px;
-      font-size: 14.5px;
       font-weight: 700;
-      color: #fff;
+      font-size: 14px;
       cursor: pointer;
+      color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
-      transition: transform 0.15s;
     }
-    .tool-btn:active { transform: scale(0.97); }
+    .btn-download-img { background: #2980b9; }
+    .btn-download-pdf { background: #27ae60; }
+    .btn-share-link { background: var(--primary-btn); width: 100%; margin-top: 10px; }
 
-    .btn-blue { background: #0984e3; box-shadow: 0 4px 15px rgba(9, 132, 227, 0.3); }
-    .btn-green { background: #00b894; box-shadow: 0 4px 15px rgba(0, 184, 148, 0.3); }
-    .btn-share { background: #6c5ce7; box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3); width: 100%; margin-top: 10px; }
-
-    /* Footer Explorations */
-    .brand-footer {
-      width: 100%;
-      max-width: 380px;
-      text-align: center;
-      margin-top: 28px;
-    }
-
-    .footer-heading {
-      font-size: 12.5px;
-      color: #928e9f;
-      margin-bottom: 12px;
-    }
-
-    .pill-tags-flex {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      margin-bottom: 16px;
-    }
-
-    .exp-pill {
-      font-size: 12px;
-      padding: 6px 14px;
-      border-radius: 20px;
-      border: 1px solid #ff4d88;
-      color: #ff85ad;
-      text-decoration: none;
-      transition: background 0.2s;
-    }
-    .exp-pill:hover { background: rgba(255, 77, 136, 0.12); }
-
-    .support-caption {
-      font-size: 11px;
-      color: #635f73;
-    }
-
-    /* Modal Sheet for Options */
-    .glass-modal {
+    /* Modal Sheet */
+    .lux-modal-sheet {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
       background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(6px);
       display: none;
       align-items: center;
       justify-content: center;
       padding: 20px;
       z-index: 100;
-      backdrop-filter: blur(4px);
     }
 
-    .modal-sheet {
-      background: #fff;
+    .modal-box-inner {
+      background: #ffffff;
       border-radius: 24px;
       padding: 24px;
       width: 100%;
       max-width: 330px;
-      color: #111;
-      animation: sheetPop 0.2s ease-out;
-    }
-
-    @keyframes sheetPop {
-      from { transform: scale(0.9); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+      color: #121018;
     }
   </style>
 </head>
-<body>
+<body class="theme-obsidian-gold">
+
+  <!-- Ambient Glow Effect -->
+  <div class="ambient-glow"></div>
 
   <div class="app-viewport">
 
     <!-- Top Navigation Header -->
-    <div class="top-nav-bar" id="navHeader" style="display: none;">
-      <button class="back-btn-circle" onclick="handleNavigationBack()">&lt;</button>
-      <div style="font-size: 13px; font-weight: 700; color: #ff85ad;">HEARTCRAFT STUDIO</div>
-      <div style="width: 40px;"></div>
+    <div class="top-control-bar">
+      <button class="icon-round-btn" id="btnBackTop" style="visibility: hidden;" onclick="navigateBack()">&lt;</button>
+      <div class="brand-title-chip">
+        <span>✨</span> LUXECRAFT CELEBRATION
+      </div>
+      <button class="icon-round-btn" onclick="toggleAudioTrack()">🎵</button>
+    </div>
+
+    <!-- Theme Switcher Palette -->
+    <div class="theme-selector-bar">
+      <div class="theme-dot td-gold active" onclick="switchTheme('theme-obsidian-gold', this)" title="Obsidian Gold"></div>
+      <div class="theme-dot td-emerald" onclick="switchTheme('theme-emerald', this)" title="Emerald Noir"></div>
+      <div class="theme-dot td-rose" onclick="switchTheme('theme-rose', this)" title="Rosé Champagne"></div>
+      <div class="theme-dot td-cyber" onclick="switchTheme('theme-cyber', this)" title="Cyber Royale"></div>
     </div>
 
     <!-- ========================================================
-         PAGE 1: WHOSE BIRTHDAY & DATE
+         PAGE 1: EVENT DETAILS & DATE
     ======================================================== -->
-    <div id="page1" style="width: 100%;">
-      <div class="badge-stack">
-        <div class="badge-item b-yellow">CREATE A</div>
-        <div class="badge-item b-coral">BIRTHDAY</div>
-        <div class="badge-item b-cyan">CARD!</div>
+    <div id="screenPage1" style="width: 100%;">
+      <div class="luxury-header-tag">
+        <div class="luxury-subtitle">Bespoke Experience</div>
+        <div class="luxury-main-title">Craft Celebration</div>
       </div>
 
-      <div class="glass-form-card">
-        <div class="serif-title">Whose birthday is it?</div>
-        <input type="text" id="recipientName" class="input-field" placeholder="Enter recipient name...">
+      <div class="lux-form-box">
+        <div class="form-heading">Whose birthday is it?</div>
+        <input type="text" id="targetNameInput" class="text-input-field" placeholder="Enter recipient name...">
 
         <div style="height: 22px;"></div>
 
-        <div class="serif-title">When is the special day? 📅</div>
-        <div class="date-grid">
-          <select id="monthPicker" class="styled-select">
+        <div class="form-heading">When is the special day? 📅</div>
+        <div class="date-row-container">
+          <select id="monthSelectInput" class="select-dropdown">
             <option value="Jan">Jan</option><option value="Feb">Feb</option><option value="Mar">Mar</option>
             <option value="Apr">Apr</option><option value="May">May</option><option value="Jun">Jun</option>
             <option value="Jul">Jul</option><option value="Aug" selected>Aug</option><option value="Sep">Sep</option>
             <option value="Oct">Oct</option><option value="Nov">Nov</option><option value="Dec">Dec</option>
           </select>
-          <select id="dayPicker" class="styled-select"></select>
+          <select id="daySelectInput" class="select-dropdown"></select>
         </div>
       </div>
 
-      <button class="main-cta" onclick="proceedToPage2()">Next</button>
-
-      <div class="brand-footer">
-        <div class="footer-heading">Explore more HeartCraft experiences:</div>
-        <div class="pill-tags-flex">
-          <span class="exp-pill">Apology</span>
-          <span class="exp-pill">Proposal</span>
-          <span class="exp-pill">Puzzle</span>
-          <span class="exp-pill">Friendship Day</span>
-          <span class="exp-pill">Anniversary</span>
-        </div>
-        <div class="support-caption">Free community edition for creators</div>
-      </div>
+      <button class="lux-primary-btn" onclick="goToStep2()">Next Step &rarr;</button>
     </div>
 
     <!-- ========================================================
-         PAGE 2: CUSTOMIZATION STUDIO
+         PAGE 2: BESPOKE CUSTOMIZATION
     ======================================================== -->
-    <div id="page2" style="width: 100%; display: none;">
-      <div class="glass-form-card">
-        <div class="serif-title" id="customHeadline">Customize for Special One</div>
-        <div class="muted-subtitle">Tap change to pick your own</div>
+    <div id="screenPage2" style="width: 100%; display: none;">
+      <div class="luxury-header-tag">
+        <div class="luxury-subtitle">Personalize Moments</div>
+        <div class="luxury-main-title" id="page2Title">Customize</div>
+      </div>
 
-        <!-- Cake Selection -->
-        <div class="row-item">
-          <div class="row-meta">
-            <span class="row-name">Cake</span>
-            <span style="font-size: 24px;" id="valCakeIcon">🎂</span>
-            <span class="row-preview" id="valCakeName">Galaxy Classic</span>
+      <div class="lux-form-box">
+        <!-- Cake Row -->
+        <div class="option-row">
+          <div class="option-meta">
+            <span class="option-label">Cake</span>
+            <span style="font-size: 24px;" id="dispCakeIcon">🎂</span>
+            <span class="option-detail" id="dispCakeName">Galaxy Classic</span>
           </div>
-          <button class="pill-btn" onclick="openChoicePicker('cake')">Change</button>
+          <button class="pill-btn-small" onclick="openPickerModal('cake')">Change</button>
         </div>
 
-        <!-- Bond Selection -->
-        <div class="row-item">
-          <div class="row-meta">
-            <span class="row-name">Bond</span>
-            <span class="row-preview" id="valBond">Sweet, Loyal, My rock</span>
+        <!-- Bond Row -->
+        <div class="option-row">
+          <div class="option-meta">
+            <span class="option-label">Bond</span>
+            <span class="option-detail" id="dispBondText">Sweet, Loyal, My rock</span>
           </div>
-          <button class="pill-btn" onclick="openChoicePicker('bond')">Change</button>
+          <button class="pill-btn-small" onclick="openPickerModal('bond')">Change</button>
         </div>
 
-        <!-- Mascot Selection -->
-        <div class="row-item">
-          <div class="row-meta">
-            <span class="row-name">Friend</span>
-            <span style="font-size: 24px;" id="valMascotIcon">🐰</span>
-            <span class="row-preview" id="valMascotName">Bunny</span>
+        <!-- Mascot Row -->
+        <div class="option-row">
+          <div class="option-meta">
+            <span class="option-label">Mascot</span>
+            <span style="font-size: 24px;" id="dispMascotIcon">🐰</span>
+            <span class="option-detail" id="dispMascotName">Bunny</span>
           </div>
-          <button class="pill-btn" onclick="openChoicePicker('mascot')">Change</button>
+          <button class="pill-btn-small" onclick="openPickerModal('mascot')">Change</button>
         </div>
 
-        <!-- Passcode Toggle -->
-        <div class="row-item">
-          <div class="row-meta">
-            <span class="row-name" style="display:flex; flex-direction:column; font-size:13px;">
-              <span style="font-size: 10px; color:#888; font-weight: 500;">Optional</span>Passcode
-            </span>
-            <span class="row-preview" id="valPasscode">Add 4 - digit Passcode</span>
+        <!-- Letter Row -->
+        <div class="option-row">
+          <div class="option-meta">
+            <span class="option-label">Letter</span>
+            <span class="option-detail" id="dispLetterText">Wishing you an extraordinary year!</span>
           </div>
-          <label class="toggle-switch">
-            <input type="checkbox" id="passcodeToggle" onchange="toggleSecurityCode(this)">
-            <span class="toggle-slider"></span>
-          </label>
-        </div>
-
-        <!-- Letter Customization -->
-        <div class="row-item">
-          <div class="row-meta">
-            <span class="row-name">Letter</span>
-            <span class="row-preview" id="valLetter">Dear Friend, Happy Birthday!</span>
-          </div>
-          <button class="pill-btn" onclick="openChoicePicker('letter')">Change</button>
+          <button class="pill-btn-small" onclick="openPickerModal('letter')">Change</button>
         </div>
       </div>
 
-      <!-- Free Photo Upload Trigger -->
-      <label class="amber-banner" for="uploadPhotoInput">
-        <span style="font-size: 22px;">🖼️</span>
-        <span>Add a Special Photo (Free)</span>
+      <!-- Photo Upload Banner -->
+      <label class="banner-highlight" for="photoFileInput">
+        <span style="font-size: 24px;">🖼️</span>
+        <div>
+          <div style="font-weight:700;">Upload Memorable Photo</div>
+          <div style="font-size:12px; opacity:0.8;">Auto fits on the reveal card</div>
+        </div>
       </label>
-      <input type="file" id="uploadPhotoInput" accept="image/*" style="display: none;" onchange="processUploadedPhoto(event)">
+      <input type="file" id="photoFileInput" accept="image/*" style="display: none;" onchange="handleImageSelection(event)">
 
-      <button class="main-cta" onclick="startPartyExperience()">Start Virtual Celebration 🎈</button>
+      <button class="lux-primary-btn" onclick="startCelebrationStage()">Start Celebration Experience 🎈</button>
     </div>
 
     <!-- ========================================================
-         PAGE 3: THE PARTY EXPERIENCE (REEL STYLE)
+         PAGE 3: THE PARTY CELEBRATION STAGE
     ======================================================== -->
-    <div class="party-arena" id="partyArena">
+    <div class="celebration-stage" id="screenPage3">
 
-      <!-- STAGE 1: BALLOONS POPPING -->
-      <div id="deckStageBalloons">
-        <div class="arena-badge">Surprise Step 1 of 2</div>
-        <div class="arena-headline">🎈 Pop All The Balloons!</div>
-        <div class="arena-subhead">Tap every balloon to unlock the cake ceremony</div>
+      <!-- Sound Track Indicator -->
+      <div class="sound-player-bar" onclick="toggleAudioTrack()">
+        <span id="audioTrackStatus">▶ Play Birthday Melody</span>
+      </div>
 
-        <div class="balloons-deck">
-          <div class="interactive-balloon bal-1" onclick="popSingleBalloon(this)">
-            💖<div class="balloon-string"></div>
-          </div>
-          <div class="interactive-balloon bal-2" onclick="popSingleBalloon(this)">
-            ✨<div class="balloon-string"></div>
-          </div>
-          <div class="interactive-balloon bal-3" onclick="popSingleBalloon(this)">
-            ⭐<div class="balloon-string"></div>
-          </div>
-          <div class="interactive-balloon bal-4" onclick="popSingleBalloon(this)">
-            🎉<div class="balloon-string"></div>
+      <!-- Live Birthday Countdown -->
+      <div class="countdown-timer-box" id="countdownTimerContainer">
+        <div class="time-slot"><div class="time-val" id="cntDays">00</div><div class="time-unit">Days</div></div>
+        <div class="time-slot"><div class="time-val" id="cntHours">00</div><div class="time-unit">Hours</div></div>
+        <div class="time-slot"><div class="time-val" id="cntMins">00</div><div class="time-unit">Mins</div></div>
+        <div class="time-slot"><div class="time-val" id="cntSecs">00</div><div class="time-unit">Secs</div></div>
+      </div>
+
+      <!-- STAGE 1: BALLOON POPPING -->
+      <div id="stageBalloonsSection">
+        <div style="font-size: 11px; letter-spacing: 2px; color: var(--accent-gold); text-transform: uppercase;">Step 1 of 2</div>
+        <div style="font-family:'Cinzel',serif; font-size:22px; font-weight:700; margin:4px 0 6px;">Pop All The Balloons!</div>
+        <div style="font-size:13.5px; opacity:0.8; margin-bottom:20px;">Tap every balloon to unlock your celebration cake</div>
+
+        <div class="balloons-flex-deck">
+          <div class="balloon-unit bu-1" onclick="popBalloonUnit(this)">💖<div class="b-string"></div></div>
+          <div class="balloon-unit bu-2" onclick="popBalloonUnit(this)">✨<div class="b-string"></div></div>
+          <div class="balloon-unit bu-3" onclick="popBalloonUnit(this)">⭐<div class="b-string"></div></div>
+          <div class="balloon-unit bu-4" onclick="popBalloonUnit(this)">🎉<div class="b-string"></div></div>
+        </div>
+      </div>
+
+      <!-- STAGE 2: CANDLE BLOW -->
+      <div id="stageCakeSection" style="display: none;">
+        <div style="font-size: 11px; letter-spacing: 2px; color: var(--accent-gold); text-transform: uppercase;">Step 2 of 2</div>
+        <div style="font-family:'Cinzel',serif; font-size:22px; font-weight:700; margin:4px 0 6px;">Make a Wish & Blow!</div>
+        <div style="font-size:13.5px; opacity:0.8; margin-bottom:20px;">Tap the cake to blow the candle and reveal your surprise</div>
+
+        <div class="cake-spotlight-chamber">
+          <div class="cake-3d-model" onclick="blowCandleAndCut()">
+            <span class="flame-spark" id="candleFlameItem">🔥</span>
+            <span id="renderedCakeGraphic">🎂</span>
           </div>
         </div>
       </div>
 
-      <!-- STAGE 2: CANDLE BLOW & CAKE CUT -->
-      <div id="deckStageCake" style="display: none;">
-        <div class="arena-badge">Surprise Step 2 of 2</div>
-        <div class="arena-headline">🎂 Blow the Candle & Wish!</div>
-        <div class="arena-subhead">Tap on the cake to make your birthday wish</div>
-
-        <div class="cake-spotlight">
-          <div class="cake-avatar" onclick="triggerCandleBlow()">
-            <span class="flame-element" id="candleFlame">🔥</span>
-            <span id="cakeGraphic">🎂</span>
+      <!-- STAGE 3: UNLOCKED LUXURY CARD & EXPORT -->
+      <div id="stageCardRevealSection" style="display: none;">
+        <div class="luxe-export-card" id="exportTargetNode">
+          <div class="photo-display-circle" id="photoDisplayContainer">
+            <img id="finalCardImg" src="" alt="Celebrant">
           </div>
-        </div>
-      </div>
+          <div id="finalCardMascot" style="font-size: 38px; margin-bottom: 6px;">🐰</div>
+          <h2 style="font-family:'Cinzel',serif; font-size: 26px; font-weight:800; color:var(--accent-gold);">Happy Birthday!</h2>
+          <h3 id="finalCardName" style="font-size: 22px; font-weight:700; margin: 4px 0 8px;">Recipient</h3>
+          <p id="finalCardDate" style="font-size: 13.5px; font-weight:700; letter-spacing:1px; opacity:0.8;">AUG 26</p>
 
-      <!-- STAGE 3: UNLOCKED BIRTHDAY CARD & LETTER -->
-      <div id="deckStageCard" style="display: none;">
-        <div class="export-card" id="exportCardTarget">
-          <div class="photo-frame-display" id="photoDisplay">
-            <img id="cardUploadedImg" src="" alt="Celebrant">
-          </div>
-          <div id="cardMascotGraphic" style="font-size: 40px; margin-bottom: 4px;">🐰</div>
-          <h2 style="font-family:'Playfair Display',serif; font-size: 26px; font-weight:800; color:#84123a;">Happy Birthday! 🎉</h2>
-          <h3 id="targetCardName" style="font-size: 22px; font-weight: 800; color: #1f1b2e; margin: 4px 0 8px;">Name</h3>
-          <p id="targetCardDate" style="font-weight: 700; font-size: 14px; color: #7a3a52;">Aug 26</p>
-          
-          <div class="handwriting-note" id="targetCardLetter">
-            "Wishing you a memorable year ahead filled with happiness, good health, and success!"
+          <div class="cursive-letter-body" id="finalCardLetter">
+            "Wishing you a magnificent year ahead filled with happiness, boundless adventures, and cherished moments!"
           </div>
 
-          <div class="bond-chip" id="targetCardBond">
+          <div class="bond-pill-tag" id="finalCardBond">
             ✨ Sweet, Loyal, My rock
           </div>
         </div>
 
-        <!-- Action / Export Group -->
-        <div class="action-row-btn">
-          <button class="tool-btn btn-blue" onclick="exportAsHighResImage()">
+        <!-- Export Action Buttons -->
+        <div class="action-button-grid">
+          <button class="btn-half btn-download-img" onclick="exportCardImage()">
             <span>📷</span> Download PNG
           </button>
-          <button class="tool-btn btn-green" onclick="exportAsPDF()">
+          <button class="btn-half btn-download-pdf" onclick="exportCardPDF()">
             <span>📄</span> Download PDF
           </button>
         </div>
 
-        <button class="tool-btn btn-share" onclick="copyShareableSurpriseLink()">
-          <span>🔗</span> Copy Shareable Web Link
+        <button class="btn-half btn-share-link" onclick="copyUniqueWebLink()">
+          <span>🔗</span> Copy Shareable Surprise Web Link
         </button>
       </div>
 
@@ -737,302 +770,309 @@
 
   </div>
 
-  <!-- Dynamic Option Selection Modal -->
-  <div class="glass-modal" id="choiceModal">
-    <div class="modal-sheet">
-      <h3 id="modalHeadline" style="font-size: 18px; margin-bottom: 14px; font-family:'Playfair Display',serif;">Choose</h3>
-      <div id="modalEntries"></div>
-      <button class="main-cta" style="height: 44px; font-size: 15px; margin-top: 14px;" onclick="closeChoiceModal()">Done</button>
+  <!-- Customization Picker Modal -->
+  <div class="lux-modal-sheet" id="optionsModal">
+    <div class="modal-box-inner">
+      <h3 id="modalHeadingTitle" style="font-family:'Cinzel',serif; font-size:18px; margin-bottom:14px;">Select Option</h3>
+      <div id="modalEntriesContainer"></div>
+      <button class="lux-primary-btn" style="height:44px; margin-top:14px; font-size:14px;" onclick="closePickerModal()">Done</button>
     </div>
   </div>
 
   <script>
-    // State Store
-    let currentNavPage = 1;
-    let balloonsPoppedTotal = 0;
-    let requiredPasscode = "";
-    let uploadedImageBase64 = "";
+    let activeNavPage = 1;
+    let balloonsBurstCount = 0;
+    let audioPlaying = false;
+    let audioCtx = null;
+    let melodyTimer = null;
 
-    // Web Audio Synthesizer Engine (Zero-MP3 Dependency)
-    const AudioEngine = {
-      ctx: null,
-      init() {
-        if (!this.ctx) {
-          const AudioContext = window.AudioContext || window.webkitAudioContext;
-          if (AudioContext) this.ctx = new AudioContext();
-        }
-      },
-      playPop() {
-        this.init();
-        if (!this.ctx) return;
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(450, this.ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(80, this.ctx.currentTime + 0.12);
-        gain.gain.setValueAtTime(0.7, this.ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.12);
-        osc.connect(gain);
-        gain.connect(this.ctx.destination);
-        osc.start();
-        osc.stop(this.ctx.currentTime + 0.12);
-      },
-      playChime() {
-        this.init();
-        if (!this.ctx) return;
-        const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
-        notes.forEach((freq, idx) => {
-          const osc = this.ctx.createOscillator();
-          const gain = this.ctx.createGain();
-          osc.type = 'triangle';
-          osc.frequency.setValueAtTime(freq, this.ctx.currentTime + (idx * 0.12));
-          gain.gain.setValueAtTime(0.3, this.ctx.currentTime + (idx * 0.12));
-          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + (idx * 0.12) + 0.6);
-          osc.connect(gain);
-          gain.connect(this.ctx.destination);
-          osc.start(this.ctx.currentTime + (idx * 0.12));
-          osc.stop(this.ctx.currentTime + (idx * 0.12) + 0.6);
-        });
+    // Populate 1-31 days
+    const daySelect = document.getElementById('daySelectInput');
+    for (let i = 1; i <= 31; i++) {
+      let opt = document.createElement('option');
+      opt.value = i;
+      opt.innerText = i < 10 ? '0' + i : i;
+      if (i === 26) opt.selected = true;
+      daySelect.appendChild(opt);
+    }
+
+    // Dynamic Theme Switching
+    function switchTheme(themeClass, el) {
+      document.body.className = themeClass;
+      document.querySelectorAll('.theme-dot').forEach(d => d.classList.remove('active'));
+      el.classList.add('active');
+    }
+
+    // Synthesizer Audio Engine (Built-in Web Audio API)
+    function initSynth() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       }
-    };
+    }
 
-    // Initialize Dropdown Dates
-    const dayPicker = document.getElementById('dayPicker');
-    for (let d = 1; d <= 31; d++) {
-      const opt = document.createElement('option');
-      opt.value = d;
-      opt.innerText = d < 10 ? '0' + d : d;
-      if (d === 26) opt.selected = true;
-      dayPicker.appendChild(opt);
+    function playTone(freq, duration, type = 'sine') {
+      initSynth();
+      if (!audioCtx) return;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+      gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + duration);
+    }
+
+    // Happy Birthday Chime Melody
+    function toggleAudioTrack() {
+      initSynth();
+      const btn = document.getElementById('audioTrackStatus');
+      if (audioPlaying) {
+        clearInterval(melodyTimer);
+        audioPlaying = false;
+        btn.innerText = '▶ Play Birthday Melody';
+      } else {
+        audioPlaying = true;
+        btn.innerText = '⏸ Playing Melody...';
+        const notes = [261.63, 261.63, 293.66, 261.63, 349.23, 329.63]; // C4, C4, D4, C4, F4, E4
+        let idx = 0;
+        melodyTimer = setInterval(() => {
+          playTone(notes[idx % notes.length], 0.35, 'triangle');
+          idx++;
+        }, 500);
+      }
+    }
+
+    function playPopSound() {
+      initSynth();
+      if (!audioCtx) return;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(500, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(70, audioCtx.currentTime + 0.1);
+      gain.gain.setValueAtTime(0.6, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.1);
     }
 
     // Step 1 -> Step 2
-    function proceedToPage2() {
-      const name = document.getElementById('recipientName').value.trim();
-      if (!name) {
-        alert("Please enter whose birthday it is!");
-        return;
-      }
-      document.getElementById('customHeadline').innerText = `Customize for ${name}`;
-      document.getElementById('valLetter').innerText = `Dear ${name}, wishing you an unforgettable birthday filled with endless laughter, boundless love, and dreams fulfilled!`;
+    function goToStep2() {
+      const name = document.getElementById('targetNameInput').value.trim();
+      if (!name) return alert('Please enter recipient name!');
 
-      document.getElementById('page1').style.display = 'none';
-      document.getElementById('page2').style.display = 'block';
-      document.getElementById('navHeader').style.display = 'flex';
-      currentNavPage = 2;
+      document.getElementById('page2Title').innerText = `For ${name}`;
+      document.getElementById('dispLetterText').innerText = `Dear ${name}, wishing you a wonderful birthday filled with immense joy, love, and sweet memories!`;
+
+      document.getElementById('screenPage1').style.display = 'none';
+      document.getElementById('screenPage2').style.display = 'block';
+      document.getElementById('btnBackTop').style.visibility = 'visible';
+      activeNavPage = 2;
     }
 
-    // Handle Back Buttons
-    function handleNavigationBack() {
-      if (currentNavPage === 3) {
-        document.getElementById('partyArena').style.display = 'none';
-        document.getElementById('page2').style.display = 'block';
-        currentNavPage = 2;
-      } else if (currentNavPage === 2) {
-        document.getElementById('page2').style.display = 'none';
-        document.getElementById('page1').style.display = 'block';
-        document.getElementById('navHeader').style.display = 'none';
-        currentNavPage = 1;
+    function navigateBack() {
+      if (activeNavPage === 3) {
+        document.getElementById('screenPage3').style.display = 'none';
+        document.getElementById('screenPage2').style.display = 'block';
+        activeNavPage = 2;
+      } else if (activeNavPage === 2) {
+        document.getElementById('screenPage2').style.display = 'none';
+        document.getElementById('screenPage1').style.display = 'block';
+        document.getElementById('btnBackTop').style.visibility = 'hidden';
+        activeNavPage = 1;
       }
     }
 
-    // Modal Sheet Handlers
-    function openChoicePicker(type) {
-      const modal = document.getElementById('choiceModal');
-      const head = document.getElementById('modalHeadline');
-      const container = document.getElementById('modalEntries');
-      container.innerHTML = '';
+    // Pickers modal
+    function openPickerModal(type) {
+      const modal = document.getElementById('optionsModal');
+      const head = document.getElementById('modalHeadingTitle');
+      const body = document.getElementById('modalEntriesContainer');
+      body.innerHTML = '';
 
       if (type === 'cake') {
-        head.innerText = 'Choose Cake Theme';
-        const cakes = [
-          { icon: '🎂', name: 'Galaxy Classic' },
-          { icon: '🍫', name: 'Velvet Truffle' },
-          { icon: '🍓', name: 'Strawberry Bloom' }
-        ];
-        cakes.forEach(c => {
-          container.innerHTML += `
-            <div style="padding: 12px; cursor: pointer; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #f1f2f6;" onclick="applyCakeSelection('${c.icon}', '${c.name}')">
-              <span style="font-size: 24px;">${c.icon}</span> <b>${c.name}</b>
-            </div>`;
+        head.innerText = 'Select Cake Design';
+        [['🎂', 'Galaxy Classic'], ['🍫', 'Midnight Truffle'], ['🍓', 'Royal Strawberry']].forEach(([icon, name]) => {
+          body.innerHTML += `<div style="padding:12px; cursor:pointer; display:flex; align-items:center; gap:12px; border-bottom:1px solid #eee;" onclick="setCakeChoice('${icon}', '${name}')"><span style="font-size:24px;">${icon}</span> <b>${name}</b></div>`;
         });
       } else if (type === 'bond') {
-        head.innerText = 'Define Your Bond';
-        const bonds = [
-          'Sweet, Loyal, My rock',
-          'Bestie for life',
-          'Crime Partner & Soulmate',
-          'Forever supportive & caring'
-        ];
-        bonds.forEach(b => {
-          container.innerHTML += `
-            <div style="padding: 12px; cursor: pointer; border-bottom: 1px solid #f1f2f6; font-weight: 600;" onclick="applyBondSelection('${b}')">
-              ${b}
-            </div>`;
+        head.innerText = 'Choose Special Bond';
+        ['Sweet, Loyal, My rock', 'Best Friend Forever', 'Partner in Crime', 'Inspiring & Caring Soul'].forEach(b => {
+          body.innerHTML += `<div style="padding:12px; cursor:pointer; border-bottom:1px solid #eee; font-weight:600;" onclick="setBondChoice('${b}')">${b}</div>`;
         });
       } else if (type === 'mascot') {
-        head.innerText = 'Pick Your Mascot';
-        const mascots = [
-          { icon: '🐰', name: 'Bunny' },
-          { icon: '🧸', name: 'Teddy Bear' },
-          { icon: '🐱', name: 'Cute Kitten' },
-          { icon: '🐶', name: 'Puppy' }
-        ];
-        mascots.forEach(m => {
-          container.innerHTML += `
-            <div style="padding: 12px; cursor: pointer; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #f1f2f6;" onclick="applyMascotSelection('${m.icon}', '${m.name}')">
-              <span style="font-size: 24px;">${m.icon}</span> <b>${m.name}</b>
-            </div>`;
+        head.innerText = 'Select Mascot';
+        [['🐰', 'Bunny'], ['🧸', 'Teddy Bear'], ['🐱', 'Kitten'], ['🐶', 'Puppy']].forEach(([icon, name]) => {
+          body.innerHTML += `<div style="padding:12px; cursor:pointer; display:flex; align-items:center; gap:12px; border-bottom:1px solid #eee;" onclick="setMascotChoice('${icon}', '${name}')"><span style="font-size:24px;">${icon}</span> <b>${name}</b></div>`;
         });
       } else if (type === 'letter') {
         head.innerText = 'Write Heartfelt Note';
-        container.innerHTML = `
-          <textarea id="modalLetterInput" rows="5" style="width: 100%; border-radius: 14px; padding: 12px; border: 1.5px solid #e1e3ea; font-size: 14px;">${document.getElementById('valLetter').innerText}</textarea>
-        `;
+        body.innerHTML = `<textarea id="modalLetterInput" rows="5" style="width:100%; border-radius:14px; padding:12px; border:1.5px solid #e1e3ea; font-size:14px;">${document.getElementById('dispLetterText').innerText}</textarea>`;
       }
 
       modal.style.display = 'flex';
     }
 
-    function applyCakeSelection(icon, name) {
-      document.getElementById('valCakeIcon').innerText = icon;
-      document.getElementById('valCakeName').innerText = name;
-      document.getElementById('cakeGraphic').innerText = icon;
-      closeChoiceModal();
+    function setCakeChoice(icon, name) {
+      document.getElementById('dispCakeIcon').innerText = icon;
+      document.getElementById('dispCakeName').innerText = name;
+      document.getElementById('renderedCakeGraphic').innerText = icon;
+      closePickerModal();
     }
 
-    function applyBondSelection(text) {
-      document.getElementById('valBond').innerText = text;
-      closeChoiceModal();
+    function setBondChoice(text) {
+      document.getElementById('dispBondText').innerText = text;
+      closePickerModal();
     }
 
-    function applyMascotSelection(icon, name) {
-      document.getElementById('valMascotIcon').innerText = icon;
-      document.getElementById('valMascotName').innerText = name;
-      document.getElementById('cardMascotGraphic').innerText = icon;
-      closeChoiceModal();
+    function setMascotChoice(icon, name) {
+      document.getElementById('dispMascotIcon').innerText = icon;
+      document.getElementById('dispMascotName').innerText = name;
+      document.getElementById('finalCardMascot').innerText = icon;
+      closePickerModal();
     }
 
-    function closeChoiceModal() {
-      const letterInput = document.getElementById('modalLetterInput');
-      if (letterInput && letterInput.value.trim()) {
-        document.getElementById('valLetter').innerText = letterInput.value.trim();
+    function closePickerModal() {
+      const input = document.getElementById('modalLetterInput');
+      if (input && input.value.trim()) {
+        document.getElementById('dispLetterText').innerText = input.value.trim();
       }
-      document.getElementById('choiceModal').style.display = 'none';
+      document.getElementById('optionsModal').style.display = 'none';
     }
 
-    function toggleSecurityCode(checkbox) {
-      if (checkbox.checked) {
-        const pin = prompt("Set a 4-digit secret passcode for the surprise:", "1234");
-        if (pin && pin.length >= 4) {
-          requiredPasscode = pin;
-          document.getElementById('valPasscode').innerText = `Locked (PIN: ${pin})`;
-        } else {
-          checkbox.checked = false;
-          requiredPasscode = "";
-          document.getElementById('valPasscode').innerText = "Add 4 - digit Passcode";
-        }
-      } else {
-        requiredPasscode = "";
-        document.getElementById('valPasscode').innerText = "Add 4 - digit Passcode";
-      }
-    }
-
-    // Photo Handler
-    function processUploadedPhoto(e) {
+    function handleImageSelection(e) {
       const file = e.target.files[0];
       if (file) {
         const reader = new FileReader();
-        reader.onload = (event) => {
-          uploadedImageBase64 = event.target.result;
-          document.getElementById('cardUploadedImg').src = uploadedImageBase64;
-          document.getElementById('photoDisplay').style.display = 'block';
-          confetti({ particleCount: 50, spread: 50 });
-          alert("Photo added successfully!");
+        reader.onload = (evt) => {
+          document.getElementById('finalCardImg').src = evt.target.result;
+          document.getElementById('photoDisplayContainer').style.display = 'block';
+          alert('Photo successfully added to reveal card!');
         };
         reader.readAsDataURL(file);
       }
     }
 
-    // Start Party Reel Experience
-    function startPartyExperience() {
-      const name = document.getElementById('recipientName').value.trim();
-      const month = document.getElementById('monthPicker').value;
-      const day = document.getElementById('dayPicker').value;
+    // Start Party Celebration
+    function startCelebrationStage() {
+      const name = document.getElementById('targetNameInput').value.trim();
+      const month = document.getElementById('monthSelectInput').value;
+      const day = document.getElementById('daySelectInput').value;
 
-      document.getElementById('targetCardName').innerText = name;
-      document.getElementById('targetCardDate').innerText = `${month} ${day}`;
-      document.getElementById('targetCardLetter').innerText = `"${document.getElementById('valLetter').innerText}"`;
-      document.getElementById('targetCardBond').innerText = `✨ ${document.getElementById('valBond').innerText}`;
+      document.getElementById('finalCardName').innerText = name;
+      document.getElementById('finalCardDate').innerText = `${month.toUpperCase()} ${day}`;
+      document.getElementById('finalCardLetter').innerText = `"${document.getElementById('dispLetterText').innerText}"`;
+      document.getElementById('finalCardBond').innerText = `✨ ${document.getElementById('dispBondText').innerText}`;
 
-      document.getElementById('page2').style.display = 'none';
-      document.getElementById('partyArena').style.display = 'block';
-      currentNavPage = 3;
+      document.getElementById('screenPage2').style.display = 'none';
+      document.getElementById('screenPage3').style.display = 'block';
+      activeNavPage = 3;
 
-      // Reset party states
-      balloonsPoppedTotal = 0;
-      document.getElementById('deckStageBalloons').style.display = 'block';
-      document.getElementById('deckStageCake').style.display = 'none';
-      document.getElementById('deckStageCard').style.display = 'none';
+      // Start countdown timer
+      startCountdown(month, day);
 
-      document.querySelectorAll('.interactive-balloon').forEach(b => {
+      // Reset balloons
+      balloonsBurstCount = 0;
+      document.getElementById('stageBalloonsSection').style.display = 'block';
+      document.getElementById('stageCakeSection').style.display = 'none';
+      document.getElementById('stageCardRevealSection').style.display = 'none';
+
+      document.querySelectorAll('.balloon-unit').forEach(b => {
         b.style.opacity = '1';
         b.style.pointerEvents = 'auto';
         b.style.transform = 'scale(1)';
       });
-      document.getElementById('candleFlame').style.display = 'block';
+      document.getElementById('candleFlameItem').style.display = 'block';
     }
 
-    // Stage 1: Balloon Pop
-    function popSingleBalloon(element) {
-      AudioEngine.playPop();
+    // Live Countdown Timer
+    function startCountdown(monthStr, dayNum) {
+      const monthsMap = { Jan:0, Feb:1, Mar:2, Apr:3, May:4, Jun:5, Jul:6, Aug:7, Sep:8, Oct:9, Nov:10, Dec:11 };
+      const now = new Date();
+      let targetYear = now.getFullYear();
+      let targetDate = new Date(targetYear, monthsMap[monthStr], parseInt(dayNum));
+
+      if (targetDate < now) {
+        targetDate = new Date(targetYear + 1, monthsMap[monthStr], parseInt(dayNum));
+      }
+
+      function updateClock() {
+        const diff = targetDate - new Date();
+        if (diff <= 0) {
+          document.getElementById('cntDays').innerText = "00";
+          document.getElementById('cntHours').innerText = "00";
+          document.getElementById('cntMins').innerText = "00";
+          document.getElementById('cntSecs').innerText = "00";
+          return;
+        }
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const m = Math.floor((diff / 1000 / 60) % 60);
+        const s = Math.floor((diff / 1000) % 60);
+
+        document.getElementById('cntDays').innerText = d < 10 ? '0' + d : d;
+        document.getElementById('cntHours').innerText = h < 10 ? '0' + h : h;
+        document.getElementById('cntMins').innerText = m < 10 ? '0' + m : m;
+        document.getElementById('cntSecs').innerText = s < 10 ? '0' + s : s;
+      }
+      updateClock();
+      setInterval(updateClock, 1000);
+    }
+
+    // Balloon Pop
+    function popBalloonUnit(element) {
+      playPopSound();
       element.style.transform = 'scale(1.5)';
       element.style.opacity = '0';
       element.style.pointerEvents = 'none';
-      confetti({ particleCount: 25, spread: 40, origin: { y: 0.7 } });
-      balloonsPoppedTotal++;
+      confetti({ particleCount: 30, spread: 45, origin: { y: 0.65 } });
+      balloonsBurstCount++;
 
-      if (balloonsPoppedTotal >= 4) {
+      if (balloonsBurstCount >= 4) {
         setTimeout(() => {
-          document.getElementById('deckStageBalloons').style.display = 'none';
-          document.getElementById('deckStageCake').style.display = 'block';
-          confetti({ particleCount: 90, spread: 70 });
+          document.getElementById('stageBalloonsSection').style.display = 'none';
+          document.getElementById('stageCakeSection').style.display = 'block';
+          confetti({ particleCount: 100, spread: 80 });
         }, 500);
       }
     }
 
-    // Stage 2: Candle Blow & Cake Cut
-    function triggerCandleBlow() {
-      document.getElementById('candleFlame').style.display = 'none';
-      AudioEngine.playChime();
-      
-      // Dramatic Confetti Shower
-      confetti({ particleCount: 160, spread: 100, origin: { y: 0.55 } });
+    // Candle Blow & Reveal
+    function blowCandleAndCut() {
+      document.getElementById('candleFlameItem').style.display = 'none';
+      playTone(523.25, 0.4, 'triangle');
+
+      confetti({ particleCount: 180, spread: 100, origin: { y: 0.55 } });
       setTimeout(() => {
-        confetti({ particleCount: 100, spread: 80, origin: { y: 0.4 } });
+        confetti({ particleCount: 120, spread: 80, origin: { y: 0.4 } });
       }, 300);
 
       setTimeout(() => {
-        document.getElementById('deckStageCake').style.display = 'none';
-        document.getElementById('deckStageCard').style.display = 'block';
+        document.getElementById('stageCakeSection').style.display = 'none';
+        document.getElementById('stageCardRevealSection').style.display = 'block';
       }, 700);
     }
 
     // Export As PNG
-    function exportAsHighResImage() {
-      const card = document.getElementById('exportCardTarget');
+    function exportCardImage() {
+      const card = document.getElementById('exportTargetNode');
       html2canvas(card, { scale: 3, useCORS: true }).then(canvas => {
         const link = document.createElement('a');
-        link.download = `Birthday-Surprise-${document.getElementById('recipientName').value || 'Card'}.png`;
+        link.download = `Birthday-Card-${document.getElementById('targetNameInput').value || 'Celebration'}.png`;
         link.href = canvas.toDataURL('image/png');
         link.click();
       });
     }
 
     // Export As PDF
-    function exportAsPDF() {
+    function exportCardPDF() {
       const { jsPDF } = window.jspdf;
-      const card = document.getElementById('exportCardTarget');
+      const card = document.getElementById('exportTargetNode');
       html2canvas(card, { scale: 3, useCORS: true }).then(canvas => {
         const img = canvas.toDataURL('image/png');
         const pdf = new jsPDF({
@@ -1041,63 +1081,50 @@
           format: [canvas.width / 3, canvas.height / 3]
         });
         pdf.addImage(img, 'PNG', 0, 0, canvas.width / 3, canvas.height / 3);
-        pdf.save(`Birthday-Surprise-${document.getElementById('recipientName').value || 'Card'}.pdf`);
+        pdf.save(`Birthday-Card-${document.getElementById('targetNameInput').value || 'Celebration'}.pdf`);
       });
     }
 
     // Shareable Link Generator (Encodes details into URL Hash)
-    function copyShareableSurpriseLink() {
+    function copyUniqueWebLink() {
       const payload = {
-        n: document.getElementById('recipientName').value,
-        m: document.getElementById('monthPicker').value,
-        d: document.getElementById('dayPicker').value,
-        l: document.getElementById('valLetter').innerText,
-        b: document.getElementById('valBond').innerText,
-        c: document.getElementById('valCakeIcon').innerText,
-        p: requiredPasscode
+        n: document.getElementById('targetNameInput').value,
+        m: document.getElementById('monthSelectInput').value,
+        d: document.getElementById('daySelectInput').value,
+        l: document.getElementById('dispLetterText').innerText,
+        b: document.getElementById('dispBondText').innerText,
+        c: document.getElementById('dispCakeIcon').innerText,
+        th: document.body.className
       };
       const hash = btoa(encodeURIComponent(JSON.stringify(payload)));
-      const shareUrl = `${window.location.origin}${window.location.pathname}#surprise=${hash}`;
-      
+      const shareUrl = `${window.location.origin}${window.location.pathname}#party=${hash}`;
+
       navigator.clipboard.writeText(shareUrl).then(() => {
-        alert("Surprise link copied! Share it on WhatsApp or Instagram DM.");
+        alert("✨ Special celebration link copied! Share it on WhatsApp or Instagram.");
       }).catch(() => {
-        prompt("Copy your special surprise link:", shareUrl);
+        prompt("Copy your link:", shareUrl);
       });
     }
 
-    // Check if recipient opened via Shareable Link
+    // Auto open party when opening via shareable link
     window.addEventListener('DOMContentLoaded', () => {
       const hash = window.location.hash;
-      if (hash.includes('#surprise=')) {
+      if (hash.includes('#party=')) {
         try {
-          const raw = decodeURIComponent(atob(hash.replace('#surprise=', '')));
+          const raw = decodeURIComponent(atob(hash.replace('#party=', '')));
           const data = JSON.parse(raw);
+          if (data.th) document.body.className = data.th;
+          document.getElementById('targetNameInput').value = data.n;
+          document.getElementById('monthSelectInput').value = data.m;
+          document.getElementById('daySelectInput').value = data.d;
+          document.getElementById('dispLetterText').innerText = data.l;
+          document.getElementById('dispBondText').innerText = data.b;
+          document.getElementById('dispCakeIcon').innerText = data.c;
 
-          // If passcode exists, verify
-          if (data.p) {
-            const entered = prompt("🔒 Enter secret 4-digit PIN to open your birthday surprise:");
-            if (entered !== data.p) {
-              alert("Incorrect Passcode!");
-              return;
-            }
-          }
-
-          // Populate and auto launch into Party mode for recipient
-          document.getElementById('recipientName').value = data.n;
-          document.getElementById('monthPicker').value = data.m;
-          document.getElementById('dayPicker').value = data.d;
-          document.getElementById('valLetter').innerText = data.l;
-          document.getElementById('valBond').innerText = data.b;
-          document.getElementById('cakeGraphic').innerText = data.c;
-
-          document.getElementById('page1').style.display = 'none';
-          document.getElementById('page2').style.display = 'none';
-          document.getElementById('partyArena').style.display = 'block';
-
-          startPartyExperience();
+          goToStep2();
+          startCelebrationStage();
         } catch (e) {
-          console.error("Invalid share link format");
+          console.error("Invalid URL payload");
         }
       }
     });
