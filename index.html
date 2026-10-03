@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>LuxeCraft - Cinematic Birthday Celebration Experience</title>
+  <title>Teddy's 15-Chapter Birthday Odyssey</title>
 
-  <!-- Google Premium Fonts -->
+  <!-- Premium Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Core Libraries -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -16,61 +16,13 @@
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <style>
-    /* ========================================================
-       DYNAMIC LUXURY THEME VARIABLES
-    ======================================================== */
     :root {
-      --bg-gradient: radial-gradient(circle at 50% 10%, #1a162b 0%, #0a0812 100%);
-      --accent-gold: #e2b755;
-      --accent-gradient: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
-      --primary-btn: linear-gradient(135deg, #d4af37 0%, #aa771c 100%);
-      --card-bg: rgba(255, 255, 255, 0.05);
-      --card-border: rgba(255, 255, 255, 0.12);
-      --glass-form: #ffffff;
-      --text-dark: #121018;
-      --text-glow: rgba(226, 183, 85, 0.3);
-      --card-export-bg: linear-gradient(145deg, #1b1625 0%, #110d18 100%);
-      --card-export-text: #ffffff;
-    }
-
-    /* THEME 1: ROYAL NOIR & GOLD */
-    body.theme-obsidian-gold {
-      --bg-gradient: radial-gradient(circle at top, #211c10 0%, #080705 100%);
-      --accent-gold: #dfb76c;
-      --primary-btn: linear-gradient(135deg, #e5b95f 0%, #9e7526 100%);
-      --card-border: rgba(223, 183, 108, 0.3);
-      --card-export-bg: linear-gradient(145deg, #1f1b13 0%, #0f0d09 100%);
-      --card-export-text: #f7edd7;
-    }
-
-    /* THEME 2: MIDNIGHT EMERALD */
-    body.theme-emerald {
-      --bg-gradient: radial-gradient(circle at top, #08211b 0%, #030d0a 100%);
-      --accent-gold: #2ecc71;
-      --primary-btn: linear-gradient(135deg, #00b894 0%, #006266 100%);
-      --card-border: rgba(46, 204, 113, 0.3);
-      --card-export-bg: linear-gradient(145deg, #0d2720 0%, #061310 100%);
-      --card-export-text: #e8f8f5;
-    }
-
-    /* THEME 3: ROSÉ CHAMPAGNE */
-    body.theme-rose {
-      --bg-gradient: radial-gradient(circle at top, #2d131f 0%, #10060b 100%);
-      --accent-gold: #ff76ac;
+      --bg-gradient: radial-gradient(circle at 50% 10%, #201335 0%, #090611 100%);
+      --accent-gold: #f6d365;
+      --accent-pink: #ff76ac;
       --primary-btn: linear-gradient(135deg, #e84393 0%, #a41c5c 100%);
-      --card-border: rgba(255, 118, 172, 0.3);
-      --card-export-bg: linear-gradient(145deg, #321925 0%, #150910 100%);
-      --card-export-text: #fce4ec;
-    }
-
-    /* THEME 4: CYBER ROYALE */
-    body.theme-cyber {
-      --bg-gradient: radial-gradient(circle at top, #140d33 0%, #04020c 100%);
-      --accent-gold: #00f2fe;
-      --primary-btn: linear-gradient(135deg, #4facfe 0%, #000851 100%);
-      --card-border: rgba(0, 242, 254, 0.35);
-      --card-export-bg: linear-gradient(145deg, #131432 0%, #070718 100%);
-      --card-export-text: #e0f7fa;
+      --card-white: #ffffff;
+      --text-dark: #1b1625;
     }
 
     * {
@@ -88,50 +40,34 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 24px 16px 45px;
+      padding: 20px 16px 45px;
       overflow-x: hidden;
-      transition: background 0.4s ease;
     }
 
-    /* Ambient Background Glow */
-    .ambient-glow {
-      position: fixed;
-      top: -120px;
-      width: 450px;
-      height: 450px;
-      background: radial-gradient(circle, var(--accent-gold) 0%, transparent 70%);
-      opacity: 0.12;
-      filter: blur(80px);
-      pointer-events: none;
-      z-index: 0;
-      transition: background 0.4s;
-    }
-
-    .app-viewport {
+    .app-shell {
       width: 100%;
       max-width: 420px;
       display: flex;
       flex-direction: column;
       align-items: center;
       position: relative;
-      z-index: 1;
     }
 
     /* Top Control Bar */
-    .top-control-bar {
+    .top-bar {
       width: 100%;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      margin-bottom: 20px;
+      align-items: center;
+      margin-bottom: 14px;
     }
 
-    .icon-round-btn {
-      width: 42px;
-      height: 42px;
-      background: rgba(255, 255, 255, 0.08);
+    .nav-btn {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -139,92 +75,186 @@
       color: #fff;
       font-size: 16px;
       cursor: pointer;
-      transition: transform 0.15s, background 0.2s;
     }
-    .icon-round-btn:active { transform: scale(0.92); }
 
-    .brand-title-chip {
-      font-family: 'Cinzel', serif;
-      font-size: 13px;
-      font-weight: 800;
+    .stage-pill {
+      font-size: 11px;
       letter-spacing: 2px;
-      color: var(--accent-gold);
       text-transform: uppercase;
+      font-weight: 800;
+      color: var(--accent-gold);
+      background: rgba(255, 255, 255, 0.08);
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    /* ========================================================
+       CUTE 3D TEDDY BEAR AVATAR
+    ======================================================== */
+    .teddy-box {
+      width: 130px;
+      height: 140px;
+      margin: 0 auto 8px;
+      position: relative;
       display: flex;
       align-items: center;
-      gap: 6px;
+      justify-content: center;
+      animation: teddySway 3s ease-in-out infinite alternate;
     }
 
-    /* Theme Selector Bar */
-    .theme-selector-bar {
-      display: flex;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.07);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 6px 12px;
-      border-radius: 30px;
-      margin-bottom: 22px;
+    @keyframes teddySway {
+      0% { transform: translateY(0) rotate(-1.5deg); }
+      100% { transform: translateY(-8px) rotate(2deg); }
     }
 
-    .theme-dot {
-      width: 22px;
-      height: 22px;
+    .teddy-head {
+      width: 86px;
+      height: 76px;
+      background: #c5864e;
+      border-radius: 50% 50% 45% 45%;
+      position: relative;
+      box-shadow: inset -5px -6px 12px rgba(0,0,0,0.25), 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    .teddy-ear {
+      width: 30px;
+      height: 30px;
+      background: #b0723c;
       border-radius: 50%;
-      cursor: pointer;
-      border: 2px solid transparent;
-      transition: transform 0.2s, border-color 0.2s;
+      position: absolute;
+      top: -6px;
     }
-    .theme-dot.active { border-color: #fff; transform: scale(1.15); }
-    .td-gold { background: linear-gradient(135deg, #f6d365, #fda085); }
-    .td-emerald { background: linear-gradient(135deg, #00b894, #00cec9); }
-    .td-rose { background: linear-gradient(135deg, #ff76ac, #e84393); }
-    .td-cyber { background: linear-gradient(135deg, #00f2fe, #4facfe); }
-
-    /* Luxury Header Badges */
-    .luxury-header-tag {
-      text-align: center;
-      margin-bottom: 20px;
+    .teddy-ear.left { left: -6px; }
+    .teddy-ear.right { right: -6px; }
+    .teddy-ear-inner {
+      width: 16px;
+      height: 16px;
+      background: #e8a872;
+      border-radius: 50%;
+      margin: 7px auto;
     }
 
-    .luxury-subtitle {
-      font-size: 11px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--accent-gold);
+    .teddy-eye {
+      width: 10px;
+      height: 12px;
+      background: #111;
+      border-radius: 50%;
+      position: absolute;
+      top: 28px;
+      animation: teddyBlink 4s infinite;
+    }
+    .teddy-eye.left { left: 22px; }
+    .teddy-eye.right { right: 22px; }
+    .teddy-eye::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 4px;
+      height: 4px;
+      background: #fff;
+      border-radius: 50%;
+    }
+
+    @keyframes teddyBlink {
+      0%, 96%, 100% { transform: scaleY(1); }
+      98% { transform: scaleY(0.1); }
+    }
+
+    .teddy-muzzle {
+      width: 40px;
+      height: 28px;
+      background: #e8a872;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .teddy-nose {
+      width: 13px;
+      height: 9px;
+      background: #2b1810;
+      border-radius: 50% 50% 40% 40%;
+      margin: 4px auto 0;
+    }
+
+    .teddy-blush {
+      width: 14px;
+      height: 8px;
+      background: rgba(255, 118, 172, 0.6);
+      border-radius: 50%;
+      position: absolute;
+      top: 36px;
+    }
+    .teddy-blush.left { left: 12px; }
+    .teddy-blush.right { right: 12px; }
+
+    .teddy-body {
+      width: 76px;
+      height: 56px;
+      background: #b0723c;
+      border-radius: 40px 40px 30px 30px;
+      position: absolute;
+      bottom: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: -1;
+    }
+
+    /* Dialogue bubble */
+    .teddy-speech {
+      background: rgba(255, 255, 255, 0.95);
+      color: #2b1810;
+      font-size: 13.5px;
       font-weight: 700;
-      margin-bottom: 4px;
+      padding: 10px 16px;
+      border-radius: 18px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      margin-bottom: 14px;
+      text-align: center;
+      position: relative;
+      max-width: 330px;
+    }
+    .teddy-speech::after {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 0 8px 8px 8px;
+      border-style: solid;
+      border-color: transparent transparent rgba(255, 255, 255, 0.95) transparent;
     }
 
-    .luxury-main-title {
-      font-family: 'Cinzel', serif;
-      font-size: 26px;
-      font-weight: 800;
-      background: linear-gradient(180deg, #ffffff 40%, rgba(255,255,255,0.7) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      letter-spacing: 0.5px;
-    }
-
-    /* Main White Luxe Form Card */
-    .lux-form-box {
-      background: var(--glass-form);
+    /* Main Content Stage Card */
+    .card-stage {
+      background: #ffffff;
       border-radius: 28px;
-      padding: 28px 22px;
+      padding: 26px 20px;
       width: 100%;
-      box-shadow: 0 20px 45px rgba(0,0,0,0.5);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.45);
       color: var(--text-dark);
-    }
-
-    .form-heading {
-      font-family: 'Cinzel', serif;
-      font-size: 19px;
-      font-weight: 700;
-      color: #121018;
       text-align: center;
     }
 
-    .text-input-field {
+    .chapter-heading {
+      font-family: 'Cinzel', serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: #141416;
+      margin-bottom: 6px;
+    }
+
+    .chapter-caption {
+      font-size: 13.5px;
+      color: #7b7886;
+      margin-bottom: 16px;
+    }
+
+    .input-field {
       width: 100%;
       height: 52px;
       border: 1.5px solid #e1e3ea;
@@ -232,562 +262,410 @@
       padding: 0 16px;
       font-size: 16px;
       outline: none;
-      color: #2d3436;
       background: #fafbfc;
       margin-top: 10px;
-      transition: border-color 0.2s;
-    }
-    .text-input-field:focus { border-color: var(--accent-gold); }
-
-    .date-row-container {
-      display: flex;
-      gap: 12px;
-      margin-top: 10px;
     }
 
-    .select-dropdown {
-      flex: 1;
-      height: 52px;
-      border: 1.5px solid #e1e3ea;
-      border-radius: 16px;
-      padding: 0 14px;
-      font-size: 15px;
-      font-weight: 600;
-      color: #333;
-      background: #fafbfc;
-      outline: none;
-      cursor: pointer;
-    }
-
-    /* Primary CTA Buttons */
-    .lux-primary-btn {
+    .btn-action {
       margin-top: 18px;
       width: 100%;
-      height: 54px;
+      height: 52px;
       background: var(--primary-btn);
       border: none;
       border-radius: 18px;
       color: #fff;
       font-size: 16px;
       font-weight: 700;
-      letter-spacing: 0.5px;
       cursor: pointer;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
-      transition: transform 0.15s, opacity 0.2s;
+      box-shadow: 0 8px 22px rgba(232, 85, 122, 0.4);
+      transition: transform 0.15s;
     }
-    .lux-primary-btn:active { transform: scale(0.98); }
+    .btn-action:active { transform: scale(0.97); }
 
-    /* Customization List Rows (Page 2) */
-    .option-row {
+    /* Wax Seal */
+    .wax-seal {
+      width: 90px;
+      height: 90px;
+      background: radial-gradient(circle, #e74c3c 60%, #c0392b 100%);
+      border-radius: 50%;
+      margin: 20px auto;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 14px 0;
-      border-bottom: 1px solid #f1f2f6;
-    }
-    .option-row:last-of-type { border-bottom: none; }
-
-    .option-meta {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex: 1;
-    }
-
-    .option-label {
-      font-weight: 700;
-      font-size: 14px;
-      color: #2f253a;
-      min-width: 65px;
-    }
-
-    .option-detail {
-      font-size: 13.5px;
-      color: #7b7886;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 150px;
-    }
-
-    .pill-btn-small {
-      background: #f4f3f8;
-      color: #554a66;
-      border: none;
-      padding: 7px 15px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 700;
+      justify-content: center;
+      box-shadow: 0 8px 25px rgba(231, 76, 60, 0.5);
       cursor: pointer;
-      transition: all 0.2s;
+      font-size: 34px;
+      border: 3px solid #ff7675;
+      transition: transform 0.2s;
     }
-    .pill-btn-small:hover { background: #e8e6f1; }
+    .wax-seal:active { transform: scale(0.9); }
 
-    /* Banner callout */
-    .banner-highlight {
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(12px);
-      border: 1px dashed var(--card-border);
+    /* Video Frame */
+    .video-viewport {
+      width: 100%;
       border-radius: 18px;
-      padding: 14px 18px;
+      overflow: hidden;
+      background: #000;
+      margin-top: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      max-height: 280px;
+    }
+    .video-viewport video {
       width: 100%;
-      margin-top: 16px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      font-size: 13.5px;
-      font-weight: 600;
-      color: #fff;
-      cursor: pointer;
+      height: 100%;
+      object-fit: contain;
     }
 
-    /* ========================================================
-       PAGE 3: INTERACTIVE REEL CELEBRATION STAGE
-    ======================================================== */
-    .celebration-stage {
-      display: none;
-      width: 100%;
-      text-align: center;
-      animation: viewSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    @keyframes viewSlideUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Sound Track Player Bar */
-    .sound-player-bar {
-      background: rgba(255, 255, 255, 0.06);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 30px;
-      padding: 8px 16px;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 12px;
-      font-weight: 600;
-      margin-bottom: 20px;
-      color: var(--accent-gold);
-      cursor: pointer;
-    }
-
-    /* Countdown Display */
-    .countdown-timer-box {
+    /* Balloons */
+    .balloons-deck {
       display: flex;
       justify-content: center;
       gap: 12px;
-      margin: 10px 0 24px;
+      margin: 18px 0;
     }
-    .time-slot {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 8px 14px;
-      min-width: 60px;
-    }
-    .time-val { font-size: 18px; font-weight: 800; color: #fff; font-family: 'Cinzel', serif; }
-    .time-unit { font-size: 10px; color: #8f8a9e; text-transform: uppercase; letter-spacing: 1px; }
-
-    /* Interactive Balloons Deck */
-    .balloons-flex-deck {
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      margin: 25px 0 35px;
-    }
-
-    .balloon-unit {
-      width: 66px;
-      height: 84px;
+    .balloon-node {
+      width: 65px;
+      height: 82px;
       border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
-      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 24px;
-      user-select: none;
-      box-shadow: inset -6px -6px 12px rgba(0,0,0,0.3), 0 10px 22px rgba(0,0,0,0.4);
-      position: relative;
-      animation: balloonSway 3s ease-in-out infinite alternate;
-      transition: transform 0.15s, opacity 0.3s;
+      cursor: pointer;
+      box-shadow: inset -5px -5px 10px rgba(0,0,0,0.25), 0 8px 18px rgba(0,0,0,0.3);
+      animation: floatBal 2.8s ease-in-out infinite alternate;
+    }
+    .bn-1 { background: #ff76ac; animation-delay: 0s; }
+    .bn-2 { background: #74b9ff; animation-delay: 0.5s; }
+    .bn-3 { background: #ffeaa7; animation-delay: 0.2s; }
+    .bn-4 { background: #a29bfe; animation-delay: 0.7s; }
+
+    @keyframes floatBal {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-15px); }
     }
 
-    .b-string {
-      position: absolute;
-      bottom: -16px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 1.5px;
-      height: 18px;
-      background: rgba(255, 255, 255, 0.4);
-    }
-
-    .bu-1 { background: radial-gradient(circle at 30% 30%, #ff7675, #d63031); animation-delay: 0s; }
-    .bu-2 { background: radial-gradient(circle at 30% 30%, #74b9ff, #0984e3); animation-delay: 0.5s; }
-    .bu-3 { background: radial-gradient(circle at 30% 30%, #ffeaa7, #e17055); animation-delay: 0.2s; }
-    .bu-4 { background: radial-gradient(circle at 30% 30%, #a29bfe, #6c5ce7); animation-delay: 0.7s; }
-
-    @keyframes balloonSway {
-      0% { transform: translateY(0px) rotate(-3deg); }
-      100% { transform: translateY(-18px) rotate(4deg); }
-    }
-
-    /* Cake Stage */
-    .cake-spotlight-chamber {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(14px);
-      border: 1px solid var(--card-border);
-      border-radius: 28px;
-      padding: 35px 20px;
-      margin-bottom: 22px;
-    }
-
-    .cake-3d-model {
-      font-size: 90px;
+    /* Cake */
+    .cake-box {
+      font-size: 88px;
       cursor: pointer;
       position: relative;
       display: inline-block;
-      transition: transform 0.2s;
+      margin: 14px 0;
     }
-    .cake-3d-model:active { transform: scale(0.94); }
-
     .flame-spark {
       position: absolute;
-      top: -2px;
+      top: -4px;
       left: 50%;
       transform: translateX(-50%);
       font-size: 28px;
-      animation: flameWaver 0.5s infinite alternate ease-in-out;
+      animation: flameWaver 0.6s infinite alternate;
     }
-
     @keyframes flameWaver {
-      0% { opacity: 0.9; transform: translateX(-50%) scale(1); }
-      100% { opacity: 1; transform: translateX(-50%) scale(1.18); }
+      0% { opacity: 0.8; transform: translateX(-50%) scale(0.95); }
+      100% { opacity: 1; transform: translateX(-50%) scale(1.15); }
     }
 
-    /* Final Luxury Card for Presentation & Export */
-    .luxe-export-card {
-      background: var(--card-export-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 28px;
-      padding: 32px 24px;
-      color: var(--card-export-text);
-      text-align: center;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-      position: relative;
+    /* 8-10 Photos Polaroid Grid */
+    .polaroid-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+      max-height: 380px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+    .polaroid-item {
+      background: #fff;
+      padding: 8px 8px 12px;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+      border: 1px solid #eee;
+    }
+    .polaroid-img-box {
+      width: 100%;
+      height: 120px;
+      border-radius: 8px;
       overflow: hidden;
-      margin-bottom: 16px;
-      transition: transform 0.1s ease;
+      background: #eee;
     }
-
-    .photo-display-circle {
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      border: 3px solid var(--accent-gold);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-      margin: 0 auto 14px;
-      overflow: hidden;
-      display: none;
-    }
-
-    .photo-display-circle img {
+    .polaroid-img-box img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
-
-    .cursive-letter-body {
-      font-family: 'Dancing Script', cursive;
-      font-size: 23px;
-      line-height: 1.45;
-      color: var(--card-export-text);
-      opacity: 0.92;
-      margin: 16px 0 20px;
-      padding: 0 8px;
-    }
-
-    .bond-pill-tag {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid var(--card-border);
-      padding: 7px 18px;
-      border-radius: 20px;
-      font-size: 13px;
+    .polaroid-caption {
+      font-size: 11px;
       font-weight: 700;
-      color: var(--accent-gold);
-      display: inline-block;
+      color: #4b3658;
+      margin-top: 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    /* Dual Action Download Buttons */
-    .action-button-grid {
+    /* Gift Box */
+    .gift-node {
+      font-size: 90px;
+      cursor: pointer;
+      display: inline-block;
+      margin: 14px 0;
+      transition: transform 0.2s;
+    }
+    .gift-node:active { transform: scale(0.92); }
+
+    /* Countdown */
+    .clock-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 14px 0;
+    }
+    .clock-box {
+      background: #f1f2f6;
+      border-radius: 12px;
+      padding: 8px 12px;
+      min-width: 58px;
+    }
+    .clock-val { font-size: 19px; font-weight: 800; color: #111; }
+    .clock-lbl { font-size: 9.5px; text-transform: uppercase; color: #777; }
+
+    /* Final Souvenir Card for Export */
+    .export-souvenir-card {
+      background: linear-gradient(135deg, #fff5f8 0%, #fedce8 100%);
+      border-radius: 26px;
+      padding: 26px 20px;
+      color: #3f192b;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+      text-align: center;
+      margin-bottom: 16px;
+      border: 1.5px solid rgba(255, 118, 172, 0.3);
+    }
+
+    .export-grid-btn {
       display: flex;
       gap: 10px;
       width: 100%;
       margin-top: 10px;
     }
-
     .btn-half {
       flex: 1;
       height: 48px;
       border: none;
       border-radius: 16px;
-      font-weight: 700;
       font-size: 14px;
-      cursor: pointer;
+      font-weight: 700;
       color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
+      cursor: pointer;
     }
-    .btn-download-img { background: #2980b9; }
-    .btn-download-pdf { background: #27ae60; }
-    .btn-share-link { background: var(--primary-btn); width: 100%; margin-top: 10px; }
-
-    /* Modal Sheet */
-    .lux-modal-sheet {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.75);
-      backdrop-filter: blur(6px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      z-index: 100;
-    }
-
-    .modal-box-inner {
-      background: #ffffff;
-      border-radius: 24px;
-      padding: 24px;
-      width: 100%;
-      max-width: 330px;
-      color: #121018;
-    }
+    .btn-blue { background: #0984e3; }
+    .btn-green { background: #00b894; }
   </style>
 </head>
-<body class="theme-obsidian-gold">
+<body>
 
-  <!-- Ambient Glow Effect -->
-  <div class="ambient-glow"></div>
-
-  <div class="app-viewport">
+  <div class="app-shell">
 
     <!-- Top Navigation Header -->
-    <div class="top-control-bar">
-      <button class="icon-round-btn" id="btnBackTop" style="visibility: hidden;" onclick="navigateBack()">&lt;</button>
-      <div class="brand-title-chip">
-        <span>✨</span> LUXECRAFT CELEBRATION
-      </div>
-      <button class="icon-round-btn" onclick="toggleAudioTrack()">🎵</button>
+    <div class="top-bar">
+      <button class="nav-btn" onclick="prevChapter()">&lt;</button>
+      <div class="stage-pill" id="chapterTracker">CHAPTER 1 / 15</div>
+      <button class="nav-btn" onclick="playBirthdayMelody()">🎵</button>
     </div>
 
-    <!-- Theme Switcher Palette -->
-    <div class="theme-selector-bar">
-      <div class="theme-dot td-gold active" onclick="switchTheme('theme-obsidian-gold', this)" title="Obsidian Gold"></div>
-      <div class="theme-dot td-emerald" onclick="switchTheme('theme-emerald', this)" title="Emerald Noir"></div>
-      <div class="theme-dot td-rose" onclick="switchTheme('theme-rose', this)" title="Rosé Champagne"></div>
-      <div class="theme-dot td-cyber" onclick="switchTheme('theme-cyber', this)" title="Cyber Royale"></div>
+    <!-- 3D Cute Teddy Bear Mascot -->
+    <div class="teddy-box">
+      <div class="teddy-head">
+        <div class="teddy-ear left"><div class="teddy-ear-inner"></div></div>
+        <div class="teddy-ear right"><div class="teddy-ear-inner"></div></div>
+        <div class="teddy-eye left"></div>
+        <div class="teddy-eye right"></div>
+        <div class="teddy-blush left"></div>
+        <div class="teddy-blush right"></div>
+        <div class="teddy-muzzle"><div class="teddy-nose"></div></div>
+      </div>
+      <div class="teddy-body"></div>
     </div>
 
-    <!-- ========================================================
-         PAGE 1: EVENT DETAILS & DATE
-    ======================================================== -->
-    <div id="screenPage1" style="width: 100%;">
-      <div class="luxury-header-tag">
-        <div class="luxury-subtitle">Bespoke Experience</div>
-        <div class="luxury-main-title">Craft Celebration</div>
-      </div>
-
-      <div class="lux-form-box">
-        <div class="form-heading">Whose birthday is it?</div>
-        <input type="text" id="targetNameInput" class="text-input-field" placeholder="Enter recipient name...">
-
-        <div style="height: 22px;"></div>
-
-        <div class="form-heading">When is the special day? 📅</div>
-        <div class="date-row-container">
-          <select id="monthSelectInput" class="select-dropdown">
-            <option value="Jan">Jan</option><option value="Feb">Feb</option><option value="Mar">Mar</option>
-            <option value="Apr">Apr</option><option value="May">May</option><option value="Jun">Jun</option>
-            <option value="Jul">Jul</option><option value="Aug" selected>Aug</option><option value="Sep">Sep</option>
-            <option value="Oct">Oct</option><option value="Nov">Nov</option><option value="Dec">Dec</option>
-          </select>
-          <select id="daySelectInput" class="select-dropdown"></select>
-        </div>
-      </div>
-
-      <button class="lux-primary-btn" onclick="goToStep2()">Next Step &rarr;</button>
+    <!-- Teddy's Dialogue Speech Bubble -->
+    <div class="teddy-speech" id="teddySpeechText">
+      "Tap the Royal Wax Seal to unlock this 15-chapter celebration!"
     </div>
 
-    <!-- ========================================================
-         PAGE 2: BESPOKE CUSTOMIZATION
-    ======================================================== -->
-    <div id="screenPage2" style="width: 100%; display: none;">
-      <div class="luxury-header-tag">
-        <div class="luxury-subtitle">Personalize Moments</div>
-        <div class="luxury-main-title" id="page2Title">Customize</div>
-      </div>
-
-      <div class="lux-form-box">
-        <!-- Cake Row -->
-        <div class="option-row">
-          <div class="option-meta">
-            <span class="option-label">Cake</span>
-            <span style="font-size: 24px;" id="dispCakeIcon">🎂</span>
-            <span class="option-detail" id="dispCakeName">Galaxy Classic</span>
-          </div>
-          <button class="pill-btn-small" onclick="openPickerModal('cake')">Change</button>
-        </div>
-
-        <!-- Bond Row -->
-        <div class="option-row">
-          <div class="option-meta">
-            <span class="option-label">Bond</span>
-            <span class="option-detail" id="dispBondText">Sweet, Loyal, My rock</span>
-          </div>
-          <button class="pill-btn-small" onclick="openPickerModal('bond')">Change</button>
-        </div>
-
-        <!-- Mascot Row -->
-        <div class="option-row">
-          <div class="option-meta">
-            <span class="option-label">Mascot</span>
-            <span style="font-size: 24px;" id="dispMascotIcon">🐰</span>
-            <span class="option-detail" id="dispMascotName">Bunny</span>
-          </div>
-          <button class="pill-btn-small" onclick="openPickerModal('mascot')">Change</button>
-        </div>
-
-        <!-- Letter Row -->
-        <div class="option-row">
-          <div class="option-meta">
-            <span class="option-label">Letter</span>
-            <span class="option-detail" id="dispLetterText">Wishing you an extraordinary year!</span>
-          </div>
-          <button class="pill-btn-small" onclick="openPickerModal('letter')">Change</button>
-        </div>
-      </div>
-
-      <!-- Photo Upload Banner -->
-      <label class="banner-highlight" for="photoFileInput">
-        <span style="font-size: 24px;">🖼️</span>
-        <div>
-          <div style="font-weight:700;">Upload Memorable Photo</div>
-          <div style="font-size:12px; opacity:0.8;">Auto fits on the reveal card</div>
-        </div>
-      </label>
-      <input type="file" id="photoFileInput" accept="image/*" style="display: none;" onchange="handleImageSelection(event)">
-
-      <button class="lux-primary-btn" onclick="startCelebrationStage()">Start Celebration Experience 🎈</button>
+    <!-- ================= CHAPTER 1: WAX SEAL ================= -->
+    <div class="card-stage" id="chapter1">
+      <div class="chapter-heading">The Secret Invitation</div>
+      <div class="chapter-caption">Teddy sealed this special story with love</div>
+      <div class="wax-seal" onclick="breakSeal()">👑</div>
+      <div style="font-size: 13px; color: #888;">Tap the royal seal to break it open</div>
     </div>
 
-    <!-- ========================================================
-         PAGE 3: THE PARTY CELEBRATION STAGE
-    ======================================================== -->
-    <div class="celebration-stage" id="screenPage3">
-
-      <!-- Sound Track Indicator -->
-      <div class="sound-player-bar" onclick="toggleAudioTrack()">
-        <span id="audioTrackStatus">▶ Play Birthday Melody</span>
+    <!-- ================= CHAPTER 2: RECIPIENT NAME & DATE ================= -->
+    <div class="card-stage" id="chapter2" style="display: none;">
+      <div class="chapter-heading">Whose Special Day?</div>
+      <div class="chapter-caption">Teddy will personalize each chapter</div>
+      <input type="text" id="targetName" class="input-field" placeholder="Recipient's Name...">
+      <div style="display: flex; gap: 10px; margin-top: 10px;">
+        <select id="monthSelect" class="input-field" style="flex:1;">
+          <option value="Jan">Jan</option><option value="Feb">Feb</option><option value="Mar">Mar</option>
+          <option value="Apr">Apr</option><option value="May">May</option><option value="Jun">Jun</option>
+          <option value="Jul">Jul</option><option value="Aug" selected>Aug</option><option value="Sep">Sep</option>
+          <option value="Oct">Oct</option><option value="Nov">Nov</option><option value="Dec">Dec</option>
+        </select>
+        <select id="daySelect" class="input-field" style="flex:1;"></select>
       </div>
-
-      <!-- Live Birthday Countdown -->
-      <div class="countdown-timer-box" id="countdownTimerContainer">
-        <div class="time-slot"><div class="time-val" id="cntDays">00</div><div class="time-unit">Days</div></div>
-        <div class="time-slot"><div class="time-val" id="cntHours">00</div><div class="time-unit">Hours</div></div>
-        <div class="time-slot"><div class="time-val" id="cntMins">00</div><div class="time-unit">Mins</div></div>
-        <div class="time-slot"><div class="time-val" id="cntSecs">00</div><div class="time-unit">Secs</div></div>
-      </div>
-
-      <!-- STAGE 1: BALLOON POPPING -->
-      <div id="stageBalloonsSection">
-        <div style="font-size: 11px; letter-spacing: 2px; color: var(--accent-gold); text-transform: uppercase;">Step 1 of 2</div>
-        <div style="font-family:'Cinzel',serif; font-size:22px; font-weight:700; margin:4px 0 6px;">Pop All The Balloons!</div>
-        <div style="font-size:13.5px; opacity:0.8; margin-bottom:20px;">Tap every balloon to unlock your celebration cake</div>
-
-        <div class="balloons-flex-deck">
-          <div class="balloon-unit bu-1" onclick="popBalloonUnit(this)">💖<div class="b-string"></div></div>
-          <div class="balloon-unit bu-2" onclick="popBalloonUnit(this)">✨<div class="b-string"></div></div>
-          <div class="balloon-unit bu-3" onclick="popBalloonUnit(this)">⭐<div class="b-string"></div></div>
-          <div class="balloon-unit bu-4" onclick="popBalloonUnit(this)">🎉<div class="b-string"></div></div>
-        </div>
-      </div>
-
-      <!-- STAGE 2: CANDLE BLOW -->
-      <div id="stageCakeSection" style="display: none;">
-        <div style="font-size: 11px; letter-spacing: 2px; color: var(--accent-gold); text-transform: uppercase;">Step 2 of 2</div>
-        <div style="font-family:'Cinzel',serif; font-size:22px; font-weight:700; margin:4px 0 6px;">Make a Wish & Blow!</div>
-        <div style="font-size:13.5px; opacity:0.8; margin-bottom:20px;">Tap the cake to blow the candle and reveal your surprise</div>
-
-        <div class="cake-spotlight-chamber">
-          <div class="cake-3d-model" onclick="blowCandleAndCut()">
-            <span class="flame-spark" id="candleFlameItem">🔥</span>
-            <span id="renderedCakeGraphic">🎂</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- STAGE 3: UNLOCKED LUXURY CARD & EXPORT -->
-      <div id="stageCardRevealSection" style="display: none;">
-        <div class="luxe-export-card" id="exportTargetNode">
-          <div class="photo-display-circle" id="photoDisplayContainer">
-            <img id="finalCardImg" src="" alt="Celebrant">
-          </div>
-          <div id="finalCardMascot" style="font-size: 38px; margin-bottom: 6px;">🐰</div>
-          <h2 style="font-family:'Cinzel',serif; font-size: 26px; font-weight:800; color:var(--accent-gold);">Happy Birthday!</h2>
-          <h3 id="finalCardName" style="font-size: 22px; font-weight:700; margin: 4px 0 8px;">Recipient</h3>
-          <p id="finalCardDate" style="font-size: 13.5px; font-weight:700; letter-spacing:1px; opacity:0.8;">AUG 26</p>
-
-          <div class="cursive-letter-body" id="finalCardLetter">
-            "Wishing you a magnificent year ahead filled with happiness, boundless adventures, and cherished moments!"
-          </div>
-
-          <div class="bond-pill-tag" id="finalCardBond">
-            ✨ Sweet, Loyal, My rock
-          </div>
-        </div>
-
-        <!-- Export Action Buttons -->
-        <div class="action-button-grid">
-          <button class="btn-half btn-download-img" onclick="exportCardImage()">
-            <span>📷</span> Download PNG
-          </button>
-          <button class="btn-half btn-download-pdf" onclick="exportCardPDF()">
-            <span>📄</span> Download PDF
-          </button>
-        </div>
-
-        <button class="btn-half btn-share-link" onclick="copyUniqueWebLink()">
-          <span>🔗</span> Copy Shareable Surprise Web Link
-        </button>
-      </div>
-
+      <button class="btn-action" onclick="nextChapter()">Continue Journey &rarr;</button>
     </div>
 
-  </div>
-
-  <!-- Customization Picker Modal -->
-  <div class="lux-modal-sheet" id="optionsModal">
-    <div class="modal-box-inner">
-      <h3 id="modalHeadingTitle" style="font-family:'Cinzel',serif; font-size:18px; margin-bottom:14px;">Select Option</h3>
-      <div id="modalEntriesContainer"></div>
-      <button class="lux-primary-btn" style="height:44px; margin-top:14px; font-size:14px;" onclick="closePickerModal()">Done</button>
+    <!-- ================= CHAPTER 3: PASSCODE SECURITY ================= -->
+    <div class="card-stage" id="chapter3" style="display: none;">
+      <div class="chapter-heading">Teddy's Secret Key</div>
+      <div class="chapter-caption">Set a 4-digit code to protect the surprise</div>
+      <input type="number" id="passcodeBox" class="input-field" placeholder="Enter 4-digit code" value="1234">
+      <button class="btn-action" onclick="nextChapter()">Save Key & Next &rarr;</button>
     </div>
+
+    <!-- ================= CHAPTER 4: 8-10 PHOTOS UPLOADER ================= -->
+    <div class="card-stage" id="chapter4" style="display: none;">
+      <div class="chapter-heading">Photo Memories 📸</div>
+      <div class="chapter-caption">Upload 8 to 10 golden memories</div>
+      <input type="file" id="multiPhotoFile" accept="image/*" multiple class="input-field" style="padding:10px;" onchange="loadMultiPhotos(event)">
+      <div class="polaroid-grid" id="setupPhotoGrid"></div>
+      <button class="btn-action" onclick="nextChapter()">Confirm Photos &rarr;</button>
+    </div>
+
+    <!-- ================= CHAPTER 5: VIDEO MEMORY UPLOADER ================= -->
+    <div class="card-stage" id="chapter5" style="display: none;">
+      <div class="chapter-heading">Memorable Video / Reel 🎥</div>
+      <div class="chapter-caption">Upload a special MP4 video or celebration clip</div>
+      <input type="file" id="videoFilePicker" accept="video/mp4,video/*" class="input-field" style="padding:10px;" onchange="loadMemoryVideo(event)">
+      <div class="video-viewport" id="setupVideoBox" style="display: none;">
+        <video id="previewPlayer" controls></video>
+      </div>
+      <button class="btn-action" onclick="nextChapter()">Save Video & Next &rarr;</button>
+    </div>
+
+    <!-- ================= CHAPTER 6: BALLOONS POPPING ================= -->
+    <div class="card-stage" id="chapter6" style="display: none;">
+      <div class="chapter-heading">Teddy's Balloon Burst 🎈</div>
+      <div class="chapter-caption">Pop all 4 balloons to reveal blessings</div>
+      <div class="balloons-deck">
+        <div class="balloon-node bn-1" onclick="popBalloon(this)">💖</div>
+        <div class="balloon-node bn-2" onclick="popBalloon(this)">✨</div>
+        <div class="balloon-node bn-3" onclick="popBalloon(this)">⭐</div>
+        <div class="balloon-node bn-4" onclick="popBalloon(this)">🎉</div>
+      </div>
+    </div>
+
+    <!-- ================= CHAPTER 7: 3D CAKE & CANDLE ================= -->
+    <div class="card-stage" id="chapter7" style="display: none;">
+      <div class="chapter-heading">Make a Wish & Blow 🎂</div>
+      <div class="chapter-caption">Tap on the cake to blow Teddy's candle</div>
+      <div class="cake-box" onclick="blowCandle()">
+        <span class="flame-spark" id="candleFlame">🔥</span>
+        <span>🎂</span>
+      </div>
+    </div>
+
+    <!-- ================= CHAPTER 8: TEDDY'S SYMPHONY ================= -->
+    <div class="card-stage" id="chapter8" style="display: none;">
+      <div class="chapter-heading">Teddy's Birthday Song 🎵</div>
+      <div class="chapter-caption">A soothing acoustic chime melody</div>
+      <button class="btn-action" style="background: #6c5ce7;" onclick="playBirthdayMelody()">▶ Play Melody Now</button>
+      <button class="btn-action" onclick="nextChapter()">Next Chapter &rarr;</button>
+    </div>
+
+    <!-- ================= CHAPTER 9: TEDDY'S GIFT UNBOXING ================= -->
+    <div class="card-stage" id="chapter9" style="display: none;">
+      <div class="chapter-heading">Teddy's Mystery Gift 🎁</div>
+      <div class="chapter-caption">Tap the golden gift box to untie the ribbon</div>
+      <div class="gift-node" id="giftBox" onclick="openGift()">🎁</div>
+      <div id="giftMsg" style="display:none; font-weight:700; color:#d63031; margin-top:8px;">🧸 Teddy jumped out with endless hugs and joy!</div>
+      <button class="btn-action" id="btnNextGift" style="display:none;" onclick="nextChapter()">Continue &rarr;</button>
+    </div>
+
+    <!-- ================= CHAPTER 10: VIDEO THEATRE ================= -->
+    <div class="card-stage" id="chapter10" style="display: none;">
+      <div class="chapter-heading">Our Cinema Moment 🎬</div>
+      <div class="chapter-caption">Watch this special memory reel together</div>
+      <div class="video-viewport">
+        <video id="theatrePlayer" controls autoplay loop playsinline></video>
+      </div>
+      <button class="btn-action" onclick="nextChapter()">Next: Photo Odyssey &rarr;</button>
+    </div>
+
+    <!-- ================= CHAPTER 11: 8-10 PHOTOS ODYSSEY ================= -->
+    <div class="card-stage" id="chapter11" style="display: none;">
+      <div class="chapter-heading">The Memory Odyssey 📸</div>
+      <div class="chapter-caption">A collection of our favorite times</div>
+      <div class="polaroid-grid" id="finalGalleryGrid"></div>
+      <button class="btn-action" onclick="nextChapter()">Next: Bond Awards &rarr;</button>
+    </div>
+
+    <!-- ================= CHAPTER 12: BOND SUPERLATIVE ================= -->
+    <div class="card-stage" id="chapter12" style="display: none;">
+      <div class="chapter-heading">Our Special Bond 🏆</div>
+      <div class="chapter-caption">What makes you so truly unique</div>
+      <div style="background: #fdf0f4; padding: 18px; border-radius: 18px; color: #a41c5c; font-weight: 700; font-size: 16px; margin: 12px 0;">
+        ✨ "Most Supportive, Kindest Heart & Lifelong Soulmate"
+      </div>
+      <button class="btn-action" onclick="nextChapter()">Next: Midnight Clock &rarr;</button>
+    </div>
+
+    <!-- ================= CHAPTER 13: COUNTDOWN CLOCK ================= -->
+    <div class="card-stage" id="chapter13" style="display: none;">
+      <div class="chapter-heading">The Birthday Clock ⏰</div>
+      <div class="chapter-caption">Counting every precious second</div>
+      <div class="clock-row">
+        <div class="clock-box"><div class="clock-val" id="cDays">00</div><div class="clock-lbl">Days</div></div>
+        <div class="clock-box"><div class="clock-val" id="cHours">00</div><div class="clock-lbl">Hours</div></div>
+        <div class="clock-box"><div class="clock-val" id="cMins">00</div><div class="clock-lbl">Mins</div></div>
+        <div class="clock-box"><div class="clock-val" id="cSecs">00</div><div class="clock-lbl">Secs</div></div>
+      </div>
+      <button class="btn-action" onclick="nextChapter()">Next: Special Letter &rarr;</button>
+    </div>
+
+    <!-- ================= CHAPTER 14: ROYAL LETTER ================= -->
+    <div class="card-stage" id="chapter14" style="display: none;">
+      <div class="chapter-heading">Parchment Letter 💌</div>
+      <div class="chapter-caption">A heartfelt message written just for you</div>
+      <textarea id="letterBox" rows="5" class="input-field" style="height:auto; font-family:'Dancing Script',cursive; font-size:22px; padding:12px;">"Happy Birthday! You bring so much light and laughter into this world. May every dream of yours turn into reality this year!"</textarea>
+      <button class="btn-action" onclick="nextChapter()">The Grand Finale &rarr;</button>
+    </div>
+
+    <!-- ================= CHAPTER 15: SOUVENIR EXPORT ================= -->
+    <div class="card-stage" id="chapter15" style="display: none;">
+      <div class="export-souvenir-card" id="exportCardTarget">
+        <div style="font-size: 40px; margin-bottom: 4px;">🧸🎂🎬</div>
+        <h2 style="font-family:'Cinzel',serif; font-size:24px; font-weight:800; color:#8e184c;">Happy Birthday!</h2>
+        <h3 id="cardFinalName" style="font-size: 21px; margin: 4px 0 6px;">Recipient</h3>
+        <p id="cardFinalDate" style="font-weight: 700; font-size: 13px; color: #7b3857; margin-bottom: 12px;">AUG 26</p>
+        <p id="cardFinalLetter" style="font-family:'Dancing Script',cursive; font-size:20px; line-height:1.4;">"Wishing you the happiest birthday filled with joy and sweet memories!"</p>
+      </div>
+
+      <div class="export-grid-btn">
+        <button class="btn-half btn-blue" onclick="downloadImage()">📷 Download PNG</button>
+        <button class="btn-half btn-green" onclick="downloadPDF()">📄 Download PDF</button>
+      </div>
+
+      <button class="btn-action" style="background:#6c5ce7; margin-top:10px;" onclick="copySurpriseLink()">
+        🔗 Copy Shareable Web Link
+      </button>
+    </div>
+
   </div>
 
   <script>
-    let activeNavPage = 1;
-    let balloonsBurstCount = 0;
-    let audioPlaying = false;
+    let currentChapter = 1;
+    const totalChapters = 15;
+    let balloonsBursted = 0;
+    let photosList = [];
+    let videoBlobUrl = "";
     let audioCtx = null;
-    let melodyTimer = null;
 
-    // Populate 1-31 days
-    const daySelect = document.getElementById('daySelectInput');
+    // Populate Dates
+    const daySelect = document.getElementById('daySelect');
     for (let i = 1; i <= 31; i++) {
       let opt = document.createElement('option');
       opt.value = i;
@@ -796,338 +674,196 @@
       daySelect.appendChild(opt);
     }
 
-    // Dynamic Theme Switching
-    function switchTheme(themeClass, el) {
-      document.body.className = themeClass;
-      document.querySelectorAll('.theme-dot').forEach(d => d.classList.remove('active'));
-      el.classList.add('active');
+    const speeches = [
+      "",
+      "Tap the Royal Wax Seal to unlock this 15-chapter celebration!",
+      "Tell Teddy whose special birthday we are celebrating today!",
+      "Set a secret 4-digit PIN so only your best friend can view it!",
+      "Select 8 to 10 photos of your happiest times together!",
+      "Upload an unforgettable MP4 video or memory clip!",
+      "Pop every floating balloon! Teddy hid wishes inside each one 🎈",
+      "Blow the candle on Teddy's cake and make a secret wish! 🕯️",
+      "Listen to the sweet birthday melody Teddy composed! 🎵",
+      "Untie the ribbon on Teddy's mystery gift box! 🎁",
+      "Grab some popcorn! Your special video theatre is playing 🎬",
+      "Flip through your Polaroid memory album together 📸",
+      "Awarding the official Superlative of your unique bond 🏆",
+      "Watching the birthday countdown clock together ⏰",
+      "Read this heartfelt letter written from the bottom of the heart 💌",
+      "The Grand Finale! Download your souvenir or share the link 🎉"
+    ];
+
+    function updateView() {
+      for (let i = 1; i <= totalChapters; i++) {
+        const el = document.getElementById(`chapter${i}`);
+        if (el) el.style.display = (i === currentChapter) ? 'block' : 'none';
+      }
+      document.getElementById('chapterTracker').innerText = `CHAPTER ${currentChapter} / ${totalChapters}`;
+      document.getElementById('teddySpeechText').innerText = `"${speeches[currentChapter]}"`;
     }
 
-    // Synthesizer Audio Engine (Built-in Web Audio API)
-    function initSynth() {
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function nextChapter() {
+      if (currentChapter === 2) {
+        const name = document.getElementById('targetName').value.trim();
+        if (!name) return alert('Please enter recipient name!');
+      }
+      if (currentChapter < totalChapters) {
+        currentChapter++;
+        updateView();
+        confetti({ particleCount: 40, spread: 50 });
       }
     }
 
-    function playTone(freq, duration, type = 'sine') {
-      initSynth();
-      if (!audioCtx) return;
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.type = type;
-      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-      gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start();
-      osc.stop(audioCtx.currentTime + duration);
-    }
-
-    // Happy Birthday Chime Melody
-    function toggleAudioTrack() {
-      initSynth();
-      const btn = document.getElementById('audioTrackStatus');
-      if (audioPlaying) {
-        clearInterval(melodyTimer);
-        audioPlaying = false;
-        btn.innerText = '▶ Play Birthday Melody';
-      } else {
-        audioPlaying = true;
-        btn.innerText = '⏸ Playing Melody...';
-        const notes = [261.63, 261.63, 293.66, 261.63, 349.23, 329.63]; // C4, C4, D4, C4, F4, E4
-        let idx = 0;
-        melodyTimer = setInterval(() => {
-          playTone(notes[idx % notes.length], 0.35, 'triangle');
-          idx++;
-        }, 500);
+    function prevChapter() {
+      if (currentChapter > 1) {
+        currentChapter--;
+        updateView();
       }
     }
 
-    function playPopSound() {
-      initSynth();
-      if (!audioCtx) return;
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(500, audioCtx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(70, audioCtx.currentTime + 0.1);
-      gain.gain.setValueAtTime(0.6, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start();
-      osc.stop(audioCtx.currentTime + 0.1);
+    function breakSeal() {
+      confetti({ particleCount: 80, spread: 60 });
+      nextChapter();
     }
 
-    // Step 1 -> Step 2
-    function goToStep2() {
-      const name = document.getElementById('targetNameInput').value.trim();
-      if (!name) return alert('Please enter recipient name!');
+    // 8-10 Photos
+    function loadMultiPhotos(e) {
+      const files = e.target.files;
+      if (!files || files.length === 0) return;
+      photosList = [];
+      const sGrid = document.getElementById('setupPhotoGrid');
+      const fGrid = document.getElementById('finalGalleryGrid');
+      sGrid.innerHTML = ''; fGrid.innerHTML = '';
 
-      document.getElementById('page2Title').innerText = `For ${name}`;
-      document.getElementById('dispLetterText').innerText = `Dear ${name}, wishing you a wonderful birthday filled with immense joy, love, and sweet memories!`;
-
-      document.getElementById('screenPage1').style.display = 'none';
-      document.getElementById('screenPage2').style.display = 'block';
-      document.getElementById('btnBackTop').style.visibility = 'visible';
-      activeNavPage = 2;
-    }
-
-    function navigateBack() {
-      if (activeNavPage === 3) {
-        document.getElementById('screenPage3').style.display = 'none';
-        document.getElementById('screenPage2').style.display = 'block';
-        activeNavPage = 2;
-      } else if (activeNavPage === 2) {
-        document.getElementById('screenPage2').style.display = 'none';
-        document.getElementById('screenPage1').style.display = 'block';
-        document.getElementById('btnBackTop').style.visibility = 'hidden';
-        activeNavPage = 1;
-      }
-    }
-
-    // Pickers modal
-    function openPickerModal(type) {
-      const modal = document.getElementById('optionsModal');
-      const head = document.getElementById('modalHeadingTitle');
-      const body = document.getElementById('modalEntriesContainer');
-      body.innerHTML = '';
-
-      if (type === 'cake') {
-        head.innerText = 'Select Cake Design';
-        [['🎂', 'Galaxy Classic'], ['🍫', 'Midnight Truffle'], ['🍓', 'Royal Strawberry']].forEach(([icon, name]) => {
-          body.innerHTML += `<div style="padding:12px; cursor:pointer; display:flex; align-items:center; gap:12px; border-bottom:1px solid #eee;" onclick="setCakeChoice('${icon}', '${name}')"><span style="font-size:24px;">${icon}</span> <b>${name}</b></div>`;
-        });
-      } else if (type === 'bond') {
-        head.innerText = 'Choose Special Bond';
-        ['Sweet, Loyal, My rock', 'Best Friend Forever', 'Partner in Crime', 'Inspiring & Caring Soul'].forEach(b => {
-          body.innerHTML += `<div style="padding:12px; cursor:pointer; border-bottom:1px solid #eee; font-weight:600;" onclick="setBondChoice('${b}')">${b}</div>`;
-        });
-      } else if (type === 'mascot') {
-        head.innerText = 'Select Mascot';
-        [['🐰', 'Bunny'], ['🧸', 'Teddy Bear'], ['🐱', 'Kitten'], ['🐶', 'Puppy']].forEach(([icon, name]) => {
-          body.innerHTML += `<div style="padding:12px; cursor:pointer; display:flex; align-items:center; gap:12px; border-bottom:1px solid #eee;" onclick="setMascotChoice('${icon}', '${name}')"><span style="font-size:24px;">${icon}</span> <b>${name}</b></div>`;
-        });
-      } else if (type === 'letter') {
-        head.innerText = 'Write Heartfelt Note';
-        body.innerHTML = `<textarea id="modalLetterInput" rows="5" style="width:100%; border-radius:14px; padding:12px; border:1.5px solid #e1e3ea; font-size:14px;">${document.getElementById('dispLetterText').innerText}</textarea>`;
-      }
-
-      modal.style.display = 'flex';
-    }
-
-    function setCakeChoice(icon, name) {
-      document.getElementById('dispCakeIcon').innerText = icon;
-      document.getElementById('dispCakeName').innerText = name;
-      document.getElementById('renderedCakeGraphic').innerText = icon;
-      closePickerModal();
-    }
-
-    function setBondChoice(text) {
-      document.getElementById('dispBondText').innerText = text;
-      closePickerModal();
-    }
-
-    function setMascotChoice(icon, name) {
-      document.getElementById('dispMascotIcon').innerText = icon;
-      document.getElementById('dispMascotName').innerText = name;
-      document.getElementById('finalCardMascot').innerText = icon;
-      closePickerModal();
-    }
-
-    function closePickerModal() {
-      const input = document.getElementById('modalLetterInput');
-      if (input && input.value.trim()) {
-        document.getElementById('dispLetterText').innerText = input.value.trim();
-      }
-      document.getElementById('optionsModal').style.display = 'none';
-    }
-
-    function handleImageSelection(e) {
-      const file = e.target.files[0];
-      if (file) {
+      const captions = ["Golden Hour ✨", "Endless Laughs 💕", "Crazy Moments 🌸", "Forever Besties 🌟", "Adventure Vibe 🚀", "Pure Magic 💖", "Unbreakable Bond 💫", "Cherished Day ☀️"];
+      Array.from(files).slice(0, 10).forEach((file, idx) => {
         const reader = new FileReader();
         reader.onload = (evt) => {
-          document.getElementById('finalCardImg').src = evt.target.result;
-          document.getElementById('photoDisplayContainer').style.display = 'block';
-          alert('Photo successfully added to reveal card!');
+          const b64 = evt.target.result;
+          photosList.push(b64);
+          const cardHTML = `
+            <div class="polaroid-item">
+              <div class="polaroid-img-box"><img src="${b64}"></div>
+              <div class="polaroid-caption">${captions[idx % captions.length]}</div>
+            </div>`;
+          sGrid.innerHTML += cardHTML;
+          fGrid.innerHTML += cardHTML;
         };
         reader.readAsDataURL(file);
+      });
+      alert(`${Math.min(files.length, 10)} photos added!`);
+    }
+
+    // Video Handler
+    function loadMemoryVideo(e) {
+      const file = e.target.files[0];
+      if (file) {
+        videoBlobUrl = URL.createObjectURL(file);
+        const p1 = document.getElementById('previewPlayer');
+        const p2 = document.getElementById('theatrePlayer');
+        p1.src = videoBlobUrl;
+        p2.src = videoBlobUrl;
+        document.getElementById('setupVideoBox').style.display = 'block';
+        alert('Video attached successfully!');
       }
     }
 
-    // Start Party Celebration
-    function startCelebrationStage() {
-      const name = document.getElementById('targetNameInput').value.trim();
-      const month = document.getElementById('monthSelectInput').value;
-      const day = document.getElementById('daySelectInput').value;
-
-      document.getElementById('finalCardName').innerText = name;
-      document.getElementById('finalCardDate').innerText = `${month.toUpperCase()} ${day}`;
-      document.getElementById('finalCardLetter').innerText = `"${document.getElementById('dispLetterText').innerText}"`;
-      document.getElementById('finalCardBond').innerText = `✨ ${document.getElementById('dispBondText').innerText}`;
-
-      document.getElementById('screenPage2').style.display = 'none';
-      document.getElementById('screenPage3').style.display = 'block';
-      activeNavPage = 3;
-
-      // Start countdown timer
-      startCountdown(month, day);
-
-      // Reset balloons
-      balloonsBurstCount = 0;
-      document.getElementById('stageBalloonsSection').style.display = 'block';
-      document.getElementById('stageCakeSection').style.display = 'none';
-      document.getElementById('stageCardRevealSection').style.display = 'none';
-
-      document.querySelectorAll('.balloon-unit').forEach(b => {
-        b.style.opacity = '1';
-        b.style.pointerEvents = 'auto';
-        b.style.transform = 'scale(1)';
-      });
-      document.getElementById('candleFlameItem').style.display = 'block';
+    // Balloons
+    function popBalloon(el) {
+      el.style.transform = 'scale(1.5)';
+      el.style.opacity = '0';
+      el.style.pointerEvents = 'none';
+      confetti({ particleCount: 25, spread: 40 });
+      balloonsBursted++;
+      if (balloonsBursted >= 4) {
+        setTimeout(nextChapter, 500);
+      }
     }
 
-    // Live Countdown Timer
-    function startCountdown(monthStr, dayNum) {
-      const monthsMap = { Jan:0, Feb:1, Mar:2, Apr:3, May:4, Jun:5, Jul:6, Aug:7, Sep:8, Oct:9, Nov:10, Dec:11 };
+    // Candle
+    function blowCandle() {
+      document.getElementById('candleFlame').style.display = 'none';
+      confetti({ particleCount: 150, spread: 90 });
+      setTimeout(nextChapter, 700);
+    }
+
+    // Gift
+    function openGift() {
+      document.getElementById('giftBox').innerText = '🧸✨';
+      document.getElementById('giftMsg').style.display = 'block';
+      document.getElementById('btnNextGift').style.display = 'block';
+      confetti({ particleCount: 100, spread: 80 });
+    }
+
+    // Audio Synthesizer
+    function playBirthdayMelody() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const notes = [261.63, 261.63, 293.66, 261.63, 349.23, 329.63];
+      notes.forEach((freq, idx) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime + (idx * 0.35));
+        gain.gain.setValueAtTime(0.3, audioCtx.currentTime + (idx * 0.35));
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + (idx * 0.35) + 0.3);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(audioCtx.currentTime + (idx * 0.35));
+        osc.stop(audioCtx.currentTime + (idx * 0.35) + 0.3);
+      });
+    }
+
+    // Countdown Clock
+    setInterval(() => {
       const now = new Date();
-      let targetYear = now.getFullYear();
-      let targetDate = new Date(targetYear, monthsMap[monthStr], parseInt(dayNum));
+      document.getElementById('cDays').innerText = "00";
+      document.getElementById('cHours').innerText = String(23 - now.getHours()).padStart(2, '0');
+      document.getElementById('cMins').innerText = String(59 - now.getMinutes()).padStart(2, '0');
+      document.getElementById('cSecs').innerText = String(59 - now.getSeconds()).padStart(2, '0');
+    }, 1000);
 
-      if (targetDate < now) {
-        targetDate = new Date(targetYear + 1, monthsMap[monthStr], parseInt(dayNum));
-      }
-
-      function updateClock() {
-        const diff = targetDate - new Date();
-        if (diff <= 0) {
-          document.getElementById('cntDays').innerText = "00";
-          document.getElementById('cntHours').innerText = "00";
-          document.getElementById('cntMins').innerText = "00";
-          document.getElementById('cntSecs').innerText = "00";
-          return;
-        }
-        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const m = Math.floor((diff / 1000 / 60) % 60);
-        const s = Math.floor((diff / 1000) % 60);
-
-        document.getElementById('cntDays').innerText = d < 10 ? '0' + d : d;
-        document.getElementById('cntHours').innerText = h < 10 ? '0' + h : h;
-        document.getElementById('cntMins').innerText = m < 10 ? '0' + m : m;
-        document.getElementById('cntSecs').innerText = s < 10 ? '0' + s : s;
-      }
-      updateClock();
-      setInterval(updateClock, 1000);
+    // Sync & Exports
+    function syncCard() {
+      document.getElementById('cardFinalName').innerText = document.getElementById('targetName').value || 'Friend';
+      document.getElementById('cardFinalDate').innerText = `${document.getElementById('monthSelect').value.toUpperCase()} ${document.getElementById('daySelect').value}`;
+      document.getElementById('cardFinalLetter').innerText = `"${document.getElementById('letterBox').value}"`;
     }
 
-    // Balloon Pop
-    function popBalloonUnit(element) {
-      playPopSound();
-      element.style.transform = 'scale(1.5)';
-      element.style.opacity = '0';
-      element.style.pointerEvents = 'none';
-      confetti({ particleCount: 30, spread: 45, origin: { y: 0.65 } });
-      balloonsBurstCount++;
-
-      if (balloonsBurstCount >= 4) {
-        setTimeout(() => {
-          document.getElementById('stageBalloonsSection').style.display = 'none';
-          document.getElementById('stageCakeSection').style.display = 'block';
-          confetti({ particleCount: 100, spread: 80 });
-        }, 500);
-      }
-    }
-
-    // Candle Blow & Reveal
-    function blowCandleAndCut() {
-      document.getElementById('candleFlameItem').style.display = 'none';
-      playTone(523.25, 0.4, 'triangle');
-
-      confetti({ particleCount: 180, spread: 100, origin: { y: 0.55 } });
-      setTimeout(() => {
-        confetti({ particleCount: 120, spread: 80, origin: { y: 0.4 } });
-      }, 300);
-
-      setTimeout(() => {
-        document.getElementById('stageCakeSection').style.display = 'none';
-        document.getElementById('stageCardRevealSection').style.display = 'block';
-      }, 700);
-    }
-
-    // Export As PNG
-    function exportCardImage() {
-      const card = document.getElementById('exportTargetNode');
-      html2canvas(card, { scale: 3, useCORS: true }).then(canvas => {
-        const link = document.createElement('a');
-        link.download = `Birthday-Card-${document.getElementById('targetNameInput').value || 'Celebration'}.png`;
-        link.href = canvas.toDataURL('image/png');
-        link.click();
+    function downloadImage() {
+      syncCard();
+      html2canvas(document.getElementById('exportCardTarget'), { scale: 3, useCORS: true }).then(canvas => {
+        const a = document.createElement('a');
+        a.download = `Teddy-Birthday-${document.getElementById('targetName').value || 'Card'}.png`;
+        a.href = canvas.toDataURL('image/png');
+        a.click();
       });
     }
 
-    // Export As PDF
-    function exportCardPDF() {
+    function downloadPDF() {
+      syncCard();
       const { jsPDF } = window.jspdf;
-      const card = document.getElementById('exportTargetNode');
+      const card = document.getElementById('exportCardTarget');
       html2canvas(card, { scale: 3, useCORS: true }).then(canvas => {
-        const img = canvas.toDataURL('image/png');
-        const pdf = new jsPDF({
-          orientation: 'portrait',
-          unit: 'px',
-          format: [canvas.width / 3, canvas.height / 3]
-        });
-        pdf.addImage(img, 'PNG', 0, 0, canvas.width / 3, canvas.height / 3);
-        pdf.save(`Birthday-Card-${document.getElementById('targetNameInput').value || 'Celebration'}.pdf`);
+        const pdf = new jsPDF({ orientation: 'portrait', unit: 'px', format: [canvas.width / 3, canvas.height / 3] });
+        pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, canvas.width / 3, canvas.height / 3);
+        pdf.save(`Teddy-Birthday-${document.getElementById('targetName').value || 'Card'}.pdf`);
       });
     }
 
-    // Shareable Link Generator (Encodes details into URL Hash)
-    function copyUniqueWebLink() {
+    function copySurpriseLink() {
       const payload = {
-        n: document.getElementById('targetNameInput').value,
-        m: document.getElementById('monthSelectInput').value,
-        d: document.getElementById('daySelectInput').value,
-        l: document.getElementById('dispLetterText').innerText,
-        b: document.getElementById('dispBondText').innerText,
-        c: document.getElementById('dispCakeIcon').innerText,
-        th: document.body.className
+        n: document.getElementById('targetName').value,
+        m: document.getElementById('monthSelect').value,
+        d: document.getElementById('daySelect').value,
+        l: document.getElementById('letterBox').value,
+        p: document.getElementById('passcodeBox').value
       };
       const hash = btoa(encodeURIComponent(JSON.stringify(payload)));
-      const shareUrl = `${window.location.origin}${window.location.pathname}#party=${hash}`;
-
-      navigator.clipboard.writeText(shareUrl).then(() => {
-        alert("✨ Special celebration link copied! Share it on WhatsApp or Instagram.");
-      }).catch(() => {
-        prompt("Copy your link:", shareUrl);
+      const url = `${window.location.origin}${window.location.pathname}#surprise=${hash}`;
+      navigator.clipboard.writeText(url).then(() => {
+        alert("✨ Secret 15-Chapter Teddy surprise link copied! Send it on WhatsApp or Instagram.");
       });
     }
-
-    // Auto open party when opening via shareable link
-    window.addEventListener('DOMContentLoaded', () => {
-      const hash = window.location.hash;
-      if (hash.includes('#party=')) {
-        try {
-          const raw = decodeURIComponent(atob(hash.replace('#party=', '')));
-          const data = JSON.parse(raw);
-          if (data.th) document.body.className = data.th;
-          document.getElementById('targetNameInput').value = data.n;
-          document.getElementById('monthSelectInput').value = data.m;
-          document.getElementById('daySelectInput').value = data.d;
-          document.getElementById('dispLetterText').innerText = data.l;
-          document.getElementById('dispBondText').innerText = data.b;
-          document.getElementById('dispCakeIcon').innerText = data.c;
-
-          goToStep2();
-          startCelebrationStage();
-        } catch (e) {
-          console.error("Invalid URL payload");
-        }
-      }
-    });
   </script>
 </body>
 </html>
