@@ -3,1304 +3,1104 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Celebration Studio Pro | Luxury Event Cards & Web Experience</title>
-  
-  <!-- Modern Typography Fonts -->
+  <title>HeartCraft - Virtual Birthday Celebration</title>
+
+  <!-- Premium Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
-  
-  <!-- CDN Dependencies: TailwindCSS, Canvas-Confetti, html2canvas, jsPDF -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,600;0,800;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Core Libraries -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-            serif: ['"Playfair Display"', 'serif'],
-            luxury: ['"Cinzel"', 'serif'],
-          },
-          colors: {
-            obsidian: '#08070d',
-            surface: 'rgba(23, 19, 36, 0.72)',
-            surfaceLight: 'rgba(255, 255, 255, 0.06)',
-            neonPink: '#ff2d75',
-            neonGold: '#ffd159',
-            neonCyan: '#00f2fe',
-            neonViolet: '#a855f7',
-          },
-          boxShadow: {
-            'glow-pink': '0 0 25px -4px rgba(255, 45, 117, 0.45)',
-            'glow-gold': '0 0 25px -4px rgba(255, 209, 89, 0.4)',
-            'glow-cyan': '0 0 25px -4px rgba(0, 242, 254, 0.35)',
-            'glass': '0 12px 40px 0 rgba(0, 0, 0, 0.55)',
-          }
-        }
-      }
-    };
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <style>
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #0c0a14; }
-    ::-webkit-scrollbar-thumb { background: #332b4a; border-radius: 9999px; }
-
-    /* Frosted Glassmorphism Backdrop */
-    .glass-card {
-      background: rgba(26, 21, 41, 0.78);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+    :root {
+      --bg-dark: #0d0914;
+      --bg-radial: radial-gradient(circle at top, #23123d 0%, #0d0914 100%);
+      --accent-pink: #e8557a;
+      --accent-purple: #9b51e0;
+      --card-white: #ffffff;
+      --text-dark: #1f1b2e;
+      --text-muted: #8b8599;
     }
-    
-    .glass-pill {
-      background: rgba(255, 255, 255, 0.05);
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: var(--bg-radial);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px 40px;
+      overflow-x: hidden;
+    }
+
+    .app-viewport {
+      width: 100%;
+      max-width: 410px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    /* Top Navigation */
+    .top-nav-bar {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .back-btn-circle {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      cursor: pointer;
+      color: #111;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+      font-size: 18px;
+      font-weight: 800;
+      transition: transform 0.15s ease;
+    }
+
+    .back-btn-circle:active { transform: scale(0.92); }
+
+    /* Sticky Playful Badges */
+    .badge-stack {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .badge-item {
+      font-weight: 800;
+      font-size: 19px;
+      padding: 6px 18px;
+      border-radius: 12px;
+      border: 2.5px solid #111;
+      text-transform: uppercase;
+      box-shadow: 0 4px 0 #111;
+      letter-spacing: 0.5px;
+    }
+
+    .b-yellow { background: #fbc531; color: #2f1703; transform: rotate(-3deg); z-index: 1; }
+    .b-coral { background: #eb4d4b; color: #fff; transform: rotate(2deg); margin-top: -6px; z-index: 2; }
+    .b-cyan { background: #48dbfb; color: #0c2461; transform: rotate(-2deg); margin-top: -6px; z-index: 3; }
+
+    /* Polished White Glassmorphic Card */
+    .glass-form-card {
+      background: var(--card-white);
+      border-radius: 30px;
+      padding: 28px 22px;
+      width: 100%;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+      color: var(--text-dark);
+    }
+
+    .serif-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #141416;
+      text-align: center;
+    }
+
+    .muted-subtitle {
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 5px;
+      margin-bottom: 18px;
+    }
+
+    .input-field {
+      width: 100%;
+      height: 52px;
+      border: 1.5px solid #e3e5ec;
+      border-radius: 16px;
+      padding: 0 16px;
+      font-size: 16px;
+      outline: none;
+      color: #2d3436;
+      background: #fafbfc;
+      margin-top: 10px;
+      transition: border-color 0.2s;
+    }
+
+    .input-field:focus { border-color: var(--accent-pink); }
+
+    .date-grid {
+      display: flex;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .styled-select {
+      flex: 1;
+      height: 52px;
+      border: 1.5px solid #e3e5ec;
+      border-radius: 16px;
+      padding: 0 14px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #333;
+      background: #fafbfc;
+      outline: none;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23666%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22M6%209l6%206%206-6%22%2F%3E%3C%2Fsvg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+    }
+
+    /* Page 2 Customize Rows */
+    .row-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid #f1f2f6;
+    }
+    .row-item:last-of-type { border-bottom: none; }
+
+    .row-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .row-name {
+      font-weight: 700;
+      font-size: 14px;
+      color: #4b233a;
+      min-width: 62px;
+    }
+
+    .row-preview {
+      font-size: 13.5px;
+      color: #7b7886;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 155px;
+    }
+
+    .pill-btn {
+      background: #fdf0f4;
+      color: #cf4f79;
+      border: none;
+      padding: 7px 15px;
+      border-radius: 20px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .pill-btn:hover { background: #fce1ea; }
+
+    /* Switch Component */
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 25px;
+    }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+    .toggle-slider {
+      position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #e4e4e9; transition: .3s; border-radius: 34px;
+    }
+    .toggle-slider:before {
+      position: absolute; content: ""; height: 19px; width: 19px; left: 3px; bottom: 3px;
+      background-color: white; transition: .3s; border-radius: 50%;
+    }
+    input:checked + .toggle-slider { background-color: var(--accent-pink); }
+    input:checked + .toggle-slider:before { transform: translateX(19px); }
+
+    /* Callouts & Primary Button */
+    .amber-banner {
+      background: #fed361;
+      color: #3b2203;
+      border-radius: 18px;
+      padding: 13px 18px;
+      width: 100%;
+      margin-top: 15px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(254, 211, 97, 0.25);
+    }
+
+    .main-cta {
+      margin-top: 16px;
+      width: 100%;
+      height: 54px;
+      background: linear-gradient(90deg, #bb467a 0%, #e8557a 100%);
+      border: none;
+      border-radius: 20px;
+      color: #fff;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 22px rgba(232, 85, 122, 0.4);
+      transition: transform 0.15s, opacity 0.2s;
+    }
+    .main-cta:active { transform: scale(0.98); }
+
+    /* ========================================================
+       PAGE 3: THE INTERACTIVE REEL CELEBRATION ROOM
+    ======================================================== */
+    .party-arena {
+      display: none;
+      width: 100%;
+      text-align: center;
+      animation: viewFadeIn 0.4s ease forwards;
+    }
+
+    @keyframes viewFadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .arena-badge {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      color: #ff9ff3;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .arena-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #ffeaa7;
+      margin-bottom: 6px;
+    }
+
+    .arena-subhead {
+      font-size: 14px;
+      color: #dfe6e9;
+      margin-bottom: 24px;
+    }
+
+    /* Floating Balloons Grid */
+    .balloons-deck {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin: 30px 0 40px;
+    }
+
+    .interactive-balloon {
+      width: 66px;
+      height: 84px;
+      border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      user-select: none;
+      box-shadow: inset -6px -6px 12px rgba(0,0,0,0.25), 0 10px 20px rgba(0,0,0,0.3);
+      position: relative;
+      animation: balloonWiggle 2.8s ease-in-out infinite alternate;
+      transition: transform 0.15s, opacity 0.3s;
+    }
+
+    .balloon-string {
+      position: absolute;
+      bottom: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1.5px;
+      height: 18px;
+      background: rgba(255,255,255,0.4);
+    }
+
+    .bal-1 { background: #ff7675; animation-delay: 0s; }
+    .bal-2 { background: #74b9ff; animation-delay: 0.4s; }
+    .bal-3 { background: #ffeaa7; animation-delay: 0.8s; }
+    .bal-4 { background: #a29bfe; animation-delay: 0.2s; }
+
+    @keyframes balloonWiggle {
+      0% { transform: translateY(0px) rotate(-4deg); }
+      100% { transform: translateY(-20px) rotate(4deg); }
+    }
+
+    /* Interactive 3D Cake & Candle Stage */
+    .cake-spotlight {
+      background: rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 28px;
+      padding: 32px 20px;
+      margin-bottom: 20px;
     }
 
-    /* 3D Dynamic Card Tilt Container */
-    .perspective-container {
-      perspective: 1200px;
+    .cake-avatar {
+      font-size: 88px;
+      cursor: pointer;
+      position: relative;
+      display: inline-block;
+      user-select: none;
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
-    
-    .card-3d-mesh {
-      transform-style: preserve-3d;
-      transition: transform 0.15s ease-out, box-shadow 0.3s ease;
-      will-change: transform;
+    .cake-avatar:active { transform: scale(0.92); }
+
+    .flame-element {
+      position: absolute;
+      top: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 28px;
+      animation: flameFlicker 0.6s infinite alternate ease-in-out;
     }
 
-    /* Themes for Cards */
-    .theme-midnight-gold {
-      background: linear-gradient(135deg, #18141e 0%, #2b1f13 50%, #443210 100%);
-      border: 1px solid rgba(255, 215, 0, 0.35);
-      color: #fff9e6;
-    }
-    .theme-rose-quartz {
-      background: linear-gradient(135deg, #2b1021 0%, #4a1936 50%, #6f2249 100%);
-      border: 1px solid rgba(255, 130, 180, 0.35);
-      color: #ffeef6;
-    }
-    .theme-cyber-neon {
-      background: linear-gradient(135deg, #09172e 0%, #11284d 50%, #143e59 100%);
-      border: 1px solid rgba(0, 242, 254, 0.4);
-      color: #ebffff;
-    }
-    .theme-royal-emerald {
-      background: linear-gradient(135deg, #061e16 0%, #0d382b 50%, #155541 100%);
-      border: 1px solid rgba(52, 211, 153, 0.35);
-      color: #edfff8;
-    }
-    .theme-lavender-aurora {
-      background: linear-gradient(135deg, #1f1035 0%, #351c5c 50%, #52278d 100%);
-      border: 1px solid rgba(192, 132, 252, 0.4);
-      color: #f7efff;
+    @keyframes flameFlicker {
+      0% { opacity: 0.9; transform: translateX(-50%) scale(0.95); }
+      100% { opacity: 1; transform: translateX(-50%) scale(1.15); }
     }
 
-    /* Ambient Lighting Background animation */
-    @keyframes pulseGlow {
-      0%, 100% { opacity: 0.35; transform: scale(1); }
-      50% { opacity: 0.6; transform: scale(1.15); }
-    }
-    .ambient-orb {
-      animation: pulseGlow 8s ease-in-out infinite alternate;
+    /* Final Revealed Luxury Card (Canvas export ready) */
+    .export-card {
+      background: linear-gradient(135deg, #fff5f7 0%, #fedee7 50%, #fbd5e3 100%);
+      border-radius: 28px;
+      padding: 30px 22px;
+      color: #381525;
+      text-align: center;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+      margin-top: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      position: relative;
+      overflow: hidden;
     }
 
-    /* Card Photo Filters */
-    .filter-grayscale { filter: grayscale(100%); }
-    .filter-vintage { filter: sepia(0.55) contrast(1.1) brightness(0.95); }
-    .filter-dreamy { filter: contrast(1.05) saturate(1.4) brightness(1.05); }
-
-    /* Candle flame animation */
-    @keyframes flicker {
-      0%, 100% { transform: scale(1) rotate(-1deg); opacity: 0.95; }
-      50% { transform: scale(1.15, 0.85) rotate(2deg); opacity: 1; }
+    .photo-frame-display {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 4px solid #fff;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+      margin: 0 auto 12px;
+      overflow: hidden;
+      display: none;
     }
-    .flame-active {
-      animation: flicker 0.6s infinite ease-in-out alternate;
+
+    .photo-frame-display img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .handwriting-note {
+      font-family: 'Dancing Script', cursive;
+      font-size: 21px;
+      line-height: 1.45;
+      color: #44172f;
+      margin: 14px 0 18px;
+      padding: 0 8px;
+    }
+
+    .bond-chip {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(255, 107, 129, 0.3);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #9c2755;
+      display: inline-block;
+    }
+
+    /* Dual Action Buttons */
+    .action-row-btn {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+      width: 100%;
+    }
+
+    .tool-btn {
+      flex: 1;
+      height: 48px;
+      border: none;
+      border-radius: 16px;
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: transform 0.15s;
+    }
+    .tool-btn:active { transform: scale(0.97); }
+
+    .btn-blue { background: #0984e3; box-shadow: 0 4px 15px rgba(9, 132, 227, 0.3); }
+    .btn-green { background: #00b894; box-shadow: 0 4px 15px rgba(0, 184, 148, 0.3); }
+    .btn-share { background: #6c5ce7; box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3); width: 100%; margin-top: 10px; }
+
+    /* Footer Explorations */
+    .brand-footer {
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+      margin-top: 28px;
+    }
+
+    .footer-heading {
+      font-size: 12.5px;
+      color: #928e9f;
+      margin-bottom: 12px;
+    }
+
+    .pill-tags-flex {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .exp-pill {
+      font-size: 12px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid #ff4d88;
+      color: #ff85ad;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .exp-pill:hover { background: rgba(255, 77, 136, 0.12); }
+
+    .support-caption {
+      font-size: 11px;
+      color: #635f73;
+    }
+
+    /* Modal Sheet for Options */
+    .glass-modal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.75);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 100;
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-sheet {
+      background: #fff;
+      border-radius: 24px;
+      padding: 24px;
+      width: 100%;
+      max-width: 330px;
+      color: #111;
+      animation: sheetPop 0.2s ease-out;
+    }
+
+    @keyframes sheetPop {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
     }
   </style>
 </head>
+<body>
 
-<body class="bg-obsidian text-white min-h-screen relative overflow-x-hidden selection:bg-neonPink selection:text-white flex flex-col justify-between">
+  <div class="app-viewport">
 
-  <!-- Ambient Glowing Background Orbs -->
-  <div class="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
-    <div class="ambient-orb absolute -top-24 -left-24 w-96 h-96 rounded-full bg-purple-700/20 blur-[120px]"></div>
-    <div class="ambient-orb absolute top-1/3 -right-24 w-96 h-96 rounded-full bg-pink-600/20 blur-[130px]" style="animation-delay: -3s;"></div>
-    <div class="ambient-orb absolute -bottom-24 left-1/4 w-[32rem] h-[32rem] rounded-full bg-blue-600/15 blur-[140px]" style="animation-delay: -5s;"></div>
-  </div>
+    <!-- Top Navigation Header -->
+    <div class="top-nav-bar" id="navHeader" style="display: none;">
+      <button class="back-btn-circle" onclick="handleNavigationBack()">&lt;</button>
+      <div style="font-size: 13px; font-weight: 700; color: #ff85ad;">HEARTCRAFT STUDIO</div>
+      <div style="width: 40px;"></div>
+    </div>
 
-  <header class="w-full max-w-xl mx-auto px-4 pt-5 pb-3 flex items-center justify-between z-30">
-    <div class="flex items-center gap-2.5">
-      <div class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-pink-500 via-rose-400 to-amber-300 flex items-center justify-center shadow-glow-pink">
-        <span class="text-lg">✨</span>
+    <!-- ========================================================
+         PAGE 1: WHOSE BIRTHDAY & DATE
+    ======================================================== -->
+    <div id="page1" style="width: 100%;">
+      <div class="badge-stack">
+        <div class="badge-item b-yellow">CREATE A</div>
+        <div class="badge-item b-coral">BIRTHDAY</div>
+        <div class="badge-item b-cyan">CARD!</div>
       </div>
-      <div>
-        <h1 class="text-base font-bold font-luxury tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-pink-200 to-white">
-          CELEBRATION STUDIO
-        </h1>
-        <span class="text-[10px] uppercase tracking-widest text-pink-300/70 font-semibold">Pro Interactive Suite</span>
+
+      <div class="glass-form-card">
+        <div class="serif-title">Whose birthday is it?</div>
+        <input type="text" id="recipientName" class="input-field" placeholder="Enter recipient name...">
+
+        <div style="height: 22px;"></div>
+
+        <div class="serif-title">When is the special day? 📅</div>
+        <div class="date-grid">
+          <select id="monthPicker" class="styled-select">
+            <option value="Jan">Jan</option><option value="Feb">Feb</option><option value="Mar">Mar</option>
+            <option value="Apr">Apr</option><option value="May">May</option><option value="Jun">Jun</option>
+            <option value="Jul">Jul</option><option value="Aug" selected>Aug</option><option value="Sep">Sep</option>
+            <option value="Oct">Oct</option><option value="Nov">Nov</option><option value="Dec">Dec</option>
+          </select>
+          <select id="dayPicker" class="styled-select"></select>
+        </div>
+      </div>
+
+      <button class="main-cta" onclick="proceedToPage2()">Next</button>
+
+      <div class="brand-footer">
+        <div class="footer-heading">Explore more HeartCraft experiences:</div>
+        <div class="pill-tags-flex">
+          <span class="exp-pill">Apology</span>
+          <span class="exp-pill">Proposal</span>
+          <span class="exp-pill">Puzzle</span>
+          <span class="exp-pill">Friendship Day</span>
+          <span class="exp-pill">Anniversary</span>
+        </div>
+        <div class="support-caption">Free community edition for creators</div>
       </div>
     </div>
 
-    <!-- Music Ambient Synthesizer Player -->
-    <div class="flex items-center gap-2">
-      <button id="audioToggleBtn" onclick="toggleAmbientMusic()" class="glass-pill px-3 py-1.5 rounded-full flex items-center gap-2 text-xs font-medium hover:bg-white/10 active:scale-95 transition">
-        <span id="audioStatusIcon" class="text-sm">🎵</span>
-        <span id="audioStatusText" class="hidden sm:inline text-gray-300">Play Ambient</span>
-      </button>
-      
-      <div id="stepProgressBadge" class="glass-pill px-3 py-1.5 rounded-full text-xs font-semibold text-pink-300 border-pink-500/30">
-        Step 1/3
-      </div>
-    </div>
-  </header>
+    <!-- ========================================================
+         PAGE 2: CUSTOMIZATION STUDIO
+    ======================================================== -->
+    <div id="page2" style="width: 100%; display: none;">
+      <div class="glass-form-card">
+        <div class="serif-title" id="customHeadline">Customize for Special One</div>
+        <div class="muted-subtitle">Tap change to pick your own</div>
 
-  <!-- Main Multi-step Application Container -->
-  <main class="w-full max-w-md mx-auto px-4 py-3 flex-1 flex flex-col justify-start relative z-20">
-
-    <section id="step1Screen" class="w-full space-y-4">
-      
-      <!-- Top Colorful Sticker Badges -->
-      <div class="flex flex-col items-center justify-center pt-2 pb-1 select-none">
-        <div class="flex flex-col items-center">
-          <span class="inline-block bg-[#fed330] text-[#2c1b05] text-xs font-black tracking-wider uppercase px-4 py-1 rounded-lg border-2 border-black -rotate-3 shadow-[0_3px_0_#000]">
-            CREATE AN EXCLUSIVE
-          </span>
-          <span id="badgeEventTitle" class="inline-block bg-[#ff4757] text-white text-base font-black tracking-wider uppercase px-6 py-1.5 rounded-xl border-2 border-black rotate-2 -mt-1.5 shadow-[0_3px_0_#000]">
-            BIRTHDAY
-          </span>
-          <span class="inline-block bg-[#2ed573] text-[#062914] text-xs font-black tracking-wider uppercase px-4 py-1 rounded-lg border-2 border-black -rotate-2 -mt-1.5 shadow-[0_3px_0_#000]">
-            EXPERIENCE!
-          </span>
-        </div>
-      </div>
-
-      <!-- Main Input Glass Card -->
-      <div class="glass-card rounded-[28px] p-6 shadow-glass space-y-5">
-        
-        <!-- Event Type Switcher Tabs -->
-        <div>
-          <label class="block text-xs uppercase tracking-wider text-gray-400 font-bold mb-2">Occasion Category</label>
-          <div class="grid grid-cols-3 sm:grid-cols-5 gap-1.5 p-1 rounded-2xl bg-black/40 border border-white/5">
-            <button type="button" onclick="selectEvent('birthday', 'BIRTHDAY', '🎂')" class="event-pill-btn py-2 rounded-xl text-xs font-bold transition flex flex-col items-center gap-0.5 active:scale-95 bg-pink-500 text-white shadow-glow-pink" data-event="birthday">
-              <span class="text-base">🎂</span>
-              <span>Birthday</span>
-            </button>
-            <button type="button" onclick="selectEvent('wedding', 'WEDDING', '💍')" class="event-pill-btn py-2 rounded-xl text-xs font-medium text-gray-300 transition flex flex-col items-center gap-0.5 hover:text-white hover:bg-white/5 active:scale-95" data-event="wedding">
-              <span class="text-base">💍</span>
-              <span>Wedding</span>
-            </button>
-            <button type="button" onclick="selectEvent('anniversary', 'ANNIVERSARY', '🥂')" class="event-pill-btn py-2 rounded-xl text-xs font-medium text-gray-300 transition flex flex-col items-center gap-0.5 hover:text-white hover:bg-white/5 active:scale-95" data-event="anniversary">
-              <span class="text-base">🥂</span>
-              <span>Anniv.</span>
-            </button>
-            <button type="button" onclick="selectEvent('proposal', 'PROPOSAL', '💎')" class="event-pill-btn py-2 rounded-xl text-xs font-medium text-gray-300 transition flex flex-col items-center gap-0.5 hover:text-white hover:bg-white/5 active:scale-95" data-event="proposal">
-              <span class="text-base">💎</span>
-              <span>Proposal</span>
-            </button>
-            <button type="button" onclick="selectEvent('friendship', 'FRIENDSHIP', '✨')" class="event-pill-btn py-2 rounded-xl text-xs font-medium text-gray-300 transition flex flex-col items-center gap-0.5 hover:text-white hover:bg-white/5 active:scale-95" data-event="friendship">
-              <span class="text-base">✨</span>
-              <span>Friends</span>
-            </button>
+        <!-- Cake Selection -->
+        <div class="row-item">
+          <div class="row-meta">
+            <span class="row-name">Cake</span>
+            <span style="font-size: 24px;" id="valCakeIcon">🎂</span>
+            <span class="row-preview" id="valCakeName">Galaxy Classic</span>
           </div>
+          <button class="pill-btn" onclick="openChoicePicker('cake')">Change</button>
         </div>
 
-        <!-- Recipient / Couple Name -->
-        <div>
-          <label id="nameLabel" class="block font-serif text-lg font-semibold text-white/95 mb-1.5">
-            Whose birthday is it?
-          </label>
-          <div class="relative">
-            <input 
-              type="text" 
-              id="inputRecipientName" 
-              class="w-full h-13 px-4 py-3.5 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-gray-500 font-medium focus:outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-500/20 transition"
-              placeholder="e.g. Sanya / Rahul & Pooja"
-              value="Sanya"
-              oninput="updateCountdownBadge()"
-            />
-            <div class="absolute right-3.5 top-3.5 text-gray-400 pointer-events-none text-sm">
-              ✨
-            </div>
+        <!-- Bond Selection -->
+        <div class="row-item">
+          <div class="row-meta">
+            <span class="row-name">Bond</span>
+            <span class="row-preview" id="valBond">Sweet, Loyal, My rock</span>
           </div>
+          <button class="pill-btn" onclick="openChoicePicker('bond')">Change</button>
         </div>
 
-        <!-- Smart Event Date Picker -->
-        <div>
-          <div class="flex items-center justify-between mb-1.5">
-            <label class="font-serif text-lg font-semibold text-white/95 flex items-center gap-1.5">
-              <span>When is the special day?</span> 
-              <span>🗓️</span>
-            </label>
-            <span id="countdownBadge" class="text-[11px] font-bold text-amber-300 bg-amber-400/10 px-2.5 py-0.5 rounded-full border border-amber-400/20">
-              Calculating...
+        <!-- Mascot Selection -->
+        <div class="row-item">
+          <div class="row-meta">
+            <span class="row-name">Friend</span>
+            <span style="font-size: 24px;" id="valMascotIcon">🐰</span>
+            <span class="row-preview" id="valMascotName">Bunny</span>
+          </div>
+          <button class="pill-btn" onclick="openChoicePicker('mascot')">Change</button>
+        </div>
+
+        <!-- Passcode Toggle -->
+        <div class="row-item">
+          <div class="row-meta">
+            <span class="row-name" style="display:flex; flex-direction:column; font-size:13px;">
+              <span style="font-size: 10px; color:#888; font-weight: 500;">Optional</span>Passcode
             </span>
+            <span class="row-preview" id="valPasscode">Add 4 - digit Passcode</span>
           </div>
-
-          <div class="grid grid-cols-3 gap-2">
-            <select id="selectMonth" onchange="updateCountdownBadge()" class="h-12 px-3 rounded-2xl bg-white/5 border border-white/10 text-white text-sm font-semibold focus:outline-none focus:border-pink-500">
-              <option value="0">Jan</option><option value="1">Feb</option><option value="2">Mar</option>
-              <option value="3">Apr</option><option value="4">May</option><option value="5">Jun</option>
-              <option value="6">Jul</option><option value="7" selected>Aug</option><option value="8">Sep</option>
-              <option value="9">Oct</option><option value="10">Nov</option><option value="11">Dec</option>
-            </select>
-
-            <select id="selectDay" onchange="updateCountdownBadge()" class="h-12 px-3 rounded-2xl bg-white/5 border border-white/10 text-white text-sm font-semibold focus:outline-none focus:border-pink-500">
-              <!-- Dynamically populated 1 to 31 -->
-            </select>
-
-            <select id="selectYear" onchange="updateCountdownBadge()" class="h-12 px-3 rounded-2xl bg-white/5 border border-white/10 text-white text-sm font-semibold focus:outline-none focus:border-pink-500">
-              <option value="2026" selected>2026</option>
-              <option value="2027">2027</option>
-            </select>
-          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="passcodeToggle" onchange="toggleSecurityCode(this)">
+            <span class="toggle-slider"></span>
+          </label>
         </div>
 
+        <!-- Letter Customization -->
+        <div class="row-item">
+          <div class="row-meta">
+            <span class="row-name">Letter</span>
+            <span class="row-preview" id="valLetter">Dear Friend, Happy Birthday!</span>
+          </div>
+          <button class="pill-btn" onclick="openChoicePicker('letter')">Change</button>
+        </div>
       </div>
 
-      <!-- Action Button -->
-      <button 
-        type="button" 
-        onclick="navigateToStep(2)"
-        class="w-full h-14 rounded-2xl bg-gradient-to-r from-pink-600 via-rose-500 to-amber-500 text-white text-base font-bold shadow-glow-pink hover:opacity-95 active:scale-[0.98] transition flex items-center justify-center gap-2">
-        <span>Customize Experience</span>
-        <span>→</span>
-      </button>
+      <!-- Free Photo Upload Trigger -->
+      <label class="amber-banner" for="uploadPhotoInput">
+        <span style="font-size: 22px;">🖼️</span>
+        <span>Add a Special Photo (Free)</span>
+      </label>
+      <input type="file" id="uploadPhotoInput" accept="image/*" style="display: none;" onchange="processUploadedPhoto(event)">
 
-    </section>
+      <button class="main-cta" onclick="startPartyExperience()">Start Virtual Celebration 🎈</button>
+    </div>
 
-    <section id="step2Screen" class="w-full space-y-4 hidden">
-      
-      <!-- Top Bar with Back action -->
-      <div class="flex items-center justify-between">
-        <button type="button" onclick="navigateToStep(1)" class="w-10 h-10 rounded-2xl glass-pill flex items-center justify-center text-gray-200 hover:text-white active:scale-95 transition">
-          ←
-        </button>
-        <div class="text-center">
-          <h2 id="step2HeaderName" class="font-serif text-lg font-bold text-white">Customize for Sanya</h2>
-          <p class="text-xs text-gray-400">Tap options below to tailor every detail</p>
-        </div>
-        <div class="w-10"></div>
-      </div>
+    <!-- ========================================================
+         PAGE 3: THE PARTY EXPERIENCE (REEL STYLE)
+    ======================================================== -->
+    <div class="party-arena" id="partyArena">
 
-      <div class="glass-card rounded-[28px] p-5 shadow-glass space-y-4">
-        
-        <!-- Theme Palette Switcher -->
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Luxury Theme Styling</label>
-          <div class="grid grid-cols-5 gap-2">
-            <button type="button" onclick="setCardTheme('theme-midnight-gold')" title="Midnight Gold" class="theme-select-btn h-10 rounded-xl bg-gradient-to-br from-amber-700 to-amber-950 border-2 border-amber-400/80 active:scale-90 transition flex items-center justify-center text-xs">✨</button>
-            <button type="button" onclick="setCardTheme('theme-rose-quartz')" title="Rosé Quartz" class="theme-select-btn h-10 rounded-xl bg-gradient-to-br from-pink-600 to-rose-950 border border-white/20 active:scale-90 transition flex items-center justify-center text-xs">🌹</button>
-            <button type="button" onclick="setCardTheme('theme-cyber-neon')" title="Cyberpunk Neon" class="theme-select-btn h-10 rounded-xl bg-gradient-to-br from-cyan-600 to-blue-950 border border-white/20 active:scale-90 transition flex items-center justify-center text-xs">⚡</button>
-            <button type="button" onclick="setCardTheme('theme-royal-emerald')" title="Royal Emerald" class="theme-select-btn h-10 rounded-xl bg-gradient-to-br from-emerald-600 to-green-950 border border-white/20 active:scale-90 transition flex items-center justify-center text-xs">🌿</button>
-            <button type="button" onclick="setCardTheme('theme-lavender-aurora')" title="Lavender Aurora" class="theme-select-btn h-10 rounded-xl bg-gradient-to-br from-purple-600 to-violet-950 border border-white/20 active:scale-90 transition flex items-center justify-center text-xs">💜</button>
+      <!-- STAGE 1: BALLOONS POPPING -->
+      <div id="deckStageBalloons">
+        <div class="arena-badge">Surprise Step 1 of 2</div>
+        <div class="arena-headline">🎈 Pop All The Balloons!</div>
+        <div class="arena-subhead">Tap every balloon to unlock the cake ceremony</div>
+
+        <div class="balloons-deck">
+          <div class="interactive-balloon bal-1" onclick="popSingleBalloon(this)">
+            💖<div class="balloon-string"></div>
+          </div>
+          <div class="interactive-balloon bal-2" onclick="popSingleBalloon(this)">
+            ✨<div class="balloon-string"></div>
+          </div>
+          <div class="interactive-balloon bal-3" onclick="popSingleBalloon(this)">
+            ⭐<div class="balloon-string"></div>
+          </div>
+          <div class="interactive-balloon bal-4" onclick="popSingleBalloon(this)">
+            🎉<div class="balloon-string"></div>
           </div>
         </div>
+      </div>
 
-        <div class="divide-y divide-white/10">
+      <!-- STAGE 2: CANDLE BLOW & CAKE CUT -->
+      <div id="deckStageCake" style="display: none;">
+        <div class="arena-badge">Surprise Step 2 of 2</div>
+        <div class="arena-headline">🎂 Blow the Candle & Wish!</div>
+        <div class="arena-subhead">Tap on the cake to make your birthday wish</div>
+
+        <div class="cake-spotlight">
+          <div class="cake-avatar" onclick="triggerCandleBlow()">
+            <span class="flame-element" id="candleFlame">🔥</span>
+            <span id="cakeGraphic">🎂</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 3: UNLOCKED BIRTHDAY CARD & LETTER -->
+      <div id="deckStageCard" style="display: none;">
+        <div class="export-card" id="exportCardTarget">
+          <div class="photo-frame-display" id="photoDisplay">
+            <img id="cardUploadedImg" src="" alt="Celebrant">
+          </div>
+          <div id="cardMascotGraphic" style="font-size: 40px; margin-bottom: 4px;">🐰</div>
+          <h2 style="font-family:'Playfair Display',serif; font-size: 26px; font-weight:800; color:#84123a;">Happy Birthday! 🎉</h2>
+          <h3 id="targetCardName" style="font-size: 22px; font-weight: 800; color: #1f1b2e; margin: 4px 0 8px;">Name</h3>
+          <p id="targetCardDate" style="font-weight: 700; font-size: 14px; color: #7a3a52;">Aug 26</p>
           
-          <!-- Cake / Center Element Picker Row -->
-          <div class="py-3 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-              <span id="centerElementIcon" class="text-2xl p-2 rounded-xl bg-white/5 border border-white/10">🎂</span>
-              <div>
-                <span class="text-xs uppercase tracking-wider text-gray-400 font-bold block" id="centerElementLabel">Cake / Icon</span>
-                <span id="centerElementName" class="text-sm font-semibold text-white">Galaxy Tier Cake</span>
-              </div>
-            </div>
-            <button type="button" onclick="openChoicePicker('cake')" class="px-3.5 py-1.5 rounded-full bg-pink-500/20 text-pink-300 border border-pink-500/30 text-xs font-bold hover:bg-pink-500/30 active:scale-95 transition">
-              Change
-            </button>
+          <div class="handwriting-note" id="targetCardLetter">
+            "Wishing you a memorable year ahead filled with happiness, good health, and success!"
           </div>
 
-          <!-- Relationship Bond Row -->
-          <div class="py-3 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-              <span class="text-2xl p-2 rounded-xl bg-white/5 border border-white/10">🤝</span>
-              <div>
-                <span class="text-xs uppercase tracking-wider text-gray-400 font-bold block">Relationship Bond</span>
-                <span id="bondName" class="text-sm font-semibold text-white">Sweet, Loyal, My Rock</span>
-              </div>
-            </div>
-            <button type="button" onclick="openChoicePicker('bond')" class="px-3.5 py-1.5 rounded-full bg-pink-500/20 text-pink-300 border border-pink-500/30 text-xs font-bold hover:bg-pink-500/30 active:scale-95 transition">
-              Change
-            </button>
-          </div>
-
-          <!-- Mascot / Friend Companion -->
-          <div class="py-3 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-              <span id="mascotIcon" class="text-2xl p-2 rounded-xl bg-white/5 border border-white/10">🐰</span>
-              <div>
-                <span class="text-xs uppercase tracking-wider text-gray-400 font-bold block">Companion Mascot</span>
-                <span id="mascotName" class="text-sm font-semibold text-white">Cute Bunny</span>
-              </div>
-            </div>
-            <button type="button" onclick="openChoicePicker('mascot')" class="px-3.5 py-1.5 rounded-full bg-pink-500/20 text-pink-300 border border-pink-500/30 text-xs font-bold hover:bg-pink-500/30 active:scale-95 transition">
-              Change
-            </button>
-          </div>
-
-          <!-- Secret Passcode Security Toggle -->
-          <div class="py-3 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-              <span class="text-2xl p-2 rounded-xl bg-white/5 border border-white/10">🔒</span>
-              <div>
-                <div class="flex items-center gap-2">
-                  <span class="text-xs uppercase tracking-wider text-gray-400 font-bold">Secret Passcode Lock</span>
-                  <span class="text-[10px] bg-white/10 px-1.5 py-0.5 rounded text-gray-300">Optional</span>
-                </div>
-                <span id="passcodeSummary" class="text-sm font-semibold text-gray-400">Tap switch to protect with PIN</span>
-              </div>
-            </div>
-            <label class="relative inline-flex items-center cursor-pointer">
-              <input type="checkbox" id="passcodeToggle" onchange="handlePasscodeToggle(this)" class="sr-only peer">
-              <div class="w-11 h-6 bg-white/20 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-pink-500"></div>
-            </label>
-          </div>
-
-          <!-- Message / Letter Row -->
-          <div class="py-3 flex items-center justify-between">
-            <div class="flex items-center gap-3 overflow-hidden pr-2">
-              <span class="text-2xl p-2 rounded-xl bg-white/5 border border-white/10">💌</span>
-              <div class="overflow-hidden">
-                <span class="text-xs uppercase tracking-wider text-gray-400 font-bold block">Personalized Letter</span>
-                <span id="letterExcerpt" class="text-sm font-semibold text-white truncate block">Wishing you boundless smiles and dreams!</span>
-              </div>
-            </div>
-            <button type="button" onclick="openLetterEditor()" class="px-3.5 py-1.5 rounded-full bg-pink-500/20 text-pink-300 border border-pink-500/30 text-xs font-bold hover:bg-pink-500/30 active:scale-95 transition whitespace-nowrap">
-              Edit
-            </button>
-          </div>
-
-        </div>
-
-        <!-- Photo Upload & Filter Section (100% Free & Unlimited) -->
-        <div class="pt-2">
-          <label class="w-full p-3.5 rounded-2xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-between cursor-pointer hover:bg-amber-400/15 transition active:scale-[0.99]">
-            <div class="flex items-center gap-3">
-              <span class="text-2xl">📸</span>
-              <div>
-                <span class="text-sm font-bold text-amber-200 block">Add Recipient Photo</span>
-                <span id="photoStatusText" class="text-xs text-amber-300/70">Tap to upload picture (Auto-fitted)</span>
-              </div>
-            </div>
-            <span class="px-3 py-1 rounded-xl bg-amber-400 text-black text-xs font-black uppercase">Browse</span>
-            <input type="file" id="userPhotoInput" accept="image/*" class="hidden" onchange="handleUserPhoto(event)">
-          </label>
-
-          <!-- Photo Filters (Shown once photo is uploaded) -->
-          <div id="photoFiltersBar" class="hidden mt-2 p-2 rounded-xl bg-black/40 border border-white/10 flex items-center justify-around text-xs">
-            <span class="text-gray-400 text-[11px] font-bold">FILTER:</span>
-            <button type="button" onclick="applyPhotoFilter('none')" class="px-2 py-1 rounded bg-white/10 hover:bg-white/20">Normal</button>
-            <button type="button" onclick="applyPhotoFilter('filter-dreamy')" class="px-2 py-1 rounded bg-white/10 hover:bg-white/20">Dreamy</button>
-            <button type="button" onclick="applyPhotoFilter('filter-vintage')" class="px-2 py-1 rounded bg-white/10 hover:bg-white/20">Vintage</button>
-            <button type="button" onclick="applyPhotoFilter('filter-grayscale')" class="px-2 py-1 rounded bg-white/10 hover:bg-white/20">B&W</button>
+          <div class="bond-chip" id="targetCardBond">
+            ✨ Sweet, Loyal, My rock
           </div>
         </div>
 
-      </div>
-
-      <!-- Action Button to Step 3 -->
-      <button 
-        type="button" 
-        onclick="navigateToStep(3)"
-        class="w-full h-14 rounded-2xl bg-gradient-to-r from-pink-600 via-rose-500 to-amber-500 text-white text-base font-bold shadow-glow-pink hover:opacity-95 active:scale-[0.98] transition flex items-center justify-center gap-2">
-        <span>✨ Launch Interactive Preview</span>
-        <span>→</span>
-      </button>
-
-    </section>
-
-    <section id="step3Screen" class="w-full space-y-4 hidden">
-      
-      <!-- Top Action Bar -->
-      <div class="flex items-center justify-between">
-        <button type="button" onclick="navigateToStep(2)" class="w-10 h-10 rounded-2xl glass-pill flex items-center justify-center text-gray-200 hover:text-white active:scale-95 transition">
-          ←
-        </button>
-        <div class="text-center">
-          <span class="text-xs font-bold tracking-widest text-pink-400 uppercase">Interactive Stage</span>
-          <h2 class="font-serif text-lg font-bold text-white">Your Card is Ready!</h2>
-        </div>
-        <button type="button" onclick="triggerConfettiExplosion()" class="w-10 h-10 rounded-2xl glass-pill flex items-center justify-center text-xl hover:bg-white/10 active:scale-90 transition" title="Blast Confetti">
-          🎊
-        </button>
-      </div>
-
-      <!-- Secret Passcode Gate (If Enabled) -->
-      <div id="passcodeGateOverlay" class="hidden glass-card rounded-[28px] p-6 text-center shadow-glass space-y-4 border-pink-500/40">
-        <div class="w-14 h-14 rounded-2xl bg-pink-500/20 border border-pink-500/30 flex items-center justify-center mx-auto text-2xl shadow-glow-pink">
-          🔒
-        </div>
-        <div>
-          <h3 class="font-serif text-xl font-bold text-white">This Card is Locked</h3>
-          <p class="text-xs text-gray-300 mt-1">Please enter the 4-digit passcode to reveal the surprises</p>
-        </div>
-        <div class="flex justify-center gap-3 my-2">
-          <input type="password" id="pinInput" maxlength="4" class="w-36 h-12 text-center text-2xl tracking-[0.5em] font-mono rounded-xl bg-black/60 border border-pink-500/40 text-white focus:outline-none focus:ring-2 focus:ring-pink-500">
-        </div>
-        <button type="button" onclick="verifyPinUnlock()" class="w-full h-11 rounded-xl bg-pink-500 text-white font-bold text-sm shadow-glow-pink active:scale-95 transition">
-          Unlock Card 🔓
-        </button>
-      </div>
-
-      <!-- Main 3D Interactive Printable Card Container -->
-      <div id="interactiveCardWrapper" class="perspective-container w-full">
-        <div 
-          id="exportableCard" 
-          class="card-3d-mesh theme-midnight-gold rounded-[32px] p-6 shadow-2xl relative overflow-hidden text-center select-none"
-          onmousemove="handleCardTilt(event)" 
-          onmouseleave="resetCardTilt()"
-        >
-          <!-- Luxury Border Ornament -->
-          <div class="absolute inset-2 border border-white/15 rounded-[26px] pointer-events-none"></div>
-
-          <!-- Top Badge & Sparkles -->
-          <div class="flex items-center justify-between mb-4 relative z-10 px-2">
-            <span class="text-xs uppercase tracking-widest font-luxury text-amber-200/90 font-bold flex items-center gap-1.5">
-              <span>✦</span>
-              <span id="cardBadgeEventText">VIP INVITATION</span>
-              <span>✦</span>
-            </span>
-            <span id="cardMascotBadge" class="text-2xl filter drop-shadow">🐰</span>
-          </div>
-
-          <!-- Uploaded Photo (Circular Luxury Frame) -->
-          <div id="cardPhotoHolder" class="relative mx-auto w-28 h-28 rounded-full p-1 bg-gradient-to-tr from-amber-400 via-pink-400 to-purple-400 shadow-xl mb-4 hidden z-10">
-            <div class="w-full h-full rounded-full overflow-hidden bg-black/50">
-              <img id="cardUserImage" src="" alt="Celebrant" class="w-full h-full object-cover">
-            </div>
-          </div>
-
-          <!-- Event Icon / Animated Candle -->
-          <div id="interactiveCandleBox" class="relative z-10 my-2 cursor-pointer inline-block" onclick="blowCandle()" title="Tap to blow candle!">
-            <div id="flameParticle" class="text-xl -mb-1 flame-active transition duration-300">🔥</div>
-            <div id="cardMainIcon" class="text-5xl filter drop-shadow-lg">🎂</div>
-          </div>
-          <div id="candleBlowTip" class="text-[10px] uppercase font-bold tracking-widest text-amber-300/80 mb-2">Tap cake to blow candle!</div>
-
-          <!-- Headline & Recipient Name -->
-          <div class="relative z-10 space-y-1 mb-3">
-            <h3 id="cardHeaderTag" class="text-xs uppercase tracking-widest text-gray-300 font-semibold font-sans">Celebrating the journey of</h3>
-            <h2 id="cardPersonName" class="font-serif text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-rose-200 to-white drop-shadow">
-              Sanya
-            </h2>
-          </div>
-
-          <!-- Date & Live Countdown String -->
-          <div class="relative z-10 inline-flex flex-col items-center px-4 py-1.5 rounded-2xl bg-black/35 border border-white/10 mb-3">
-            <span id="cardFullDate" class="text-sm font-bold tracking-wide text-amber-200 font-luxury">AUGUST 26, 2026</span>
-            <span id="cardCountdownSnippet" class="text-[11px] text-pink-300 font-medium">✨ In 142 Days</span>
-          </div>
-
-          <!-- Heartfelt Letter Message -->
-          <div class="relative z-10 px-3 py-3 rounded-2xl bg-white/5 border border-white/10 mb-3 backdrop-blur-sm">
-            <p id="cardDisplayMessage" class="font-serif italic text-sm text-gray-200 leading-relaxed">
-              "Wishing you an unforgettable celebration brimming with wonder, joy, laughter, and lifelong dreams coming true!"
-            </p>
-          </div>
-
-          <!-- Relationship Bond Seal -->
-          <div class="relative z-10 flex items-center justify-center">
-            <span id="cardBondSeal" class="px-4 py-1 rounded-full text-xs font-bold tracking-wide bg-gradient-to-r from-amber-500/20 to-pink-500/20 text-amber-200 border border-amber-400/30">
-              💎 Sweet, Loyal, My Rock
-            </span>
-          </div>
-
-          <!-- Card Watermark / Studio Signature -->
-          <div class="mt-4 pt-2 border-t border-white/10 flex items-center justify-between text-[10px] text-gray-400 tracking-wider">
-            <span>CELEBRATION STUDIO PRO</span>
-            <span>MEMORABLE MOMENTS</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Interactive Micro-actions Row -->
-      <div class="grid grid-cols-3 gap-2">
-        <button type="button" onclick="shootFireworks()" class="py-2.5 rounded-xl glass-card text-xs font-bold text-gray-200 hover:text-white flex items-center justify-center gap-1.5 active:scale-95 transition">
-          <span>🎆</span>
-          <span>Fireworks</span>
-        </button>
-        <button type="button" onclick="popChampagne()" class="py-2.5 rounded-xl glass-card text-xs font-bold text-gray-200 hover:text-white flex items-center justify-center gap-1.5 active:scale-95 transition">
-          <span>🍾</span>
-          <span>Cheers</span>
-        </button>
-        <button type="button" onclick="triggerConfettiExplosion()" class="py-2.5 rounded-xl glass-card text-xs font-bold text-gray-200 hover:text-white flex items-center justify-center gap-1.5 active:scale-95 transition">
-          <span>🎊</span>
-          <span>Confetti</span>
-        </button>
-      </div>
-
-      <!-- Pro Export & Sharing Suite (100% Free) -->
-      <div class="glass-card rounded-[28px] p-5 shadow-glass space-y-3">
-        <h4 class="text-xs uppercase font-bold tracking-wider text-gray-400">Save, Export & Share Webpage</h4>
-        
-        <div class="grid grid-cols-2 gap-2.5">
-          <button type="button" onclick="exportAsHighResImage()" id="btnDownloadImg" class="h-12 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs flex items-center justify-center gap-2 active:scale-95 transition shadow-glow-cyan">
-            <span>🖼️</span>
-            <span>Download PNG</span>
+        <!-- Action / Export Group -->
+        <div class="action-row-btn">
+          <button class="tool-btn btn-blue" onclick="exportAsHighResImage()">
+            <span>📷</span> Download PNG
           </button>
-
-          <button type="button" onclick="exportAsVectorPDF()" id="btnDownloadPdf" class="h-12 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center gap-2 active:scale-95 transition">
-            <span>📄</span>
-            <span>Download PDF</span>
+          <button class="tool-btn btn-green" onclick="exportAsPDF()">
+            <span>📄</span> Download PDF
           </button>
         </div>
 
-        <!-- Shareable URL Generator -->
-        <div class="pt-1">
-          <button type="button" onclick="copyShareableWebpageLink()" class="w-full h-12 rounded-xl bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 text-white font-bold text-xs flex items-center justify-center gap-2 active:scale-95 transition shadow-glow-pink">
-            <span>🔗</span>
-            <span id="copyLinkButtonText">Copy Live Interactive Webpage Link</span>
-          </button>
-          <p class="text-[11px] text-gray-400 text-center mt-2">
-            Anyone opening this link receives this interactive experience on mobile & desktop!
-          </p>
-        </div>
+        <button class="tool-btn btn-share" onclick="copyShareableSurpriseLink()">
+          <span>🔗</span> Copy Shareable Web Link
+        </button>
       </div>
 
-    </section>
+    </div>
 
-  </main>
+  </div>
 
-  <!-- Reusable Dynamic Choice Picker Modal -->
-  <div id="pickerModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-md hidden items-center justify-center p-4">
-    <div class="glass-card w-full max-w-sm rounded-[28px] p-5 space-y-4 border border-white/20">
-      <div class="flex items-center justify-between border-b border-white/10 pb-3">
-        <h3 id="pickerModalTitle" class="font-serif text-lg font-bold text-white">Select Option</h3>
-        <button type="button" onclick="closePickerModal()" class="w-8 h-8 rounded-full glass-pill flex items-center justify-center text-gray-300 text-sm">✕</button>
-      </div>
-
-      <div id="pickerOptionsContainer" class="space-y-2 max-h-72 overflow-y-auto pr-1">
-        <!-- Rendered dynamically -->
-      </div>
+  <!-- Dynamic Option Selection Modal -->
+  <div class="glass-modal" id="choiceModal">
+    <div class="modal-sheet">
+      <h3 id="modalHeadline" style="font-size: 18px; margin-bottom: 14px; font-family:'Playfair Display',serif;">Choose</h3>
+      <div id="modalEntries"></div>
+      <button class="main-cta" style="height: 44px; font-size: 15px; margin-top: 14px;" onclick="closeChoiceModal()">Done</button>
     </div>
   </div>
-
-  <!-- Letter & Message Editor Modal -->
-  <div id="letterModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-md hidden items-center justify-center p-4">
-    <div class="glass-card w-full max-w-sm rounded-[28px] p-5 space-y-3.5 border border-white/20">
-      <div class="flex items-center justify-between border-b border-white/10 pb-3">
-        <h3 class="font-serif text-lg font-bold text-white">Personalized Message</h3>
-        <button type="button" onclick="closeLetterModal()" class="w-8 h-8 rounded-full glass-pill flex items-center justify-center text-gray-300 text-sm">✕</button>
-      </div>
-
-      <!-- Quick AI Inspiration Presets -->
-      <div>
-        <span class="text-[11px] font-bold uppercase tracking-wider text-gray-400 block mb-1.5">Quick Inspiration Templates:</span>
-        <div class="grid grid-cols-2 gap-1.5 text-xs">
-          <button type="button" onclick="applyMessageTemplate('emotional')" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-left">💖 Heartfelt</button>
-          <button type="button" onclick="applyMessageTemplate('fun')" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-left">🎉 Fun & Crazy</button>
-          <button type="button" onclick="applyMessageTemplate('poetic')" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-left">✨ Poetic Luxe</button>
-          <button type="button" onclick="applyMessageTemplate('wedding')" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-left">💍 Lifetime Love</button>
-        </div>
-      </div>
-
-      <div>
-        <textarea id="modalMessageInput" rows="5" class="w-full p-3.5 rounded-2xl bg-black/50 border border-white/15 text-white text-sm focus:outline-none focus:border-pink-500 placeholder-gray-500 resize-none font-sans leading-relaxed"></textarea>
-      </div>
-
-      <button type="button" onclick="saveLetterMessage()" class="w-full h-11 rounded-xl bg-pink-500 hover:bg-pink-400 text-white font-bold text-sm shadow-glow-pink active:scale-95 transition">
-        Save Message
-      </button>
-    </div>
-  </div>
-
-  <!-- Notification Toast -->
-  <div id="toastNotification" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 glass-card px-5 py-2.5 rounded-full border border-white/20 text-white text-xs font-semibold shadow-2xl flex items-center gap-2 translate-y-20 opacity-0 pointer-events-none transition duration-300">
-    <span id="toastIcon">✨</span>
-    <span id="toastMsg">Action completed!</span>
-  </div>
-
-  <!-- Footer Info -->
-  <footer class="w-full max-w-md mx-auto px-4 py-4 text-center z-20">
-    <p class="text-[11px] text-gray-500">
-      Built with ❤️ Celebration Studio Pro • Free & Open Source for GitHub Pages
-    </p>
-  </footer>
 
   <script>
-    // App State Configuration
-    const state = {
-      step: 1,
-      eventType: 'birthday',
-      eventNameTitle: 'BIRTHDAY',
-      recipientName: 'Sanya',
-      eventMonth: 7, // August
-      eventDay: 26,
-      eventYear: 2026,
-      themeClass: 'theme-midnight-gold',
-      centerIcon: '🎂',
-      centerTitle: 'Galaxy Tier Cake',
-      bond: 'Sweet, Loyal, My Rock',
-      mascotIcon: '🐰',
-      mascotName: 'Cute Bunny',
-      letterText: "Wishing you an unforgettable celebration brimming with wonder, joy, laughter, and lifelong dreams coming true!",
-      photoDataUrl: null,
-      photoFilter: 'none',
-      isPasscodeEnabled: false,
-      passcodePin: '',
-      isUnlocked: true,
-      audioActive: false,
-      candleBlown: false
+    // State Store
+    let currentNavPage = 1;
+    let balloonsPoppedTotal = 0;
+    let requiredPasscode = "";
+    let uploadedImageBase64 = "";
+
+    // Web Audio Synthesizer Engine (Zero-MP3 Dependency)
+    const AudioEngine = {
+      ctx: null,
+      init() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) this.ctx = new AudioContext();
+        }
+      },
+      playPop() {
+        this.init();
+        if (!this.ctx) return;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(450, this.ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(80, this.ctx.currentTime + 0.12);
+        gain.gain.setValueAtTime(0.7, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.12);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start();
+        osc.stop(this.ctx.currentTime + 0.12);
+      },
+      playChime() {
+        this.init();
+        if (!this.ctx) return;
+        const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+        notes.forEach((freq, idx) => {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, this.ctx.currentTime + (idx * 0.12));
+          gain.gain.setValueAtTime(0.3, this.ctx.currentTime + (idx * 0.12));
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + (idx * 0.12) + 0.6);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(this.ctx.currentTime + (idx * 0.12));
+          osc.stop(this.ctx.currentTime + (idx * 0.12) + 0.6);
+        });
+      }
     };
 
-    // Web Audio Synthesizer (Zero external mp3 needed)
-    let audioCtx = null;
-    let synthInterval = null;
-
-    function initAudioContext() {
-      if (!audioCtx) {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        audioCtx = new AudioContext();
-      }
-      if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
-      }
+    // Initialize Dropdown Dates
+    const dayPicker = document.getElementById('dayPicker');
+    for (let d = 1; d <= 31; d++) {
+      const opt = document.createElement('option');
+      opt.value = d;
+      opt.innerText = d < 10 ? '0' + d : d;
+      if (d === 26) opt.selected = true;
+      dayPicker.appendChild(opt);
     }
 
-    function playSoftChime(freq, timeOffset = 0, duration = 1.2) {
-      if (!audioCtx) return;
-      try {
-        const now = audioCtx.currentTime + timeOffset;
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(freq, now);
-
-        gain.gain.setValueAtTime(0.001, now);
-        gain.gain.exponentialRampToValueAtTime(0.08, now + 0.08);
-        gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
-
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-
-        osc.start(now);
-        osc.stop(now + duration);
-      } catch (err) {
-        console.error("Audio synth error", err);
-      }
-    }
-
-    function toggleAmbientMusic() {
-      initAudioContext();
-      state.audioActive = !state.audioActive;
-      const icon = document.getElementById('audioStatusIcon');
-      const text = document.getElementById('audioStatusText');
-
-      if (state.audioActive) {
-        icon.innerText = '🔊';
-        text.innerText = 'Music Playing';
-        // Play gentle harmonic arpeggio every few seconds
-        playArpeggio();
-        synthInterval = setInterval(playArpeggio, 4800);
-        showToast('🎵 Ambient music generator activated');
-      } else {
-        icon.innerText = '🎵';
-        text.innerText = 'Play Ambient';
-        if (synthInterval) clearInterval(synthInterval);
-        showToast('🔇 Music paused');
-      }
-    }
-
-    function playArpeggio() {
-      if (!state.audioActive) return;
-      const notes = [261.63, 329.63, 392.00, 523.25, 659.25]; // C Major lush notes
-      notes.forEach((freq, idx) => {
-        playSoftChime(freq, idx * 0.28, 1.8);
-      });
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-      populateDaysDropdown();
-      parseUrlParameters();
-      updateCountdownBadge();
-      syncFormValues();
-    });
-
-    function populateDaysDropdown() {
-      const daySelect = document.getElementById('selectDay');
-      daySelect.innerHTML = '';
-      for (let d = 1; d <= 31; d++) {
-        const opt = document.createElement('option');
-        opt.value = d;
-        opt.innerText = d < 10 ? '0' + d : d;
-        if (d === 26) opt.selected = true;
-        daySelect.appendChild(opt);
-      }
-    }
-
-    function syncFormValues() {
-      document.getElementById('inputRecipientName').value = state.recipientName;
-      document.getElementById('selectMonth').value = state.eventMonth;
-      document.getElementById('selectDay').value = state.eventDay;
-      document.getElementById('selectYear').value = state.eventYear;
-    }
-
-    function selectEvent(type, title, defaultIcon) {
-      state.eventType = type;
-      state.eventNameTitle = title;
-      document.getElementById('badgeEventTitle').innerText = title;
-
-      // Update pills
-      document.querySelectorAll('.event-pill-btn').forEach(btn => {
-        if (btn.getAttribute('data-event') === type) {
-          btn.className = "event-pill-btn py-2 rounded-xl text-xs font-bold transition flex flex-col items-center gap-0.5 active:scale-95 bg-pink-500 text-white shadow-glow-pink";
-        } else {
-          btn.className = "event-pill-btn py-2 rounded-xl text-xs font-medium text-gray-300 transition flex flex-col items-center gap-0.5 hover:text-white hover:bg-white/5 active:scale-95";
-        }
-      });
-
-      // Update center element based on occasion
-      if (type === 'birthday') {
-        state.centerIcon = '🎂';
-        state.centerTitle = 'Galaxy Tier Cake';
-        document.getElementById('nameLabel').innerText = "Whose birthday is it?";
-      } else if (type === 'wedding') {
-        state.centerIcon = '💍';
-        state.centerTitle = 'Solitaire Diamond Rings';
-        document.getElementById('nameLabel').innerText = "Couple Names?";
-      } else if (type === 'anniversary') {
-        state.centerIcon = '🥂';
-        state.centerTitle = 'Golden Champagne Flutes';
-        document.getElementById('nameLabel').innerText = "Couple Names?";
-      } else if (type === 'proposal') {
-        state.centerIcon = '💎';
-        state.centerTitle = 'Eternity Ring Box';
-        document.getElementById('nameLabel').innerText = "Your Soulmate's Name?";
-      } else {
-        state.centerIcon = '✨';
-        state.centerTitle = 'Infinity Friendship Token';
-        document.getElementById('nameLabel').innerText = "Best Friend's Name?";
-      }
-
-      document.getElementById('centerElementIcon').innerText = state.centerIcon;
-      document.getElementById('centerElementName').innerText = state.centerTitle;
-      updateCountdownBadge();
-    }
-
-    function updateCountdownBadge() {
-      const name = document.getElementById('inputRecipientName').value.trim() || 'Someone Special';
-      state.recipientName = name;
-
-      const m = parseInt(document.getElementById('selectMonth').value);
-      const d = parseInt(document.getElementById('selectDay').value);
-      const y = parseInt(document.getElementById('selectYear').value);
-      state.eventMonth = m;
-      state.eventDay = d;
-      state.eventYear = y;
-
-      const target = new Date(y, m, d);
-      const now = new Date();
-      now.setHours(0,0,0,0);
-      const diffMs = target.getTime() - now.getTime();
-      const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
-
-      const badge = document.getElementById('countdownBadge');
-      if (diffDays === 0) {
-        badge.innerText = "TODAY IS THE BIG DAY! 🎉";
-        badge.className = "text-[11px] font-bold text-green-300 bg-green-500/20 px-2.5 py-0.5 rounded-full border border-green-500/30";
-      } else if (diffDays > 0) {
-        badge.innerText = `${diffDays} days left ⏳`;
-        badge.className = "text-[11px] font-bold text-amber-300 bg-amber-400/10 px-2.5 py-0.5 rounded-full border border-amber-400/20";
-      } else {
-        badge.innerText = `${Math.abs(diffDays)} days ago ⭐`;
-        badge.className = "text-[11px] font-bold text-purple-300 bg-purple-400/10 px-2.5 py-0.5 rounded-full border border-purple-400/20";
-      }
-
-      const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-      document.getElementById('cardFullDate').innerText = `${months[m].toUpperCase()} ${d}, ${y}`;
-      document.getElementById('cardCountdownSnippet').innerText = diffDays >= 0 ? `✨ In ${diffDays} Days` : `✨ Celebrated ${Math.abs(diffDays)} days ago`;
-    }
-
-    function navigateToStep(stepNumber) {
-      if (stepNumber === 2 && !state.recipientName) {
-        showToast('⚠️ Please enter a name first!');
+    // Step 1 -> Step 2
+    function proceedToPage2() {
+      const name = document.getElementById('recipientName').value.trim();
+      if (!name) {
+        alert("Please enter whose birthday it is!");
         return;
       }
+      document.getElementById('customHeadline').innerText = `Customize for ${name}`;
+      document.getElementById('valLetter').innerText = `Dear ${name}, wishing you an unforgettable birthday filled with endless laughter, boundless love, and dreams fulfilled!`;
 
-      state.step = stepNumber;
-      document.getElementById('step1Screen').classList.toggle('hidden', stepNumber !== 1);
-      document.getElementById('step2Screen').classList.toggle('hidden', stepNumber !== 2);
-      document.getElementById('step3Screen').classList.toggle('hidden', stepNumber !== 3);
-      document.getElementById('stepProgressBadge').innerText = `Step ${stepNumber}/3`;
+      document.getElementById('page1').style.display = 'none';
+      document.getElementById('page2').style.display = 'block';
+      document.getElementById('navHeader').style.display = 'flex';
+      currentNavPage = 2;
+    }
 
-      if (stepNumber === 2) {
-        document.getElementById('step2HeaderName').innerText = `Customize for ${state.recipientName}`;
-      } else if (stepNumber === 3) {
-        prepareInteractiveCard();
+    // Handle Back Buttons
+    function handleNavigationBack() {
+      if (currentNavPage === 3) {
+        document.getElementById('partyArena').style.display = 'none';
+        document.getElementById('page2').style.display = 'block';
+        currentNavPage = 2;
+      } else if (currentNavPage === 2) {
+        document.getElementById('page2').style.display = 'none';
+        document.getElementById('page1').style.display = 'block';
+        document.getElementById('navHeader').style.display = 'none';
+        currentNavPage = 1;
       }
-
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function setCardTheme(themeClass) {
-      state.themeClass = themeClass;
-      const card = document.getElementById('exportableCard');
-      card.className = `card-3d-mesh ${themeClass} rounded-[32px] p-6 shadow-2xl relative overflow-hidden text-center select-none`;
-      showToast('Theme style updated!');
-    }
-
+    // Modal Sheet Handlers
     function openChoicePicker(type) {
-      const modal = document.getElementById('pickerModal');
-      const title = document.getElementById('pickerModalTitle');
-      const container = document.getElementById('pickerOptionsContainer');
+      const modal = document.getElementById('choiceModal');
+      const head = document.getElementById('modalHeadline');
+      const container = document.getElementById('modalEntries');
       container.innerHTML = '';
 
       if (type === 'cake') {
-        title.innerText = "Choose Center Icon";
-        const items = [
-          { icon: '🎂', name: 'Galaxy Tier Cake' },
-          { icon: '🧁', name: 'Strawberry Cupcake' },
-          { icon: '🍾', name: 'Vintage Champagne' },
-          { icon: '💍', name: 'Diamond Ring' },
-          { icon: '💎', name: 'Sparkling Gem' },
-          { icon: '💐', name: 'Bouquet of Roses' },
-          { icon: '🎁', name: 'Mystery Gift Box' },
+        head.innerText = 'Choose Cake Theme';
+        const cakes = [
+          { icon: '🎂', name: 'Galaxy Classic' },
+          { icon: '🍫', name: 'Velvet Truffle' },
+          { icon: '🍓', name: 'Strawberry Bloom' }
         ];
-        items.forEach(item => {
-          container.appendChild(createPickerOption(item.icon, item.name, () => {
-            state.centerIcon = item.icon;
-            state.centerTitle = item.name;
-            document.getElementById('centerElementIcon').innerText = item.icon;
-            document.getElementById('centerElementName').innerText = item.name;
-            closePickerModal();
-          }));
+        cakes.forEach(c => {
+          container.innerHTML += `
+            <div style="padding: 12px; cursor: pointer; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #f1f2f6;" onclick="applyCakeSelection('${c.icon}', '${c.name}')">
+              <span style="font-size: 24px;">${c.icon}</span> <b>${c.name}</b>
+            </div>`;
         });
       } else if (type === 'bond') {
-        title.innerText = "Select Relationship Bond";
+        head.innerText = 'Define Your Bond';
         const bonds = [
-          "Sweet, Loyal, My Rock",
-          "Soulmate & Forever Love",
-          "Best Friend for Life",
-          "Partner in Crime",
-          "Guiding Light & Mentor",
-          "Caring, Radiant & Kind"
+          'Sweet, Loyal, My rock',
+          'Bestie for life',
+          'Crime Partner & Soulmate',
+          'Forever supportive & caring'
         ];
-        bonds.forEach(bond => {
-          container.appendChild(createPickerOption('🤝', bond, () => {
-            state.bond = bond;
-            document.getElementById('bondName').innerText = bond;
-            closePickerModal();
-          }));
+        bonds.forEach(b => {
+          container.innerHTML += `
+            <div style="padding: 12px; cursor: pointer; border-bottom: 1px solid #f1f2f6; font-weight: 600;" onclick="applyBondSelection('${b}')">
+              ${b}
+            </div>`;
         });
       } else if (type === 'mascot') {
-        title.innerText = "Select Companion Mascot";
+        head.innerText = 'Pick Your Mascot';
         const mascots = [
-          { icon: '🐰', name: 'Cute Bunny' },
+          { icon: '🐰', name: 'Bunny' },
           { icon: '🧸', name: 'Teddy Bear' },
-          { icon: '🐱', name: 'Playful Kitten' },
-          { icon: '🐶', name: 'Loyal Pup' },
-          { icon: '🦄', name: 'Magical Unicorn' },
-          { icon: '🐼', name: 'Chubby Panda' }
+          { icon: '🐱', name: 'Cute Kitten' },
+          { icon: '🐶', name: 'Puppy' }
         ];
         mascots.forEach(m => {
-          container.appendChild(createPickerOption(m.icon, m.name, () => {
-            state.mascotIcon = m.icon;
-            state.mascotName = m.name;
-            document.getElementById('mascotIcon').innerText = m.icon;
-            document.getElementById('mascotName').innerText = m.name;
-            closePickerModal();
-          }));
+          container.innerHTML += `
+            <div style="padding: 12px; cursor: pointer; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #f1f2f6;" onclick="applyMascotSelection('${m.icon}', '${m.name}')">
+              <span style="font-size: 24px;">${m.icon}</span> <b>${m.name}</b>
+            </div>`;
         });
+      } else if (type === 'letter') {
+        head.innerText = 'Write Heartfelt Note';
+        container.innerHTML = `
+          <textarea id="modalLetterInput" rows="5" style="width: 100%; border-radius: 14px; padding: 12px; border: 1.5px solid #e1e3ea; font-size: 14px;">${document.getElementById('valLetter').innerText}</textarea>
+        `;
       }
 
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
+      modal.style.display = 'flex';
     }
 
-    function createPickerOption(icon, label, callback) {
-      const div = document.createElement('div');
-      div.className = "flex items-center gap-3 p-3 rounded-2xl bg-white/5 hover:bg-white/10 cursor-pointer active:scale-95 transition border border-white/5";
-      div.innerHTML = `<span class="text-2xl">${icon}</span> <span class="text-sm font-semibold text-white">${label}</span>`;
-      div.onclick = callback;
-      return div;
+    function applyCakeSelection(icon, name) {
+      document.getElementById('valCakeIcon').innerText = icon;
+      document.getElementById('valCakeName').innerText = name;
+      document.getElementById('cakeGraphic').innerText = icon;
+      closeChoiceModal();
     }
 
-    function closePickerModal() {
-      const modal = document.getElementById('pickerModal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
+    function applyBondSelection(text) {
+      document.getElementById('valBond').innerText = text;
+      closeChoiceModal();
     }
 
-    // Passcode toggle logic
-    function handlePasscodeToggle(checkbox) {
+    function applyMascotSelection(icon, name) {
+      document.getElementById('valMascotIcon').innerText = icon;
+      document.getElementById('valMascotName').innerText = name;
+      document.getElementById('cardMascotGraphic').innerText = icon;
+      closeChoiceModal();
+    }
+
+    function closeChoiceModal() {
+      const letterInput = document.getElementById('modalLetterInput');
+      if (letterInput && letterInput.value.trim()) {
+        document.getElementById('valLetter').innerText = letterInput.value.trim();
+      }
+      document.getElementById('choiceModal').style.display = 'none';
+    }
+
+    function toggleSecurityCode(checkbox) {
       if (checkbox.checked) {
-        const pin = prompt("Set a 4-digit numeric PIN for the recipient:", "1234");
+        const pin = prompt("Set a 4-digit secret passcode for the surprise:", "1234");
         if (pin && pin.length >= 4) {
-          state.isPasscodeEnabled = true;
-          state.passcodePin = pin.slice(0, 4);
-          document.getElementById('passcodeSummary').innerText = `Locked with PIN (${state.passcodePin})`;
-          showToast('🔒 Passcode protection enabled');
+          requiredPasscode = pin;
+          document.getElementById('valPasscode').innerText = `Locked (PIN: ${pin})`;
         } else {
           checkbox.checked = false;
-          state.isPasscodeEnabled = false;
+          requiredPasscode = "";
+          document.getElementById('valPasscode').innerText = "Add 4 - digit Passcode";
         }
       } else {
-        state.isPasscodeEnabled = false;
-        state.passcodePin = '';
-        document.getElementById('passcodeSummary').innerText = "Tap switch to protect with PIN";
+        requiredPasscode = "";
+        document.getElementById('valPasscode').innerText = "Add 4 - digit Passcode";
       }
     }
 
-    // Letter modal
-    function openLetterEditor() {
-      document.getElementById('modalMessageInput').value = state.letterText;
-      const modal = document.getElementById('letterModal');
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-    }
-
-    function closeLetterModal() {
-      const modal = document.getElementById('letterModal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-    }
-
-    function applyMessageTemplate(style) {
-      const name = state.recipientName || 'Dear';
-      if (style === 'emotional') {
-        document.getElementById('modalMessageInput').value = `Dearest ${name}, words cannot express the gratitude and joy you bring into my world every day. May your celebration be as radiant and magnificent as your heart!`;
-      } else if (style === 'fun') {
-        document.getElementById('modalMessageInput').value = `Happy Birthday ${name}! Let's eat all the cake, dance like nobody is watching, and make memories we will talk about for decades to come! 🎂⚡`;
-      } else if (style === 'poetic') {
-        document.getElementById('modalMessageInput').value = `To ${name}: Like fine wine and timeless stars, you shine brighter with each chapter. May this special day unfold like pure poetry in your life!`;
-      } else {
-        document.getElementById('modalMessageInput').value = `Wishing ${name} a magnificent journey ahead filled with endless love, unwavering support, happiness, and unforgettable moments!`;
-      }
-    }
-
-    function saveLetterMessage() {
-      const val = document.getElementById('modalMessageInput').value.trim();
-      if (val) {
-        state.letterText = val;
-        document.getElementById('letterExcerpt').innerText = val;
-        showToast('Message saved!');
-      }
-      closeLetterModal();
-    }
-
-    // Photo Upload with FileReader API
-    function handleUserPhoto(event) {
-      const file = event.target.files[0];
+    // Photo Handler
+    function processUploadedPhoto(e) {
+      const file = e.target.files[0];
       if (file) {
         const reader = new FileReader();
-        reader.onload = function(e) {
-          state.photoDataUrl = e.target.result;
-          document.getElementById('photoStatusText').innerText = "Photo loaded! Pick a filter below";
-          document.getElementById('photoFiltersBar').classList.remove('hidden');
-          showToast('📸 Photo added successfully');
+        reader.onload = (event) => {
+          uploadedImageBase64 = event.target.result;
+          document.getElementById('cardUploadedImg').src = uploadedImageBase64;
+          document.getElementById('photoDisplay').style.display = 'block';
+          confetti({ particleCount: 50, spread: 50 });
+          alert("Photo added successfully!");
         };
         reader.readAsDataURL(file);
       }
     }
 
-    function applyPhotoFilter(filterClass) {
-      state.photoFilter = filterClass;
-      showToast(`Filter applied: ${filterClass}`);
+    // Start Party Reel Experience
+    function startPartyExperience() {
+      const name = document.getElementById('recipientName').value.trim();
+      const month = document.getElementById('monthPicker').value;
+      const day = document.getElementById('dayPicker').value;
+
+      document.getElementById('targetCardName').innerText = name;
+      document.getElementById('targetCardDate').innerText = `${month} ${day}`;
+      document.getElementById('targetCardLetter').innerText = `"${document.getElementById('valLetter').innerText}"`;
+      document.getElementById('targetCardBond').innerText = `✨ ${document.getElementById('valBond').innerText}`;
+
+      document.getElementById('page2').style.display = 'none';
+      document.getElementById('partyArena').style.display = 'block';
+      currentNavPage = 3;
+
+      // Reset party states
+      balloonsPoppedTotal = 0;
+      document.getElementById('deckStageBalloons').style.display = 'block';
+      document.getElementById('deckStageCake').style.display = 'none';
+      document.getElementById('deckStageCard').style.display = 'none';
+
+      document.querySelectorAll('.interactive-balloon').forEach(b => {
+        b.style.opacity = '1';
+        b.style.pointerEvents = 'auto';
+        b.style.transform = 'scale(1)';
+      });
+      document.getElementById('candleFlame').style.display = 'block';
     }
 
-    function prepareInteractiveCard() {
-      const card = document.getElementById('exportableCard');
-      card.className = `card-3d-mesh ${state.themeClass} rounded-[32px] p-6 shadow-2xl relative overflow-hidden text-center select-none`;
+    // Stage 1: Balloon Pop
+    function popSingleBalloon(element) {
+      AudioEngine.playPop();
+      element.style.transform = 'scale(1.5)';
+      element.style.opacity = '0';
+      element.style.pointerEvents = 'none';
+      confetti({ particleCount: 25, spread: 40, origin: { y: 0.7 } });
+      balloonsPoppedTotal++;
 
-      document.getElementById('cardBadgeEventText').innerText = `${state.eventNameTitle} CELEBRATION`;
-      document.getElementById('cardPersonName').innerText = state.recipientName;
-      document.getElementById('cardMainIcon').innerText = state.centerIcon;
-      document.getElementById('cardMascotBadge').innerText = state.mascotIcon;
-      document.getElementById('cardDisplayMessage').innerText = `"${state.letterText}"`;
-      document.getElementById('cardBondSeal').innerText = `✨ ${state.bond}`;
-
-      // Photo check
-      const photoHolder = document.getElementById('cardPhotoHolder');
-      const photoImg = document.getElementById('cardUserImage');
-      if (state.photoDataUrl) {
-        photoImg.src = state.photoDataUrl;
-        photoImg.className = `w-full h-full object-cover ${state.photoFilter}`;
-        photoHolder.classList.remove('hidden');
-      } else {
-        photoHolder.classList.add('hidden');
-      }
-
-      // Passcode gate check
-      const gate = document.getElementById('passcodeGateOverlay');
-      const wrapper = document.getElementById('interactiveCardWrapper');
-      if (state.isPasscodeEnabled && !state.isUnlocked) {
-        gate.classList.remove('hidden');
-        wrapper.classList.add('blur-md', 'pointer-events-none');
-      } else {
-        gate.classList.add('hidden');
-        wrapper.classList.remove('blur-md', 'pointer-events-none');
-        triggerConfettiExplosion();
-      }
-    }
-
-    function verifyPinUnlock() {
-      const entered = document.getElementById('pinInput').value.trim();
-      if (entered === state.passcodePin) {
-        state.isUnlocked = true;
-        document.getElementById('passcodeGateOverlay').classList.add('hidden');
-        document.getElementById('interactiveCardWrapper').classList.remove('blur-md', 'pointer-events-none');
-        triggerConfettiExplosion();
-        showToast('🔓 Unlocked! Enjoy the card');
-      } else {
-        showToast('❌ Incorrect PIN. Please try again!');
+      if (balloonsPoppedTotal >= 4) {
+        setTimeout(() => {
+          document.getElementById('deckStageBalloons').style.display = 'none';
+          document.getElementById('deckStageCake').style.display = 'block';
+          confetti({ particleCount: 90, spread: 70 });
+        }, 500);
       }
     }
 
-    // 3D Gyroscope & Mouse Tilt
-    function handleCardTilt(e) {
-      const card = document.getElementById('exportableCard');
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      const rotateX = (-y / rect.height) * 16;
-      const rotateY = (x / rect.width) * 16;
-      card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    // Stage 2: Candle Blow & Cake Cut
+    function triggerCandleBlow() {
+      document.getElementById('candleFlame').style.display = 'none';
+      AudioEngine.playChime();
+      
+      // Dramatic Confetti Shower
+      confetti({ particleCount: 160, spread: 100, origin: { y: 0.55 } });
+      setTimeout(() => {
+        confetti({ particleCount: 100, spread: 80, origin: { y: 0.4 } });
+      }, 300);
+
+      setTimeout(() => {
+        document.getElementById('deckStageCake').style.display = 'none';
+        document.getElementById('deckStageCard').style.display = 'block';
+      }, 700);
     }
 
-    function resetCardTilt() {
-      const card = document.getElementById('exportableCard');
-      card.style.transform = 'rotateX(0deg) rotateY(0deg)';
-    }
-
-    // Candle blow interaction
-    function blowCandle() {
-      const flame = document.getElementById('flameParticle');
-      const tip = document.getElementById('candleBlowTip');
-      state.candleBlown = !state.candleBlown;
-
-      if (state.candleBlown) {
-        flame.innerText = '💨';
-        flame.classList.remove('flame-active');
-        tip.innerText = "🎉 Wish Granted! Best Wishes! 🎉";
-        triggerConfettiExplosion();
-      } else {
-        flame.innerText = '🔥';
-        flame.classList.add('flame-active');
-        tip.innerText = "Tap cake to blow candle!";
-      }
-    }
-
-    // Micro-action animations
-    function triggerConfettiExplosion() {
-      confetti({
-        particleCount: 80,
-        spread: 70,
-        origin: { y: 0.6 }
-      });
-    }
-
-    function shootFireworks() {
-      confetti({
-        particleCount: 120,
-        angle: 60,
-        spread: 55,
-        origin: { x: 0, y: 0.7 }
-      });
-      confetti({
-        particleCount: 120,
-        angle: 120,
-        spread: 55,
-        origin: { x: 1, y: 0.7 }
-      });
-      showToast('🎆 Fireworks fired!');
-    }
-
-    function popChampagne() {
-      confetti({
-        particleCount: 90,
-        spread: 100,
-        decay: 0.9,
-        scalar: 1.2,
-        origin: { y: 0.5 }
-      });
-      showToast('🍾 Cheers! Celebrating love & life');
-    }
-
-    // Export High-Res Image (PNG) with html2canvas
+    // Export As PNG
     function exportAsHighResImage() {
-      showToast('Rendering high-res card...');
-      const btn = document.getElementById('btnDownloadImg');
-      btn.innerText = "Rendering...";
-
-      const card = document.getElementById('exportableCard');
-      // Temporarily reset transform for clean flat pixel capture
-      const prevTransform = card.style.transform;
-      card.style.transform = 'none';
-
-      html2canvas(card, {
-        scale: 3,
-        useCORS: true,
-        backgroundColor: null,
-        logging: false
-      }).then(canvas => {
-        card.style.transform = prevTransform;
+      const card = document.getElementById('exportCardTarget');
+      html2canvas(card, { scale: 3, useCORS: true }).then(canvas => {
         const link = document.createElement('a');
-        link.download = `${state.recipientName.replace(/\s+/g, '_')}_celebration_card.png`;
+        link.download = `Birthday-Surprise-${document.getElementById('recipientName').value || 'Card'}.png`;
         link.href = canvas.toDataURL('image/png');
         link.click();
-        btn.innerHTML = '<span>🖼️</span><span>Download PNG</span>';
-        showToast('✅ High-Res Image Downloaded!');
-      }).catch(err => {
-        console.error(err);
-        card.style.transform = prevTransform;
-        btn.innerHTML = '<span>🖼️</span><span>Download PNG</span>';
-        showToast('❌ Export error, please retry');
       });
     }
 
-    // Export Print-Ready Vector PDF with jsPDF
-    function exportAsVectorPDF() {
-      showToast('Generating printable PDF...');
-      const btn = document.getElementById('btnDownloadPdf');
-      btn.innerText = "Generating...";
-
-      const card = document.getElementById('exportableCard');
-      const prevTransform = card.style.transform;
-      card.style.transform = 'none';
-
-      html2canvas(card, {
-        scale: 3,
-        useCORS: true,
-        backgroundColor: '#0d0914',
-        logging: false
-      }).then(canvas => {
-        card.style.transform = prevTransform;
-        const { jsPDF } = window.jspdf;
-        const imgData = canvas.toDataURL('image/png');
-        
-        // Calculate proportional PDF dimensions
+    // Export As PDF
+    function exportAsPDF() {
+      const { jsPDF } = window.jspdf;
+      const card = document.getElementById('exportCardTarget');
+      html2canvas(card, { scale: 3, useCORS: true }).then(canvas => {
+        const img = canvas.toDataURL('image/png');
         const pdf = new jsPDF({
           orientation: 'portrait',
-          unit: 'mm',
-          format: 'a5'
+          unit: 'px',
+          format: [canvas.width / 3, canvas.height / 3]
         });
-
-        const pageWidth = pdf.internal.pageSize.getWidth();
-        const pageHeight = pdf.internal.pageSize.getHeight();
-        const ratio = canvas.width / canvas.height;
-        let imgWidth = pageWidth - 20;
-        let imgHeight = imgWidth / ratio;
-
-        if (imgHeight > pageHeight - 20) {
-          imgHeight = pageHeight - 20;
-          imgWidth = imgHeight * ratio;
-        }
-
-        const xPos = (pageWidth - imgWidth) / 2;
-        const yPos = (pageHeight - imgHeight) / 2;
-
-        pdf.addImage(imgData, 'PNG', xPos, yPos, imgWidth, imgHeight);
-        pdf.save(`${state.recipientName.replace(/\s+/g, '_')}_invitation.pdf`);
-        btn.innerHTML = '<span>📄</span><span>Download PDF</span>';
-        showToast('✅ Print-Ready PDF Downloaded!');
-      }).catch(err => {
-        console.error(err);
-        card.style.transform = prevTransform;
-        btn.innerHTML = '<span>📄</span><span>Download PDF</span>';
-        showToast('❌ PDF generation failed');
+        pdf.addImage(img, 'PNG', 0, 0, canvas.width / 3, canvas.height / 3);
+        pdf.save(`Birthday-Surprise-${document.getElementById('recipientName').value || 'Card'}.pdf`);
       });
     }
 
-    // Encode Entire Event into URL parameters for Shareable Link
-    function copyShareableWebpageLink() {
+    // Shareable Link Generator (Encodes details into URL Hash)
+    function copyShareableSurpriseLink() {
       const payload = {
-        n: state.recipientName,
-        t: state.eventType,
-        m: state.eventMonth,
-        d: state.eventDay,
-        y: state.eventYear,
-        th: state.themeClass,
-        i: state.centerIcon,
-        b: state.bond,
-        mc: state.mascotIcon,
-        l: state.letterText,
-        p: state.passcodePin
+        n: document.getElementById('recipientName').value,
+        m: document.getElementById('monthPicker').value,
+        d: document.getElementById('dayPicker').value,
+        l: document.getElementById('valLetter').innerText,
+        b: document.getElementById('valBond').innerText,
+        c: document.getElementById('valCakeIcon').innerText,
+        p: requiredPasscode
       };
-
-      const encoded = encodeURIComponent(btoa(unescape(encodeURIComponent(JSON.stringify(payload)))));
-      const fullUrl = `${window.location.origin}${window.location.pathname}#c=${encoded}`;
-
-      // Clipboard fallback
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(fullUrl).then(() => {
-          showToast('🔗 Link copied to clipboard!');
-        }).catch(() => {
-          fallbackClipboardCopy(fullUrl);
-        });
-      } else {
-        fallbackClipboardCopy(fullUrl);
-      }
+      const hash = btoa(encodeURIComponent(JSON.stringify(payload)));
+      const shareUrl = `${window.location.origin}${window.location.pathname}#surprise=${hash}`;
+      
+      navigator.clipboard.writeText(shareUrl).then(() => {
+        alert("Surprise link copied! Share it on WhatsApp or Instagram DM.");
+      }).catch(() => {
+        prompt("Copy your special surprise link:", shareUrl);
+      });
     }
 
-    function fallbackClipboardCopy(text) {
-      const textArea = document.createElement("textarea");
-      textArea.value = text;
-      document.body.appendChild(textArea);
-      textArea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textArea);
-      showToast('🔗 Link copied to clipboard!');
-    }
-
-    // Parse URL on load for recipient experience
-    function parseUrlParameters() {
+    // Check if recipient opened via Shareable Link
+    window.addEventListener('DOMContentLoaded', () => {
       const hash = window.location.hash;
-      if (hash && hash.includes('#c=')) {
+      if (hash.includes('#surprise=')) {
         try {
-          const raw = decodeURIComponent(hash.replace('#c=', ''));
-          const decoded = decodeURIComponent(escape(atob(raw)));
-          const data = JSON.parse(decoded);
+          const raw = decodeURIComponent(atob(hash.replace('#surprise=', '')));
+          const data = JSON.parse(raw);
 
-          state.recipientName = data.n || state.recipientName;
-          state.eventType = data.t || state.eventType;
-          state.eventMonth = data.m !== undefined ? data.m : state.eventMonth;
-          state.eventDay = data.d !== undefined ? data.d : state.eventDay;
-          state.eventYear = data.y !== undefined ? data.y : state.eventYear;
-          state.themeClass = data.th || state.themeClass;
-          state.centerIcon = data.i || state.centerIcon;
-          state.bond = data.b || state.bond;
-          state.mascotIcon = data.mc || state.mascotIcon;
-          state.letterText = data.l || state.letterText;
-          state.passcodePin = data.p || '';
-          state.isPasscodeEnabled = !!data.p;
-          state.isUnlocked = !data.p;
+          // If passcode exists, verify
+          if (data.p) {
+            const entered = prompt("🔒 Enter secret 4-digit PIN to open your birthday surprise:");
+            if (entered !== data.p) {
+              alert("Incorrect Passcode!");
+              return;
+            }
+          }
 
-          // Auto-direct to the interactive preview
-          navigateToStep(3);
+          // Populate and auto launch into Party mode for recipient
+          document.getElementById('recipientName').value = data.n;
+          document.getElementById('monthPicker').value = data.m;
+          document.getElementById('dayPicker').value = data.d;
+          document.getElementById('valLetter').innerText = data.l;
+          document.getElementById('valBond').innerText = data.b;
+          document.getElementById('cakeGraphic').innerText = data.c;
+
+          document.getElementById('page1').style.display = 'none';
+          document.getElementById('page2').style.display = 'none';
+          document.getElementById('partyArena').style.display = 'block';
+
+          startPartyExperience();
         } catch (e) {
-          console.error("URL Parameter parsing error", e);
+          console.error("Invalid share link format");
         }
       }
-    }
-
-    // Toast Utility
-    let toastTimeout = null;
-    function showToast(message) {
-      const toast = document.getElementById('toastNotification');
-      const toastMsg = document.getElementById('toastMsg');
-      toastMsg.innerText = message;
-      toast.classList.remove('translate-y-20', 'opacity-0');
-      toast.classList.add('translate-y-0', 'opacity-100');
-
-      if (toastTimeout) clearTimeout(toastTimeout);
-      toastTimeout = setTimeout(() => {
-        toast.classList.add('translate-y-20', 'opacity-0');
-        toast.classList.remove('translate-y-0', 'opacity-100');
-      }, 3000);
-    }
+    });
   </script>
 </body>
-  </html>
+</html>
