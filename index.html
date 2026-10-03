@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birthday Webpage & Card Creator</title>
+
+  <!-- Google Fonts & Export Libraries -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #1e1333 0%, #0d0914 100%);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px 40px;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 410px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Top Back Button */
+    .top-nav {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .back-circle-btn {
+      width: 40px;
+      height: 40px;
+      background: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      cursor: pointer;
+      color: #1a1a1a;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    /* --- PAGE 1: STICKER BADGES HEADER --- */
+    .badge-stack {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .badge {
+      font-weight: 800;
+      font-size: 19px;
+      padding: 6px 18px;
+      border-radius: 10px;
+      border: 2px solid #111;
+      text-transform: uppercase;
+      box-shadow: 0 4px 0 #111;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-yellow { background: #fbc531; color: #2f1703; transform: rotate(-3deg); z-index: 1; }
+    .badge-coral { background: #eb4d4b; color: #fff; transform: rotate(2deg); margin-top: -6px; z-index: 2; }
+    .badge-blue { background: #48dbfb; color: #0c2461; transform: rotate(-2deg); margin-top: -6px; z-index: 3; }
+
+    /* White Form Card (Used in both Page 1 & 2) */
+    .white-card {
+      background: #ffffff;
+      border-radius: 30px;
+      padding: 26px 20px;
+      width: 100%;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.45);
+      color: #111;
+    }
+
+    /* Typography */
+    .heading-serif {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #141416;
+      text-align: center;
+    }
+
+    .sub-tagline {
+      text-align: center;
+      font-size: 13px;
+      color: #938f9d;
+      margin-top: 4px;
+      margin-bottom: 18px;
+    }
+
+    /* Page 1 Inputs */
+    .input-box {
+      width: 100%;
+      height: 52px;
+      border: 1.5px solid #e1e3ea;
+      border-radius: 16px;
+      padding: 0 16px;
+      font-size: 16px;
+      outline: none;
+      color: #2d3436;
+      background: #fafbfc;
+      margin-top: 10px;
+    }
+
+    .date-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .select-box {
+      flex: 1;
+      height: 52px;
+      border: 1.5px solid #e1e3ea;
+      border-radius: 16px;
+      padding: 0 14px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #333;
+      background: #fafbfc;
+      outline: none;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23666%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22M6%209l6%206%206-6%22%2F%3E%3C%2Fsvg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+    }
+
+    /* --- PAGE 2: CUSTOMIZE LIST ROWS --- */
+    .custom-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px 0;
+      border-bottom: 1px solid #f2f2f6;
+    }
+
+    .custom-row:last-of-type {
+      border-bottom: none;
+    }
+
+    .row-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .row-label {
+      font-weight: 700;
+      font-size: 14px;
+      color: #4b233a;
+      min-width: 60px;
+    }
+
+    .row-value {
+      font-size: 13px;
+      color: #7b7886;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 150px;
+    }
+
+    .row-icon {
+      font-size: 26px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-pill-change {
+      background: #fdf0f4;
+      color: #cf4f79;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 18px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* Switch toggle */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 42px;
+      height: 24px;
+    }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #e4e4e9; transition: .3s; border-radius: 34px;
+    }
+    .slider:before {
+      position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px;
+      background-color: white; transition: .3s; border-radius: 50%;
+    }
+    input:checked + .slider { background-color: #e8557a; }
+    input:checked + .slider:before { transform: translateX(18px); }
+
+    /* Extra features banner */
+    .banner-yellow {
+      background: #fed361;
+      color: #3b2203;
+      border-radius: 16px;
+      padding: 12px 16px;
+      width: 100%;
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* Primary Pink Action Buttons */
+    .btn-primary {
+      margin-top: 14px;
+      width: 100%;
+      height: 52px;
+      background: linear-gradient(90deg, #bb467a 0%, #e8557a 100%);
+      border: none;
+      border-radius: 18px;
+      color: #fff;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(232, 85, 122, 0.35);
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .btn-primary:active {
+      transform: scale(0.98);
+    }
+
+    /* --- PAGE 3: PREVIEW CARD (FOR DOWNLOAD) --- */
+    .card-canvas {
+      width: 100%;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+      border-radius: 26px;
+      padding: 30px 22px;
+      color: #3f1a3a;
+      text-align: center;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.45);
+      margin-bottom: 16px;
+    }
+
+    .card-photo-box {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: #fff;
+      margin: 0 auto 14px;
+      overflow: hidden;
+      border: 4px solid #fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      display: none;
+    }
+
+    .card-photo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .download-btn {
+      width: 100%;
+      height: 48px;
+      border-radius: 16px;
+      border: none;
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+      margin-top: 8px;
+      cursor: pointer;
+    }
+    .btn-png { background: #0984e3; }
+    .btn-pdf { background: #00b894; }
+
+    /* Footer Section */
+    .footer-section {
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+      margin-top: 26px;
+    }
+
+    .footer-title {
+      font-size: 12.5px;
+      color: #8c899c;
+      margin-bottom: 10px;
+    }
+
+    .pills-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .pill {
+      font-size: 12px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid #ff4d88;
+      color: #ff85ad;
+      text-decoration: none;
+    }
+
+    .help-text {
+      font-size: 11px;
+      color: #605d70;
+    }
+
+    /* Modal / Popups for Quick edit */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.65);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 100;
+    }
+
+    .modal-content {
+      background: #fff;
+      border-radius: 24px;
+      padding: 22px;
+      width: 100%;
+      max-width: 330px;
+      color: #222;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+
+    <!-- TOP NAVIGATION (Step 2 and 3) -->
+    <div class="top-nav" id="topNav" style="display: none;">
+      <button class="back-circle-btn" onclick="handleBack()">&lt;</button>
+    </div>
+
+    <!-- ================= PAGE 1 ================= -->
+    <div id="page1" style="width: 100%;">
+      <div class="badge-stack">
+        <div class="badge badge-yellow">CREATE A</div>
+        <div class="badge badge-coral">BIRTHDAY</div>
+        <div class="badge badge-blue">CARD!</div>
+      </div>
+
+      <div class="white-card">
+        <div class="heading-serif">Whose birthday is it?</div>
+        <input type="text" id="nameInput" class="input-box" placeholder="e.g. Priya / Rahul">
+
+        <div style="height: 24px;"></div>
+
+        <div class="heading-serif">When is the special day? 📅</div>
+        <div class="date-row">
+          <select id="monthSelect" class="select-box">
+            <option value="Jan">Jan</option><option value="Feb">Feb</option><option value="Mar">Mar</option>
+            <option value="Apr">Apr</option><option value="May">May</option><option value="Jun">Jun</option>
+            <option value="Jul">Jul</option><option value="Aug" selected>Aug</option><option value="Sep">Sep</option>
+            <option value="Oct">Oct</option><option value="Nov">Nov</option><option value="Dec">Dec</option>
+          </select>
+          <select id="daySelect" class="select-box"></select>
+        </div>
+      </div>
+
+      <button class="btn-primary" onclick="goToPage2()">Next</button>
+
+      <div class="footer-section">
+        <div class="footer-title">Explore more HeartCraft experiences:</div>
+        <div class="pills-container">
+          <span class="pill">Apology</span>
+          <span class="pill">Proposal</span>
+          <span class="pill">Puzzle</span>
+          <span class="pill">Friendship Day</span>
+          <span class="pill">Anniversary</span>
+        </div>
+        <div class="help-text">For any issues or feedback, reach out to<br>support@myheartcraft.com</div>
+      </div>
+    </div>
+
+    <!-- ================= PAGE 2: CUSTOMIZATION ================= -->
+    <div id="page2" style="width: 100%; display: none;">
+      <div class="white-card">
+        <div class="heading-serif" id="customizeHeading">Customize for Name</div>
+        <div class="sub-tagline">Tap change to pick your own</div>
+
+        <!-- Cake Selection -->
+        <div class="custom-row">
+          <div class="row-left">
+            <span class="row-label">Cake</span>
+            <span class="row-icon" id="cakeIcon">🎂</span>
+            <span class="row-value" id="cakeText">Galaxy Classic</span>
+          </div>
+          <button class="btn-pill-change" onclick="openChoiceModal('cake')">Change</button>
+        </div>
+
+        <!-- Bond Selection -->
+        <div class="custom-row">
+          <div class="row-left">
+            <span class="row-label">Bond</span>
+            <span class="row-value" id="bondText">Sweet, Loyal, My rock</span>
+          </div>
+          <button class="btn-pill-change" onclick="openChoiceModal('bond')">Change</button>
+        </div>
+
+        <!-- Friend / Mascot -->
+        <div class="custom-row">
+          <div class="row-left">
+            <span class="row-label">Friend</span>
+            <span class="row-icon" id="mascotIcon">🐰</span>
+            <span class="row-value" id="mascotText">Bunny</span>
+          </div>
+          <button class="btn-pill-change" onclick="openChoiceModal('mascot')">Change</button>
+        </div>
+
+        <!-- Passcode Toggle -->
+        <div class="custom-row">
+          <div class="row-left">
+            <span class="row-label" style="display:flex; flex-direction:column; font-size:13px;">
+              <span style="font-size: 10px; color:#888; font-weight: 500;">Optional</span>Passcode
+            </span>
+            <span class="row-value" id="passcodeText">Add 4-digit Passcode</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="passcodeToggle" onchange="handlePasscodeToggle(this)">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <!-- Letter / Message -->
+        <div class="custom-row">
+          <div class="row-left">
+            <span class="row-label">Letter</span>
+            <span class="row-value" id="letterText">Dear Friend, Happy Birthday!</span>
+          </div>
+          <button class="btn-pill-change" onclick="openChoiceModal('letter')">Change</button>
+        </div>
+
+        <!-- Change Music (Free Audio Picker) -->
+        <div class="custom-row" style="margin-top: 6px;">
+          <div class="row-left">
+            <span class="row-icon">🎵</span>
+            <div>
+              <div style="font-size:13px; font-weight:700; color:#333;">Background Music</div>
+              <div style="font-size:11.5px; color:#777;">Pick your favorite track</div>
+            </div>
+          </div>
+          <input type="file" id="musicFile" accept="audio/*" style="display: none;" onchange="alert('Music selected!')">
+          <button class="btn-pill-change" onclick="document.getElementById('musicFile').click()">Choose</button>
+        </div>
+
+      </div>
+
+      <!-- Photos Banner (Completely Free) -->
+      <label class="banner-yellow" for="photoInput">
+        <span style="font-size: 20px;">🖼️</span>
+        <span>Add a memorable photo (Free)</span>
+      </label>
+      <input type="file" id="photoInput" accept="image/*" style="display: none;" onchange="handlePhotoUpload(event)">
+
+      <button class="btn-primary" onclick="goToPage3()">See Preview</button>
+    </div>
+
+    <!-- ================= PAGE 3: PREVIEW & DOWNLOAD ================= -->
+    <div id="page3" style="width: 100%; display: none;">
+      <div class="card-canvas" id="printableCard">
+        <div class="card-photo-box" id="cardPhotoWrapper">
+          <img id="cardPhotoImg" src="" alt="Photo">
+        </div>
+        <div id="cardMascotDisplay" style="font-size: 38px; margin-bottom: 4px;">🐰</div>
+        <h2 style="font-size: 26px; font-weight: 800; margin-bottom: 4px;">Happy Birthday! 🎉</h2>
+        <h3 id="previewCardName" style="font-size: 22px; font-weight: 800; color:#9c1543; margin-bottom: 6px;">Name</h3>
+        <p id="previewDate" style="font-size: 14px; font-weight: 700; margin-bottom: 12px; color: #5a2846;">Aug 26</p>
+        <p id="previewLetter" style="font-size: 14px; line-height: 1.5; font-style: italic;">"Wishing you boundless happiness, laughter and success on your special day!"</p>
+        <div style="margin-top: 16px; font-size: 13px; font-weight: 700; background: rgba(255,255,255,0.45); padding: 6px 14px; border-radius: 12px; display: inline-block;" id="previewBond">
+          ✨ Sweet, Loyal, My rock
+        </div>
+      </div>
+
+      <button class="download-btn btn-png" onclick="downloadImage()">Download as Image (PNG)</button>
+      <button class="download-btn btn-pdf" onclick="downloadPDF()">Download as PDF</button>
+    </div>
+
+  </div>
+
+  <!-- Dynamic Modal for Customizing -->
+  <div class="modal-overlay" id="choiceModal">
+    <div class="modal-content">
+      <h3 id="modalTitle" style="font-size: 18px; margin-bottom: 14px;">Select Option</h3>
+      <div id="modalBody"></div>
+      <button class="btn-primary" style="height: 42px; font-size: 15px; margin-top: 14px;" onclick="closeModal()">Done</button>
+    </div>
+  </div>
+
+  <script>
+    let currentPage = 1;
+
+    // Populate 1-31 Days
+    const daySelect = document.getElementById('daySelect');
+    for (let i = 1; i <= 31; i++) {
+      let opt = document.createElement('option');
+      opt.value = i;
+      opt.innerHTML = i < 10 ? '0' + i : i;
+      if (i === 26) opt.selected = true;
+      daySelect.appendChild(opt);
+    }
+
+    // Step Navigation
+    function goToPage2() {
+      const name = document.getElementById('nameInput').value.trim();
+      if (!name) {
+        alert("Please enter a name first!");
+        return;
+      }
+      document.getElementById('customizeHeading').innerText = `Customize for ${name}`;
+      document.getElementById('letterText').innerText = `Dear ${name}, Happy Birthday!`;
+      document.getElementById('page1').style.display = 'none';
+      document.getElementById('page2').style.display = 'block';
+      document.getElementById('topNav').style.display = 'flex';
+      currentPage = 2;
+    }
+
+    function goToPage3() {
+      const name = document.getElementById('nameInput').value.trim();
+      const month = document.getElementById('monthSelect').value;
+      const day = document.getElementById('daySelect').value;
+
+      document.getElementById('previewCardName').innerText = name;
+      document.getElementById('previewDate').innerText = `${month} ${day}`;
+      document.getElementById('previewLetter').innerText = `"${document.getElementById('letterText').innerText}"`;
+      document.getElementById('previewBond').innerText = `✨ ${document.getElementById('bondText').innerText}`;
+
+      document.getElementById('page2').style.display = 'none';
+      document.getElementById('page3').style.display = 'block';
+      currentPage = 3;
+
+      confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+    }
+
+    function handleBack() {
+      if (currentPage === 3) {
+        document.getElementById('page3').style.display = 'none';
+        document.getElementById('page2').style.display = 'block';
+        currentPage = 2;
+      } else if (currentPage === 2) {
+        document.getElementById('page2').style.display = 'none';
+        document.getElementById('page1').style.display = 'block';
+        document.getElementById('topNav').style.display = 'none';
+        currentPage = 1;
+      }
+    }
+
+    // Interactive Customizations Modal
+    function openChoiceModal(type) {
+      const modal = document.getElementById('choiceModal');
+      const title = document.getElementById('modalTitle');
+      const body = document.getElementById('modalBody');
+      body.innerHTML = '';
+
+      if (type === 'cake') {
+        title.innerText = 'Choose Cake';
+        const cakes = [
+          { name: 'Galaxy Classic', icon: '🎂' },
+          { name: 'Chocolate Fudge', icon: '🍫' },
+          { name: 'Berry Bliss', icon: '🍓' }
+        ];
+        cakes.forEach(c => {
+          body.innerHTML += `
+            <div style="padding: 10px; cursor: pointer; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #eee;" 
+                 onclick="selectCake('${c.name}', '${c.icon}')">
+              <span style="font-size: 22px;">${c.icon}</span> <b>${c.name}</b>
+            </div>`;
+        });
+      } else if (type === 'bond') {
+        title.innerText = 'Choose Bond';
+        const bonds = ['Sweet, Loyal, My rock', 'Bestie for life', 'Partner in Crime', 'Caring & Supportive'];
+        bonds.forEach(b => {
+          body.innerHTML += `
+            <div style="padding: 10px; cursor: pointer; border-bottom: 1px solid #eee;" onclick="selectBond('${b}')">
+              <b>${b}</b>
+            </div>`;
+        });
+      } else if (type === 'mascot') {
+        title.innerText = 'Choose Friend';
+        const mascots = [
+          { name: 'Bunny', icon: '🐰' },
+          { name: 'Teddy Bear', icon: '🧸' },
+          { name: 'Cat', icon: '🐱' },
+          { name: 'Puppy', icon: '🐶' }
+        ];
+        mascots.forEach(m => {
+          body.innerHTML += `
+            <div style="padding: 10px; cursor: pointer; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #eee;" 
+                 onclick="selectMascot('${m.name}', '${m.icon}')">
+              <span style="font-size: 22px;">${m.icon}</span> <b>${m.name}</b>
+            </div>`;
+        });
+      } else if (type === 'letter') {
+        title.innerText = 'Write Letter';
+        body.innerHTML = `
+          <textarea id="modalLetterInput" rows="4" style="width: 100%; border-radius: 12px; padding: 10px; border: 1px solid #ccc;">${document.getElementById('letterText').innerText}</textarea>
+          <button class="btn-primary" style="height: 38px; font-size: 14px; margin-top: 8px;" onclick="saveLetter()">Save Letter</button>
+        `;
+      }
+      modal.style.display = 'flex';
+    }
+
+    function selectCake(name, icon) {
+      document.getElementById('cakeText').innerText = name;
+      document.getElementById('cakeIcon').innerText = icon;
+      closeModal();
+    }
+
+    function selectBond(bond) {
+      document.getElementById('bondText').innerText = bond;
+      closeModal();
+    }
+
+    function selectMascot(name, icon) {
+      document.getElementById('mascotText').innerText = name;
+      document.getElementById('mascotIcon').innerText = icon;
+      document.getElementById('cardMascotDisplay').innerText = icon;
+      closeModal();
+    }
+
+    function saveLetter() {
+      const txt = document.getElementById('modalLetterInput').value;
+      if (txt) document.getElementById('letterText').innerText = txt;
+      closeModal();
+    }
+
+    function closeModal() {
+      document.getElementById('choiceModal').style.display = 'none';
+    }
+
+    function handlePasscodeToggle(cb) {
+      if (cb.checked) {
+        const code = prompt("Enter 4-digit Passcode:", "1234");
+        if (code) {
+          document.getElementById('passcodeText').innerText = `Code: ${code}`;
+        } else {
+          cb.checked = false;
+        }
+      } else {
+        document.getElementById('passcodeText').innerText = "Add 4 - digit Passcode";
+      }
+    }
+
+    // Photo Handler
+    function handlePhotoUpload(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          document.getElementById('cardPhotoImg').src = evt.target.result;
+          document.getElementById('cardPhotoWrapper').style.display = 'block';
+          alert('Photo added successfully!');
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    // Export Handlers
+    function downloadImage() {
+      const card = document.getElementById('printableCard');
+      html2canvas(card, { scale: 3, useCORS: true }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'birthday-invitation.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      });
+    }
+
+    function downloadPDF() {
+      const { jsPDF } = window.jspdf;
+      const card = document.getElementById('printableCard');
+      html2canvas(card, { scale: 3, useCORS: true }).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF({
+          orientation: 'portrait',
+          unit: 'px',
+          format: [canvas.width / 3, canvas.height / 3]
+        });
+        pdf.addImage(imgData, 'PNG', 0, 0, canvas.width / 3, canvas.height / 3);
+        pdf.save('birthday-invitation.pdf');
+      });
+    }
+  </script>
+</body>
+</html>
